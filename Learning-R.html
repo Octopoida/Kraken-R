@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>AUTHOR:  David Geeraerts</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<p>##########################################################################</p>
+
+<h1>AUTHOR:  David Geeraerts</h1>
+
+<h1>EMAIL:    <a href="mailto:geeraerd@evergreen.edu">geeraerd@evergreen.edu</a></h1>
+
+<h1>LOCATION: Olympia, Washington U.S.A.</h1>
+
+<h1>TITLE:    Learning R</h1>
+
+<h1>Version:  25</h1>
+
+<h1>Purpose: Using CAL HeadCount as learning data</h1>
+
+<h1>Copyright License: Creative Commons: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)</h1>
+
+<h1><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">http://creativecommons.org/licenses/by-nc-sa/3.0/</a></h1>
+
+<p>#&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-</p>
+
+<h1>Get the data from Google docs</h1>
+
+<h1><a href="https://docs.google.com/spreadsheet/ccc?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE#gid=0">https://docs.google.com/spreadsheet/ccc?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE#gid=0</a></h1>
+
+<h1>Take the &ldquo;Log&rdquo; worksheet and save it as a csv file.</h1>
+
+<p>##########################################################################</p>
+
+<h1>Vector Chart</h1>
+
+<h1>typeof      Mode        storage.mode</h1>
+
+<h1>logical     logical     logical</h1>
+
+<h1>integer     numeric     integer</h1>
+
+<h1>double      numeric     double</h1>
+
+<h1>complex     complex     complex</h1>
+
+<h1>character   character   character</h1>
+
+<h1>raw         raw         raw</h1>
+
+<p>##########################################################################</p>
+
+<h1>NOTES</h1>
+
+<p>#&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-
+#- R is case sensitive. Can use tolower() or toupper() for munging data.
+#- \ to escape special characters
+#
+#
+##########################################################################</p>
+
+<h1>PACKAGES of note:</h1>
+
+<h1>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</h1>
+
+<h1>XML scraping tool for html &amp; XML pages</h1>
+
+<h1>httr working with HTTP connections</h1>
+
+<h1>RMySQL for MySQL connections</h1>
+
+<h1>bigmemory for handling large datasets too big for RAM</h1>
+
+<h1>knitr enables R Markdown files &ndash;&gt; .rmd file</h1>
+
+<p>#
+#
+#
+##########################################################################
+#help on functions
+help&copy;
+help(install.packages)
+#getting help on a package
+help(package=stringr)
+#</p>
+
+<h1>Example code</h1>
+
+<p>example(help)
+#R Version Information
+#simple
+getRversion()
+#verbose
+R.Version()
+#more info
+sessionInfo()
+#Type of OS
+.Platform$OS.type
+#</p>
+
+<h1><a href="http://cran.r-project.org/">http://cran.r-project.org/</a></h1>
+
+<p>#Package Management
+installed.packages()
+#load a package
+#library(&#39;packageName&#39;)
+#require(&#39;packageName&#39;)</p>
+
+<h1>Install</h1>
+
+<p>install.packages(&#39;psych&#39;)
+library(psych)
+#</p>
+
+<h1>uninstall a package</h1>
+
+<h1>remove.packages(&ldquo;psych&rdquo;)</h1>
+
+<p>#</p>
+
+<h1><a href="http://cran.r-project.org/web/views/">http://cran.r-project.org/web/views/</a></h1>
+
+<p>#CRAN Task Views
+available.views()
+install.packages(&ldquo;ctv&rdquo;)
+install.views(&ldquo;Survival&rdquo;)
+install.views(&ldquo;SocialSciences&rdquo;)
+install.views(&ldquo;TimeSeries&rdquo;)</p>
+
+<p>#Some common system variables
+Sys.getenv()
+Sys.getenv(&ldquo;R_HOME&rdquo;)
+Sys.getenv(&ldquo;R_LIBS_USER&rdquo;)
+#dump to file</p>
+
+<h1>not the best</h1>
+
+<p>cat(paste(Sys.getenv()), sep = &ldquo;\r&rdquo;, fill = TRUE, label = paste(names(Sys.getenv())), append = FALSE, file=&ldquo;System.variables.txt&rdquo;)</p>
+
+<h1>best way and formated</h1>
+
+<p>cat(paste(names(Sys.getenv()), &ldquo;=&rdquo;, Sys.getenv()), sep = &ldquo;\r&rdquo;, fill = TRUE, label = NULL, append = FALSE, file=&ldquo;System.variables.txt&rdquo;)
+#</p>
+
+<h1>Date Time simple</h1>
+
+<p>Sys.Date()
+Sys.time()
+Sys.timezone()</p>
+
+<h1>expressions can be grouped together with the use of {exp();exp()&hellip;}</h1>
+
+<p>{Sys.Date();Sys.time()}
+#</p>
+
+<h1>POSIX format</h1>
+
+<p>as.POSIXlt(Sys.time(), tz = &ldquo;GMT&rdquo;)
+as.POSIXct(Sys.time())
+format(Sys.time(), &ldquo;%a %b %d %X %Y %Z&rdquo;)
+format(Sys.time(), &ldquo;%H:%M:%OS3&rdquo;)
+#</p>
+
+<h1>see that Sys.Date() is class date</h1>
+
+<h1>{numeric, logical, character, list, matrix, array, factor, data.frame}</h1>
+
+<p>class(Sys.Date())</p>
+
+<h1>see what storage mode Sys.Date() is</h1>
+
+<h1>{logical, numeric, complex, character, list (only for object list), or raw}</h1>
+
+<p>mode(Sys.Date())
+storage.mode(Sys.Date())
+#</p>
+
+<h1>Pause for specified time (in seconds)</h1>
+
+<p>Sys.sleep(10)
+#</p>
+
+<h1>Output to a log file using sink()</h1>
+
+<h1>see if there are any open connections</h1>
+
+<p>sink.number()
+#start a sink connection to a file
+sink(&ldquo;R-Output.log.txt&rdquo;, append = TRUE, split = FALSE)
+#close the connection
+sink()
+#Check connection is closed
+sink.number()
+#</p>
+
+<h1>Setting values</h1>
+
+<h1>=</h1>
+
+<h1>&lt;-</h1>
+
+<h1>assign(&ldquo;x&rdquo;, C(x,y,z)</h1>
+
+<p>#
+#getting user input
+om &lt;- &ldquo;Your Selection:&rdquo; #output message
+x &lt;- readline(prompt = &ldquo;User Input (Y or N) : &rdquo;)
+if (x == &#39;Y&#39; || x == &#39;y&#39;) cat(c(om,&ldquo;Yes&rdquo;)) else cat (c(om,&ldquo;No&rdquo;))
+#
+#Working with directories</p>
+
+<h1>get working directory</h1>
+
+<p>getwd()</p>
+
+<h1>Set the working directory (Windows OS syntax)</h1>
+
+<p>setwd(&ldquo;D:\Workspace\R&rdquo;)
+#</p>
+
+<h1>Executing an R script from file</h1>
+
+<p>source(&ldquo;Week_Days.r&rdquo;)
+source(&ldquo;Months.r&rdquo;, local = FALSE, echo = TRUE, verbose = FALSE)</p>
+
+<h1>Can be a URL</h1>
+
+<h1>source(&ldquo;<a href="http://www.awebsite.info%22">http://www.awebsite.info&rdquo;</a>)</h1>
+
+<p>#</p>
+
+<h1>Return all objects that have been instantiated</h1>
+
+<p>objects()
+character() #any objects that are character
+numeric()   #any objects that are numeric
+#</p>
+
+<h1>quickly remove all instantiated objects</h1>
+
+<p>rm(list=ls())
+#</p>
+
+<h1>Working with Connections, such as [geo]JSON feed</h1>
+
+<h1>uses RJSONIO package</h1>
+
+<h1>Sample data from USGS Earthquake feed</h1>
+
+<p>install.packages(&#39;RJSONIO&#39;)
+library(RJSONIO)
+URI &lt;- &ldquo;<a href="http://earthquake.usgs.gov/earthquakes/feed/geojson/significant/month">http://earthquake.usgs.gov/earthquakes/feed/geojson/significant/month</a>&rdquo;
+download.file(URI,&ldquo;USGS_Quakes.json&rdquo;,&ldquo;internal&rdquo;)
+con = file(&ldquo;USGS_Quakes.json&rdquo;)
+USGS_Quakes = fromJSON(con) #makes it like a list
+close(con)
+head(USGS_Quakes)
+tail(USGS_Quakes)
+#
+##########################################################################
+#
+#</p>
+
+<h1>WORKING WITH CAL HEAD-COUNT DATA</h1>
+
+<p>#
+#
+##########################################################################
+#
+#Load the CSV file into a variable; read.table() is common for text files {.txt}; scan() is the most primitive form of reading data from a file into a variable.</p>
+
+<h1>Create a Timestamp for laoding the data</h1>
+
+<p>LastLoadTimestamp_CalData = as.POSIXct(Sys.time())</p>
+
+<h1>Get the difference between last load and current time</h1>
+
+<p>as.POSIXlt(Sys.time()) - LastLoadTimestamp_CalData
+#
+CalData &lt;- read.csv(&#39;CAL-HeadCount-Log.csv&#39;, sep = &#39;,&#39;, header = TRUE)  #if tab use sep=&#39;/t&#39;</p>
+
+<h1>To remove the total column &ndash;since its a calculated field</h1>
+
+<p>rmtCalData &lt;- CalData[,-6] #remove column #6 (which is the total column)
+#</p>
+
+<h1>First things to do when looking at a new dataset</h1>
+
+<h1>Look at the dimensions of the data</h1>
+
+<h1>number of records, number of columns</h1>
+
+<p>dim(CalData)</p>
+
+<h1>any missing values?</h1>
+
+<h1>is.na(CalData)</h1>
+
+<p>sum(is.na(CalData)) #better way of getting the info
+table(is.na(CalData))
+#
+#view headers in source order
+names(CalData)</p>
+
+<h1>Double check that columns are the expected default data type</h1>
+
+<p>is.numeric(CalData$East)    #should be TRUE
+is.numeric(CalData$West)    #should be TRUE
+is.numeric(CalData$Total)   #should be TRUE
+is.character(CalData$Counter) # false since its a factor
+#
+#List the headers (in alpha-Numeric order)
+ls(CalData)</p>
+
+<h1>Search for an item in the list</h1>
+
+<p>ls(CalData, pattern = &#39;E&#39;)</p>
+
+<h1>Print as an ordinary list rather than a matrix</h1>
+
+<p>unclass(CalData) </p>
+
+<h1>Examine the structure of CalData</h1>
+
+<p>str(CalData)</p>
+
+<h1>Examine the structure of CalData with pattern searches</h1>
+
+<p>ls.str(CalData)
+ls.str(CalData, pattern = &#39;Total&#39;)</p>
+
+<h1>to get both row and col names use</h1>
+
+<p>dimnames(CalData)</p>
+
+<h1>also row/col names</h1>
+
+<p>rownames(CalData)
+colnames(CalData)
+#Class object?
+class(CalData)
+#Mode of object &ndash;the storage mode of object
+mode(CalData)
+storage.mode(CalData)</p>
+
+<h1>test the class object, two ways of checking</h1>
+
+<p>if(class(CalData)==&#39;data.frame&#39;) TRUE else FALSE
+if(any(class(CalData)==&#39;data.frame&#39;)) TRUE else FALSE
+#</p>
+
+<h1>Create a list for all interger elements</h1>
+
+<p>iCalData = list(CalData$East, CalData$West, CalData$Total)</p>
+
+<h1>Reference a list by position</h1>
+
+<p>iCalData[[1]]
+names(iCalData) #will be null; no names defined
+iCalData = list(East=CalData$East, West=CalData$West, Total=CalData$Total)
+names(iCalData) #now the list has names
+#remove &ldquo;Total&rdquo; from the list
+iCalData[[&ldquo;Total&rdquo;]] &lt;- NULL
+#
+#Create a unique list for the counters</p>
+
+<h1>see the list first</h1>
+
+<p>levels(CalData$Counter)
+list(CalData$Counter)</p>
+
+<p>Counters &lt;- levels(CalData$Counter)
+#
+#
+#Working with CalData Data Frame
+#specify to use a data frame
+dfCalData = data.frame(CalData)</p>
+
+<h1>view the structure</h1>
+
+<p>str(dfCalData)
+str(CalData)
+#</p>
+
+<h1>Working with Dates</h1>
+
+<p>class(CalData$Date) # shows that its a factor
+dCalData_Date = as.Date(CalData$Date, format = &ldquo;%m/%d/%Y&rdquo;)
+class(dCalData_Date)    #date class
+dCalData_Date[1]    #will return the first date
+as.integer(dCalData_Date)</p>
+
+<h1>OR</h1>
+
+<p>iCalData_Date = as.integer(as.Date(CalData$Date, format = &ldquo;%m/%d/%Y&rdquo;))
+#POSIXlt creates parts to the date; human readable vs POSIXct
+dCalData_Date = as.POSIXlt(CalData$Date, format = &ldquo;%m/%d/%Y&rdquo;)
+dCalData_Date$mday  #day of the month
+dCalData_Date$mon   #Month
+dCalData_Date$year + 1900   #year (since 1900)
+dCalData_Date$wday  #day of the week
+dCalData_Date$yday  #day of the year</p>
+
+<h1>Getting the difference between two dates</h1>
+
+<h1>in this case the first count to the last count</h1>
+
+<p>difftime(dCalData_Date[1], dCalData_Date[length(dCalData_Date)])
+#</p>
+
+<h1>Working with Time</h1>
+
+<p>class(CalData$Time) #is a factor that needs to be changed
+dCalData_Time = chron(times = CalData$Time)
+class(dCalData_Time)    #is now a times class</p>
+
+<h1>Create a single timestamp string</h1>
+
+<p>dCalData_TimeStamp = paste(dCalData_Date, dCalData_Time)
+difftime(dCalData_TimeStamp[1], dCalData_TimeStamp[2])</p>
+
+<p>#################################################
+#!NEEDS RESEARCH!
+#using timeDate package#
+#require(&#39;timeDate&#39;)
+#dCalData_Time = as.timeDate(dCalData_Time)
+#class(dCalData_Time)   #is now a timeDate
+#################################################</p>
+
+<p>#show the first record with all columns
+CalData[1,1:6]
+#Show the first 10 records, all
+CalData[1:10,1:6]
+#Show all the data for a cloumn
+CalData[,6]</p>
+
+<h1>Using operators within the index</h1>
+
+<h1>get a record set without 0&#39;s</h1>
+
+<p>CalData$East[CalData$East &gt; 0]
+CalData$West[CalData$West &gt; 0]
+#create an adjusted variable excluding 0&#39;s
+adjCalData_East &lt;- CalData$East[CalData$East &gt; 0]
+adjCalData_West &lt;- CalData$West[CalData$West &gt; 0]
+adjCalData_Total &lt;- CalData$Total[CalData$Total &gt; 0]
+#show the first 6 records or n records; last 6 records
+head(CalData)
+head(CalData, n = 10)
+tail(CalData)
+#Sort/Order/Rank the Data Frame
+sort(CalData[,6])
+order(CalData[,6])
+rank(CalData[,6])
+#Get sums of columns
+with(CalData, sum(Total))
+with(CalData, sum(East))
+with(CalData, sum(West))
+#Get statisitical summary data
+summary(CalData)</p>
+
+<h1>Get individual summary</h1>
+
+<p>summary(CalData$Counter)
+summary(CalData$East)
+summary(CalData$West)
+summary(CalData$Total)
+summary(CalData$Time)
+#</p>
+
+<h1>Tukey&#39;s five number: {min, lower-hinge, median, upper-hinge, maximum}</h1>
+
+<p>fivenum(CalData$East)
+fivenum(CalData$West)
+fivenum(CalData$Total)</p>
+
+<h1>Summary Statistics</h1>
+
+<h1>Mean (Average)</h1>
+
+<p>mean(CalData$East, na.rm = TRUE)
+mean(CalData$West, na.rm = TRUE)
+mean(CalData$Total, na.rm = TRUE)</p>
+
+<h1>median (middle)</h1>
+
+<p>median(CalData$East, na.rm = TRUE)
+median(CalData$West, na.rm = TRUE)
+median(CalData$Total, na.rm = TRUE)
+#standard deviation
+sd(CalData$East, na.rm = TRUE)
+sd(CalData$West, na.rm = TRUE)
+sd(CalData$Total, na.rm = TRUE)
+#variance
+var(CalData$East, na.rm = TRUE)
+var(CalData$West, na.rm = TRUE)
+var(CalData$Total, na.rm = TRUE)</p>
+
+<h1>mdian absolute deviation</h1>
+
+<p>mad(CalData$East, na.rm = TRUE)
+mad(CalData$West, na.rm = TRUE)
+mad(CalData$Total, na.rm = TRUE)
+#</p>
+
+<h1>examples of using [] or $</h1>
+
+<p>min(CalData[,6])
+max(CalData[,6])
+min(CalData$Counter)
+max(CalData$Totals)
+#min
+min(CalData$East, na.rm = TRUE)
+min(CalData$West, na.rm = TRUE)
+min(CalData$Total, na.rm = TRUE)
+#max
+max(CalData$East, na.rm = TRUE)
+max(CalData$West, na.rm = TRUE)
+max(CalData$Total, na.rm = TRUE)
+#range
+range(CalData$East, na.rm = TRUE)
+range(CalData$West, na.rm = TRUE)
+range(CalData$Total, na.rm = TRUE)</p>
+
+<h1>sum (Totals)</h1>
+
+<p>sum(CalData$East, na.rm = TRUE)
+sum(CalData$West, na.rm = TRUE)
+sum(CalData$Total, na.rm = TRUE)</p>
+
+<h1>returns header/column count</h1>
+
+<p>length(CalData)</p>
+
+<h1>number of records</h1>
+
+<p>length(na.omit(CalData$Counter))
+#na.fail returns only if there are no NA&#39;s
+length(na.fail(CalData$Time))
+length(na.omit(CalData$East))
+length(na.omit(CalData$West))
+length(na.omit(CalData$Total))</p>
+
+<h1>get the character length</h1>
+
+<p>nchar(CalData$Total)
+#</p>
+
+<h1>Conditional search</h1>
+
+<p>any(CalData$East &gt; 50) #will return TRUE or FALSE
+any(CalData$East == 50)
+any(CalData$East &gt;= 50)
+#</p>
+
+<h1>Probabilty Statistics</h1>
+
+<p>quantile(CalData$East)
+quantile(CalData$West)
+quantile(CalData$Total)</p>
+
+<h1>adjust the scale</h1>
+
+<p>quantile(CalData$East, prob = seq(0,.1,.2,.3), na.rm = TRUE, names = TRUE)
+quantile(CalData$West)
+quantile(CalData$Total)</p>
+
+<p>quantile(CalData$East, na.rm = TRUE, names = TRUE)
+quantile(CalData$West, na.rm = TRUE, names = TRUE)
+quantile(CalData$Total, na.rm = TRUE, names = TRUE)
+#Tukey Five-Number Summaries
+#(minimum, lower-hinge, median, upper-hinge, maximum)
+fivenum(CalData$East, na.rm = TRUE)
+fivenum(CalData$West, na.rm = TRUE)
+fivenum(CalData$Total, na.rm = TRUE)
+#cumulative statistics
+cumsum(CalData$East)
+cumsum(head(CalData$West))
+cumsum(tail(CalData$Total))
+cummax(head(CalData$East, n = 10L))
+cummax(CalData$West)
+cummax(CalData$Total)
+cummin(CalData$East)
+cummin(CalData$West)
+cummin(CalData$Total)</p>
+
+<h1>unique values</h1>
+
+<p>unique(CalData$East)
+unique(CalData$West)
+unique(CalData$Total)
+sort(unique(CalData$Total), decreasing = TRUE)
+#Apply summary to a list
+lapply(iCalData, mean, USE.NAMES = TRUE)
+    # User friendly
+sapply(iCalData, mean, na.rm = TRUE, USE.NAMES = TRUE)
+sapply(iCalData, min, na.rm = TRUE, USE.NAMES = TRUE)
+sapply(iCalData, max, na.rm = TRUE, USE.NAMES = TRUE)</p>
+
+<h1>create new vector</h1>
+
+<p>maxCalData = sapply(iCalData, max, na.rm = TRUE, USE.NAMES = TRUE)
+minCalData = sapply(iCalData, min, na.rm = TRUE, USE.NAMES = TRUE)
+meanCalData = sapply(iCalData, mean, na.rm = TRUE, USE.NAMES = TRUE)</p>
+
+<h1>create seperate interger vectora</h1>
+
+<p>iCalData_East = CalData$East
+iCalData_West = CalData$West
+iCalData_Total = CalData$Total
+#</p>
+
+<h1>Requires psych package</h1>
+
+<p>if(require(&#39;psych&#39;)==FALSE) install.packages(&#39;psych&#39;)
+library(&#39;psych&#39;)
+describe(CalData)</p>
+
+<p>#Transpose the data: X(row) becomes Y(column), Y(Column) becomes X(row)
+CalData_t = t(CalData)</p>
+
+<p>#Create contingency tables</p>
+
+<h1>$ doesn&#39;t work, use []</h1>
+
+<p>table(CalData$Counter)
+table(sort(CalData$Counter, decreasing = TRUE))
+table(CalData$East)
+table(CalData$West)
+table(CalData$Total)
+tblCalData_Total = table(CalData$Total)
+tblCalData_East = table(CalData$East)
+tblCalData_West = table(CalData$West)
+lsCalData = list(tblCalData_East, tblCalData_West, tblCalData_total)
+#Test is.table
+is.table(CalData)
+is.table(iCalData)
+is.table(maxCalData)
+is.table(minCalData)
+is.table(meanCalData)
+is.table(tblCalData_total)
+is.table(tblCalData_East)
+is.table(tblCalData_West)
+#also
+is(tblCalData_East, &#39;table&#39;)
+is(tblCalData_West, &#39;table&#39;)
+is(tblCalData_Total, &#39;table&#39;)</p>
+
+<h1>will return false becasue its a list</h1>
+
+<p>is.table(lsCalData)</p>
+
+<h1>IF condition</h1>
+
+<p>if(class(lsCalData) == &#39;list&#39;) TRUE else FALSE
+if(class(lsCalData) == &#39;table&#39;) TRUE else FALSE</p>
+
+<h1>get proportions from table</h1>
+
+<p>prop.table(tblCalData_East)
+prop.table(tblCalData_West)
+prop.table(tblCalData_Total)
+#</p>
+
+<h1>Visualization (Plots and Graphs)</h1>
+
+<p>#</p>
+
+<h1>Advanced graphing with ggplot2 install.packages(&#39;ggplote2&#39;)</h1>
+
+<h1>Advanced dynamic graphing with rggobi install.packages(&#39;rggobi&#39;)</h1>
+
+<h1>par() can modify default graphics parameters</h1>
+
+<h1>type par() to see current settings and available elements</h1>
+
+<p>#</p>
+
+<h1>For a given plot to find a point</h1>
+
+<h1>clicks on the plot will be recorded and the points displayed once locator() is escaped.</h1>
+
+<h1>locator()</h1>
+
+<p>#</p>
+
+<h1>stemplot</h1>
+
+<p>stem(tblCalData_East)
+stem(tblCalData_West, scale = 3, width = 80)
+stem(tblCalData_Total)
+if(class(tblCalData_East) == &#39;table&#39;) stem(tblCalData_East) else print(&ldquo;Not in table format&rdquo;)</p>
+
+<h1>Histograms</h1>
+
+<h1>Simple</h1>
+
+<p>hist(tblCalData_East)
+hist(tblCalData_West)
+hist(tblCalData_Total)</p>
+
+<h1>hist breaks</h1>
+
+<h1>determines the number of histo bars</h1>
+
+<h1>breaks = n</h1>
+
+<h1>breaks = c(n,n,n,n)</h1>
+
+<h1>use colors() to get possible color values.</h1>
+
+<h1>mostly complete</h1>
+
+<p>hist(tblCalData_East,
+    main = &ldquo;East CAl Head Count&rdquo;,
+    xlab = &ldquo;Count&rdquo;,
+    ylab = &ldquo;Number&rdquo;,
+    breaks = &#39;Sturges&#39;,
+    xlim = ,
+    ylim = ,
+    freq = TRUE,
+    include.lowest = TRUE,
+    right = TRUE,
+    col = &#39;gray&#39;,
+    border = &#39;black&#39;,
+    density = NULL,
+    labels = TRUE,
+    axes = TRUE,
+    warn.unused = TRUE)</p>
+
+<p>hist(tblCalData_West,
+    main = &ldquo;West CAl Head Count&rdquo;,
+    xlab = &ldquo;Count&rdquo;,
+    ylab = &ldquo;Number&rdquo;,
+    breaks = &#39;Scott&#39;,
+    xlim = ,
+    ylim = ,
+    freq = TRUE,
+    include.lowest = TRUE,
+    right = TRUE,
+    col = &#39;gray&#39;,
+    border = &#39;black&#39;,
+    density = NULL,
+    labels = TRUE,
+    axes = TRUE,
+    warn.unused = TRUE)</p>
+
+<p>hist(tblCalData_Total,
+     main = &ldquo;Total CAl Head Count&rdquo;,
+     xlab = &ldquo;Count&rdquo;,
+     ylab = &ldquo;Number&rdquo;,
+     breaks = 5,
+     xlim = c(0,85),
+     ylim = c(0,45),
+     freq = TRUE,
+     include.lowest = TRUE,
+     right = TRUE,
+     col = &#39;gray&#39;,
+     border = &#39;black&#39;,
+     density = NULL,
+     labels = TRUE,
+     axes = TRUE,
+     warn.unused = TRUE)</p>
+
+<p>#Density plotting
+density(tblCalData_East, bw = &#39;nrd0&#39;, kernal = &#39;gaussian&#39;, na.rm = TRUE)
+density(tblCalData_West, bw = &#39;sf&#39;, kernal = &#39;gaussian&#39;, na.rm = TRUE)
+density(tblCalData_Total, bw = &#39;UCV&#39;, kernal = &#39;gaussian&#39;, na.rm = TRUE)</p>
+
+<p>plot(density(tblCalData_East, bw = &#39;nrd0&#39;, kernal = &#39;gaussian&#39;, na.rm = TRUE))
+plot(density(tblCalData_West, bw = &#39;nrd0&#39;, kernal = &#39;gaussian&#39;, na.rm = TRUE))
+plot(density(tblCalData_Total, bw = &#39;nrd0&#39;, kernal = &#39;gaussian&#39;, na.rm = TRUE), main = &ldquo;&rdquo;)</p>
+
+<p>#lines added to an existing graph/plot
+lines(density(tblCalData_Total, bw = &#39;UCV&#39;, kernal = &#39;gaussian&#39;, na.rm = TRUE), lty = 3)</p>
+
+<p>#Boxplot
+boxplot(iCalData_East)
+boxplot(iCalData_West, names = c(&#39;Count&#39;), xlab = &#39;HeadCount&#39;, ylab = &#39;Value&#39;, range = 0, col = &#39;sienna1&#39;)
+boxplot(iCalData_East, iCalData_West, names = c(&#39;East&#39;, &#39;West&#39;), xlab = &#39;HeadCount&#39;, ylab = &#39;Value&#39;, range = 0, horizontal = FALSE, col = &#39;sienna1&#39;)
+title(&ldquo;CAL HEAD COUNT&rdquo;)</p>
+
+<h1>this is better</h1>
+
+<p>boxplot(iCalData_East, iCalData_West, names = c(&#39;East&#39;, &#39;West&#39;), xlab = &#39;Value&#39;, ylab = &#39;CAL Side&#39;, range = 0, horizontal = TRUE, col = &#39;sienna1&#39;)
+title(expression(bold(&ldquo;CAL HEAD COUNT&rdquo;)))
+boxplot(iCalData_East,iCalData_West, iCalData_Total)</p>
+
+<h1>Addming a legend</h1>
+
+<p>legend(x = &#39;topright&#39;, y = NULL, legend = c(&ldquo;CAL East&rdquo;,&ldquo;CAL West&rdquo;), fill = NULL, col = &#39;sienna1&#39;, bty = &#39;n&#39;)</p>
+
+<h1>Scatter Plots</h1>
+
+<p>plot(iCalData_East, xlim = c(0, 1500), ylim = c(0, 40), pch = 21, col = &#39;blue&#39;)
+#adding a legend
+legend(x = &#39;topright&#39;, y = NULL, legend = &ldquo;Scatter Plot&rdquo;, fill = NULL, col = &#39;sienna1&#39;, bty = &#39;n&#39;)</p>
+
+<p>#Pie Chart
+pie(iCalData_Total, clockwise = TRUE)
+#################################################</p>
+
+<h1>!NEEDS RESEARCH!</h1>
+
+<h1>Quantile-Quantile Plot</h1>
+
+<h1>use qq()</h1>
+
+<p>#################################################
+#</p>
+
+<h1>When performing sampling/resampling</h1>
+
+<h1>use the set.seed() to make the analysis reproducible.</h1>
+
+<h1>set.seed() will allow the same results each time.</h1>
+
+<p>#
+#Sampling &amp; Re-Sampling
+#################################################</p>
+
+<h1>Sampling</h1>
+
+<p>sample(iCalData_East, size = 100, replace = TRUE)
+sample(iCalData_West, size = 100, replace = TRUE)
+sample(iCalData_Total, size = 100, replace = FALSE)</p>
+
+<p>#create a resample function
+resample &lt;- function(x, &hellip;) x[sample(length(x), &hellip;)]</p>
+
+<h1>examples</h1>
+
+<p>resample(iCalData_East[iCalData_East &gt; 25], size = 10, replace = FALSE)
+resample(iCalData_West[iCalData_West &gt; 25], size = 10, replace = FALSE)
+resample(iCalData_Total[iCalData_Total &gt; 50], size = 10, replace = FALSE)
+#</p>
+
+<h1>Types of sampling functions</h1>
+
+<h1>rbinom, pbinom, qbinom, dbinom</h1>
+
+<p>rbinom(iCalData_Total, 10, .05)
+#
+#Hypothesis Testing
+#################################################
+#Testing for Normal Distribution using Shapiro Test
+shapiro.test(iCalData_East)
+shapiro.test(iCalData_East)
+#Other Normal Distribution Tests
+#require(&#39;nortest&#39;)
+#ad.test        Anderson-Darling test for normality
+#cvm.test       Cramer-von Mises test for normality
+#lillie.test    Lilliefors (Kolmogorov-Smirnov) test for normality
+#pearson.test   Pearson chi-square test for normality
+#sf.test        Shapiro-Francia test for normality
+#</p>
+
+<h1>Simple F Test to compare two variances</h1>
+
+<p>var.test(CalData$East, CalData$West)
+#</p>
+
+<h1>T Test (Student&#39;s T Test)</h1>
+
+<p>t.test(iCalData_East, iCalData_West, var.equal = FALSE, mu = 0, alternative = &#39;two.sided&#39;, conf.level = 0.95, paired = FALSE)
+t.test(iCalData_East, iCalData_West, var.equal = FALSE, mu = 0, alternative = &#39;greater&#39;, conf.level = 0.95, paired = FALSE)
+t.test(iCalData_East, iCalData_West, var.equal = TRUE, mu = 0, alternative = &#39;two.sided&#39;, conf.level = 0.95, paired = FALSE)</p>
+
+<h1>One-Sample T Test</h1>
+
+<p>t.test(iCalData_Total, mu = 10) 
+t.test(iCalData_Total, mu = 15, alternative = &#39;greater&#39;) 
+#compare two means
+t.test(iCalData_East, iCalData_West, paired=TRUE, conf.level = 0.98)</p>
+
+<p>#Wilcoxon U-Test (Mann-Whitney)
+wilcox.test(iCalData_East, iCalData_West)
+wilcox.test(iCalData_East, iCalData_West, mu = 0, alternative = &#39;two.sided&#39;, conf.int = TRUE, conf.level = 0.95, correct = TRUE, paired = FALSE, exact = NULL)
+wilcox.test(iCalData_East, iCalData_West, Exact = FALSE, paired = TRUE)</p>
+
+<h1>one sided</h1>
+
+<p>wilcox.test(iCalData_Total, mu = 15, exact = FALSE, conf.int = TRUE, alternative = &#39;less&#39;)</p>
+
+<h1>two samples nonparametrically &ndash;doesn&#39;t have to be a normal distribution, only same shapes</h1>
+
+<p>wilcox.test(iCalData_East, iCalData_West, paired = TRUE)</p>
+
+<p>#Correlation &amp; Covariance
+cor(iCalData_East, iCalData_West)
+cov(iCalData_East, iCalData_West)
+round(cov(iCalData_East, iCalData_West), digits = 2)</p>
+
+<p>cor.test(iCalData_East, iCalData_West)
+cor.test(iCalData_East, iCalData_West, method = &#39;spearman&#39;)
+cor.test(iCalData_East, iCalData_West, method = &#39;kendall&#39;)</p>
+
+<h1>Significance Testing in Correlation Tests</h1>
+
+<p>cor.test(iCalData_East, iCalData_West)</p>
+
+<p>#Chi-Square Test
+chisq.test(iCalData_East, iCalData_West)
+chisq.test(iCalData_East, iCalData_West, simulate.p.value = TRUE, B = 100)</p>
+
+<p>#Kolmogorov?Smirnov test (Testing two samples for same distribution)
+ks.test(iCalData_East, iCalData_West)
+#</p>
+
+<p>#ANOVA
+#Fit an Analysis of Variance Model</p>
+
+<h1>used to compare models for simple or multiple regression.</h1>
+
+<h1>Using scale() uses the standardized coefficients rather than the unstandardized coefficients.</h1>
+
+<h1>Stack EAST and WEST</h1>
+
+<p>sCalData &lt;- stack(list(East = iCalData_East, West = iCalData_West))
+#can check the names for the columns
+names(sCalData)
+aov(values ~ ind, data = sCalData)
+#################################################
+#Distributions
+#Basic random number generator
+runif(1)
+runif(100, min=1, max=100)
+#sampling
+sample(CalData$Total, 1)
+sample(c(0,1), 8, replace=TRUE) #random byte
+sample(c(0,1), 8, replace=TRUE, prob=c(0.45,0.55))  #biased towards 1
+#another way 
+rbinom(8, 1, .5)    #random byte
+dbinom(1, size=8, prob=.5)  #probability discrete distribution
+pbinom(1, size=8, prob=.5)  #cumulative probability
+pnorm(25, mean(CalData$Total, na.rm = TRUE), sd(CalData$Total, na.rm = TRUE)) #normal distribution</p>
+
+</body>
+
+</html>
+
