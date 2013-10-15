@@ -9,12 +9,13 @@
 # Copyright License: Creative Commons: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
 # http://creativecommons.org/licenses/by-nc-sa/3.0/
 #
-# Get the data from Google docs #
+# Get the data from Google docs
+# Source File
 # https://docs.google.com/spreadsheet/ccc?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE#gid=0
-# Take the "Log" worksheet and save it as a csv file.
-#
+# 
+# "Log" worksheet as a csv file.
 # URI for csv file
-# https://docs.google.com/spreadsheet/fm?id=t3qmbS-NQeKzeYQ7V4sxUNQ.08953454219256637650.5830982312031553709&fmcmd=5&gid=0
+# https://docs.google.com/spreadsheet/pub?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE&single=true&gid=0&output=csv
 #
 ##########################################################################
 # Information-subStructureTypes ---------------------------------------------------
@@ -225,9 +226,8 @@ sink.number()
 # close device connection(s)
 dev.off()
 #
-# Setting values 
-# =
-# <-
+# Setting values (best practice is the use of <-
+# x <- 1
 # assign("x", C(x,y,z)
 #
 #getting user input
@@ -293,6 +293,11 @@ as.POSIXlt(Sys.time()) - LastLoadTimestamp_CalData
 # assumes a project template layout
 setwd("D:/Workspace/R/CAL-HeadCount")
 CalData <- read.csv('./data/CAL-HeadCount-Log.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
+# or to automate the process
+URI <- "https://docs.google.com/spreadsheet/pub?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE&single=true&gid=0&output=csv"
+download.file(URI,"CAL-HeadCount.csv","internal")
+CalData <- read.csv('CAL-HeadCount.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
+#
 # To remove the total column --since its a calculated field
 rmtCalData <- CalData[,-6] #remove column #6 (which is the total column)
 #or
