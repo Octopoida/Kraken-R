@@ -4,7 +4,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	30
+# Version:	33
 # Purpose: Using CAL HeadCount as learning data
 # Copyright License: Creative Commons: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
 # http://creativecommons.org/licenses/by-nc-sa/3.0/
@@ -12,6 +12,10 @@
 # Get the data from Google docs #
 # https://docs.google.com/spreadsheet/ccc?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE#gid=0
 # Take the "Log" worksheet and save it as a csv file.
+#
+# URI for csv file
+# https://docs.google.com/spreadsheet/fm?id=t3qmbS-NQeKzeYQ7V4sxUNQ.08953454219256637650.5830982312031553709&fmcmd=5&gid=0
+#
 ##########################################################################
 # Information-subStructureTypes ---------------------------------------------------
 # Types of structures
@@ -36,6 +40,7 @@
 #	double		numeric		double
 #	complex		complex		complex
 #	character	character	character
+#	list		list		list
 #	raw			raw			raw
 ##########################################################################
 # Information-subNotes ---------------------------------------------------
@@ -49,6 +54,7 @@
 # Information-subPackages ---------------------------------------------------
 # PACKAGES of note:
 # ------------------------------------------------------------------------
+# 'sig' Print function signatures
 # 'XML' scraping tool for html & XML pages
 # 'httr' working with HTTP connections
 # 'RMySQL' for MySQL connections
@@ -74,6 +80,9 @@
 # Ctrl+L clear console
 #
 ##########################################################################
+# Help ---------------------------------------------------
+# Great help resource
+# http://en.wikibooks.org/wiki/R_Programming
 # see the latest R version changes
 View(news())
 #
@@ -85,6 +94,10 @@ help(package=stringr)
 #
 # Example code
 example(help)
+# open help page as a document
+library(help="psych")
+
+
 #R Version Information
 #simple
 getRversion()
@@ -95,8 +108,24 @@ sessionInfo()
 #Type of OS
 .Platform$OS.type
 #
+# look at current options
+options()
+#
+##########################################################################
+#
+# Package Management
 # http://cran.r-project.org/
-#Package Management
+#
+##########################################################################
+#
+# list or search installed packages
+search()
+#
+# where are packages stored
+.libPaths()
+# can also be used to set the directory location of packages
+#.libPaths("C:/ProgramData/R/library")
+#
 installed.packages()
 #load a package
 #library('packageName')
@@ -104,22 +133,48 @@ installed.packages()
 # Install
 install.packages('psych')
 library(psych)
-#
+# Install a package with any dependencies --depend on/link to/import/suggest
+install.packages('ggplot2', dependencies = TRUE)
+library(ggplot2)
 # uninstall a package
 # remove.packages("psych")
 #
 # http://cran.r-project.org/web/views/
 #CRAN Task Views
-available.views()
+# have to install and load ctv first
 install.packages("ctv")
-install.views("Survival")
-install.views("SocialSciences")
+library("ctv")
+available.views()
 install.views("TimeSeries")
-
+update.views("TimeSeries")
+#
+##########################################################################
+#
+# System Utilities
+#
+##########################################################################
+#
+# additional functions
+library("R.utils")
+# very powerful feature of R is to leverage Windows command-shell or GNU/Linux BASH
+system("hostname")
+system("whoami")
+#OR
+shell("hostname")
+# shell.exec() can be used to open a file
+# shell.exec("D:/Workspace/file.txt)
+# shell.exec("D:\\Workspace\\file.txt)
+#
 #Some common system variables
 Sys.getenv()
 Sys.getenv("R_HOME")
 Sys.getenv("R_LIBS_USER")
+memory.limit()
+memory.size()
+memory.limit() - memory.size()	#available memory
+memory.profile()
+gc()
+#
 #dump to file
 # not the best
 cat(paste(Sys.getenv()), sep = "\r", fill = TRUE, label = paste(names(Sys.getenv())), append = FALSE, file="System.variables.txt")
@@ -147,6 +202,8 @@ class(Sys.Date())
 mode(Sys.Date())
 storage.mode(Sys.Date())
 #
+# Find out how long execution takes
+system.time(pie(rep(1, 12), col = rainbow(12)))
 # Pause for specified time (in seconds)
 Sys.sleep(10)
 #
@@ -195,6 +252,8 @@ objects()
 character() #any objects that are character
 numeric()	#any objects that are numeric
 #
+# list all instantiated objects
+ls()
 # quickly remove all instantiated objects
 rm(list=ls())
 #
@@ -213,6 +272,13 @@ tail(USGS_Quakes)
 #
 ##########################################################################
 #
+# Built in R data sets
+data()
+#
+##########################################################################
+#
+##########################################################################
+#
 #
 # WORKING WITH CAL HEAD-COUNT DATA
 #
@@ -224,10 +290,18 @@ tail(USGS_Quakes)
 LastLoadTimestamp_CalData = as.POSIXct(Sys.time())
 # Get the difference between last load and current time
 as.POSIXlt(Sys.time()) - LastLoadTimestamp_CalData
-#
-CalData <- read.csv('CAL-HeadCount-Log.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
+# assumes a project template layout
+setwd("D:/Workspace/R/CAL-HeadCount")
+CalData <- read.csv('./data/CAL-HeadCount-Log.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
 # To remove the total column --since its a calculated field
 rmtCalData <- CalData[,-6] #remove column #6 (which is the total column)
+#or
+CalData <- CalData[,-6]
+#
+# How was the data loaded? The data was loaded as a list; less munging if data is loaded as a matrix.
+typeof(CalData)
+is.matrix(CalData)
+is.list(CalData)
 #
 # First things to do when looking at a new dataset
 # Look at the dimensions of the data
@@ -237,6 +311,9 @@ dim(CalData)
 # is.na(CalData)
 sum(is.na(CalData))	#better way of getting the info
 table(is.na(CalData))
+#
+# look at the data in table format
+View(CalData)
 #
 #view headers in source order
 names(CalData)
@@ -749,4 +826,11 @@ rbinom(8, 1, .5)	#random byte
 dbinom(1, size=8, prob=.5)	#probability discrete distribution
 pbinom(1, size=8, prob=.5)	#cumulative probability
 pnorm(25, mean(CalData$Total, na.rm = TRUE), sd(CalData$Total, na.rm = TRUE)) #normal distribution
+
+#End Of File (EOF)
+# common end of file tasks
+# save the R session
+save.image(file="D:/Workspace/R/CAL-HeadCount/CAL-HeadCount.rda")
+# Quite without saving session.
+q("no")
 
