@@ -4,7 +4,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	33
+# Version:	35
 # Purpose: Using CAL HeadCount as learning data
 # Copyright License: Creative Commons: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
 # http://creativecommons.org/licenses/by-nc-sa/3.0/
@@ -68,8 +68,8 @@
 #Packages for Spatial analysis
 #
 # 'maps' -provides some basic world maps
-#
-#
+# library(maps)
+# map("state", boundary = FALSE, col="gray", add = TRUE)
 #
 ##########################################################################
 # Information-subTips&Tricks ---------------------------------------------------
@@ -81,6 +81,15 @@
 # Ctrl+L clear console
 #
 ##########################################################################
+#
+#Conditional checks
+# (contain text in quotes, i.e. "text" == "text") #will return TRUE
+# == equals condition
+# != not equal condition
+# >= 
+# <=
+##########################################################################
+#
 # Help ---------------------------------------------------
 # Great help resource
 # http://en.wikibooks.org/wiki/R_Programming
@@ -166,6 +175,11 @@ shell("hostname")
 # shell.exec("D:/Workspace/file.txt)
 # shell.exec("D:\\Workspace\\file.txt)
 #
+# To time the execution of any script
+# uses proc.time()
+startTimer <- proc.time()
+proc.time() - startTimer
+#
 #Some common system variables
 Sys.getenv()
 Sys.getenv("R_HOME")
@@ -193,7 +207,13 @@ Sys.timezone()
 as.POSIXlt(Sys.time(), tz = "GMT")
 as.POSIXct(Sys.time())
 format(Sys.time(), "%a %b %d %X %Y %Z")
+# long format
+format(Sys.time(), "%A %B %d %X %Y %Z")
+#time with miliseconds
 format(Sys.time(), "%H:%M:%OS3")
+#
+# Get the current day of the week
+format(Sys.time(), "%A")
 #
 # see that Sys.Date() is class date
 # {numeric, logical, character, list, matrix, array, factor, data.frame}
@@ -298,12 +318,14 @@ URI <- "https://docs.google.com/spreadsheet/pub?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt
 download.file(URI,"CAL-HeadCount.csv","internal")
 CalData <- read.csv('CAL-HeadCount.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
 #
+# Check the last few records of the dataset
+tail(CalData, 5)
 # To remove the total column --since its a calculated field
 rmtCalData <- CalData[,-6] #remove column #6 (which is the total column)
 #or
 CalData <- CalData[,-6]
 #
-# How was the data loaded? The data was loaded as a list; less munging if data is loaded as a matrix.
+# How was the data loaded? The data was loaded as a list.
 typeof(CalData)
 is.matrix(CalData)
 is.list(CalData)
@@ -370,6 +392,12 @@ list(CalData$Counter)
 # 
 Counters <- levels(CalData$Counter)
 #
+# make all the initials in Counter uppercase
+toupper(CalData$Counter)
+#
+# Can rename variables such as column names
+names(CalData)[1] <- "Initials"
+names(CalData)[1] <- "Counters"
 #
 #Working with CalData Data Frame
 #specify to use a data frame
@@ -380,12 +408,12 @@ str(CalData)
 #
 # Working with Dates
 class(CalData$Date)	# shows that its a factor
-dCalData_Date = as.Date(CalData$Date, format = "%m/%d/%Y")
+dCalData_Date <- as.Date(CalData$Date, format = "%m/%d/%Y")
 class(dCalData_Date)	#date class
 dCalData_Date[1]	#will return the first date
 as.integer(dCalData_Date)
 # OR
-iCalData_Date = as.integer(as.Date(CalData$Date, format = "%m/%d/%Y"))
+iCalData_Date <- as.integer(as.Date(CalData$Date, format = "%m/%d/%Y"))
 #POSIXlt creates parts to the date; human readable vs POSIXct
 dCalData_Date = as.POSIXlt(CalData$Date, format = "%m/%d/%Y")
 dCalData_Date$mday	#day of the month
@@ -396,20 +424,27 @@ dCalData_Date$yday	#day of the year
 # Getting the difference between two dates
 # in this case the first count to the last count
 difftime(dCalData_Date[1], dCalData_Date[length(dCalData_Date)])
+difftime(dCalData_Date[1], tail(dCalData_Date,1))
 #
 # Working with Time
+#
+if(require('chron')==FALSE) install.packages('chron')
+library('chron')
+#
 class(CalData$Time)	#is a factor that needs to be changed
-dCalData_Time = chron(times = CalData$Time)
+dCalData_Time <- chron(times = CalData$Time)
 class(dCalData_Time)	#is now a times class
 # Create a single timestamp string
-dCalData_TimeStamp = paste(dCalData_Date, dCalData_Time)
+dCalData_TimeStamp <- paste(dCalData_Date, dCalData_Time)
 difftime(dCalData_TimeStamp[1], dCalData_TimeStamp[2])
-
+difftime(tail(dCalData_TimeStamp, 2)[1], tail(dCalData_TimeStamp, 2)[2])
+#
 #################################################
 #!NEEDS RESEARCH!
 #using timeDate package#
-#require('timeDate')
-#dCalData_Time = as.timeDate(dCalData_Time)
+if(require('timeDate')==FALSE) install.packages('timeDate')
+library('timeDate')
+#dCalData_Time <- as.timeDate(dCalData_Time)
 #class(dCalData_Time)	#is now a timeDate
 #################################################
 
@@ -612,6 +647,9 @@ kmeans(CalData$West, 3)
 #
 # Cairo high quality PNG,JPEG,TIFF,SVG,PDF
 # Advanced graphing with ggplot2 install.packages('ggplote2')
+# Documentaion for ggplot2
+# http://docs.ggplot2.org/current/index.html
+#
 # Advanced dynamic graphing with rggobi install.packages('rggobi')
 # par() can modify default graphics parameters
 # type par() to see current settings and available elements
@@ -619,6 +657,43 @@ kmeans(CalData$West, 3)
 # For a given plot to find a point
 # clicks on the plot will be recorded and the points displayed once locator() is escaped.
 # locator()
+#
+##########################################################################
+# PLAYWITH
+# Playwith package provides a GUI interface to manipulate graphs in R
+if(require('playwith')==FALSE) install.packages('playwith')
+library('playwith')
+#
+# Example
+# playwith(hist(CalData$Total))
+##########################################################################
+#GrapheR
+# GUI package to help with graphing in R
+if(require('GrapheR')==FALSE) install.packages('GrapheR')
+library('GrapheR')
+#
+# Example
+# run.GrapheR()
+###########################################################################
+#
+# Titles, Legends, and Text
+#
+# Title
+# title(main = "main title", sub = "sub title")
+#
+# Legend
+# position can be "bottomleft", "bottomright", "topleft", "topright" 
+# legend(x = 'topright', y = NULL, legend = c("CAL East","CAL West"), fill = NULL, col = 'sienna1', bty = 'n')
+#
+# Text in margins
+# mtext() puts some texts in the margin. The margin can be at the bottom (1), the left (2), the top (3) or the right (4).
+# ; mtext("some text", side = 1) # the bottom
+# Example
+# hist(CalData$Total) ; mtext("bottom text", side = 1)
+###########################################################################
+#
+# use colors() to get possible color values.
+colors()
 #
 # stemplot
 stem(tblCalData_East)
@@ -640,7 +715,7 @@ hist(tblCalData_West)
 # determines the number of histo bars 
 # breaks = n
 # breaks = c(n,n,n,n)
-# use colors() to get possible color values.
+
 # mostly complete
 hist(tblCalData_East,
 	main = "East CAl Head Count",
@@ -831,9 +906,14 @@ rbinom(8, 1, .5)	#random byte
 dbinom(1, size=8, prob=.5)	#probability discrete distribution
 pbinom(1, size=8, prob=.5)	#cumulative probability
 pnorm(25, mean(CalData$Total, na.rm = TRUE), sd(CalData$Total, na.rm = TRUE)) #normal distribution
-
+#
+#
+##########################################################################
+#
 #End Of File (EOF)
 # common end of file tasks
+#
+##########################################################################
 # save the R session
 save.image(file="D:/Workspace/R/CAL-HeadCount/CAL-HeadCount.rda")
 # Quite without saving session.
