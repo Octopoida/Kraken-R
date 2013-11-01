@@ -4,7 +4,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	35
+# Version:	36
 # Purpose: Using CAL HeadCount as learning data
 # Copyright License: Creative Commons: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
 # http://creativecommons.org/licenses/by-nc-sa/3.0/
@@ -20,18 +20,24 @@
 ##########################################################################
 # Information-subStructureTypes ---------------------------------------------------
 # Types of structures
-#####################
-# vector	--one dimension
-# matrix	--two dimensions
-# array		--three or more dimensions | is.array()
+#################################################
+# vector		--one dimension
+# matrix		--two dimensions
+# list			--different classes
+# data frame	--multiple vectors with possible different classes
+# factor		--used for qualitative variables
+# array			--three or more dimensions | is.array()
+# NA			--missing values
 #
 # Types of Data or modes
-########################
+#################################################
 # Numeric 	{is.integer() is.double()}
 # Text 		is.character()
 # Factor	is.factor()
 # Function	is.function()
 # List		is.list()
+# Complex	is.complex() #imaginary value i.
+# NA		is.na()
 #
 # Vector Chart
 #	typeof		Mode		storage.mode
@@ -312,7 +318,7 @@ LastLoadTimestamp_CalData = as.POSIXct(Sys.time())
 as.POSIXlt(Sys.time()) - LastLoadTimestamp_CalData
 # assumes a project template layout
 setwd("D:/Workspace/R/CAL-HeadCount")
-CalData <- read.csv('./data/CAL-HeadCount-Log.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
+CalData <- read.csv('./data/CAL-HeadCount.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
 # or to automate the process
 URI <- "https://docs.google.com/spreadsheet/pub?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE&single=true&gid=0&output=csv"
 download.file(URI,"CAL-HeadCount.csv","internal")
@@ -329,6 +335,9 @@ CalData <- CalData[,-6]
 typeof(CalData)
 is.matrix(CalData)
 is.list(CalData)
+# better to load CalData as a data frame
+CalData <- as.data.frame(CalData)
+is.date.frame(CalData)
 #
 # First things to do when looking at a new dataset
 # Look at the dimensions of the data
@@ -426,12 +435,34 @@ dCalData_Date$yday	#day of the year
 difftime(dCalData_Date[1], dCalData_Date[length(dCalData_Date)])
 difftime(dCalData_Date[1], tail(dCalData_Date,1))
 #
+#################################################
+#
 # Working with Time
+#
+# Packages to work with time series
+# chron,
+#
+#################################################
 #
 if(require('chron')==FALSE) install.packages('chron')
 library('chron')
 #
+# check columns Date & Time
+is.ts(CalData$Date)
+is.ts(CalData$Time)
+is.chron(CalData$Date)
+is.chron(CalData$Time)
+#
+class(CalData$Date)	#is a factor that needs to be changed
 class(CalData$Time)	#is a factor that needs to be changed
+#
+CalData$Date <- as.ts(CalData$Date)
+CalData$Time <- as.ts(CalData$Time)
+
+
+
+
+
 dCalData_Time <- chron(times = CalData$Time)
 class(dCalData_Time)	#is now a times class
 # Create a single timestamp string
@@ -447,7 +478,7 @@ library('timeDate')
 #dCalData_Time <- as.timeDate(dCalData_Time)
 #class(dCalData_Time)	#is now a timeDate
 #################################################
-
+#
 #show the first record with all columns
 CalData[1,1:6]
 #Show the first 10 records, all
@@ -462,6 +493,14 @@ CalData$West[CalData$West > 0]
 adjCalData_East <- CalData$East[CalData$East > 0]
 adjCalData_West <- CalData$West[CalData$West > 0]
 adjCalData_Total <- CalData$Total[CalData$Total > 0]
+#
+# Subsetting data
+subset(CalData, CalData$East > 25)
+subset(CalData, CalData$Counter == "DG")
+subset(CalData, CalData$Counter == "DG" & CalData$East > 25)
+# Find the number of times a counter made an observation
+nrow(subset(CalData, CalData$Counter == "DG"))
+#
 #show the first 6 records or n records; last 6 records
 head(CalData)
 head(CalData, n = 10)
