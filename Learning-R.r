@@ -4,8 +4,9 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	36
-# Purpose: Using CAL HeadCount as learning data
+# Version:	37
+# Purpose: Using CAL HeadCount to learn R. Single file to keep it simple, even though using Project Template is a good idea --Project Template is an R package which defines the folder structure for a project.
+#
 # Copyright License: Creative Commons: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
 # http://creativecommons.org/licenses/by-nc-sa/3.0/
 #
@@ -498,6 +499,9 @@ adjCalData_Total <- CalData$Total[CalData$Total > 0]
 subset(CalData, CalData$East > 25)
 subset(CalData, CalData$Counter == "DG")
 subset(CalData, CalData$Counter == "DG" & CalData$East > 25)
+#or
+counterDG <- CalData[CalData$Counter == "DG",]
+#
 # Find the number of times a counter made an observation
 nrow(subset(CalData, CalData$Counter == "DG"))
 #
