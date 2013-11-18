@@ -1,12 +1,14 @@
-# Information-subAuthor ---------------------------------------------------
-##########################################################################
+# Author Information ----------------------------------------------------
+#
 # AUTHOR:	David Geeraerts
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	37
+# Version:	38
+#
 # Purpose: Using CAL HeadCount to learn R. Single file to keep it simple, even though using Project Template is a good idea --Project Template is an R package which defines the folder structure for a project.
 #
+# Copyleft ---------------------------------------------------
 # Copyright License: Creative Commons: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
 # http://creativecommons.org/licenses/by-nc-sa/3.0/
 #
@@ -18,10 +20,9 @@
 # URI for csv file
 # https://docs.google.com/spreadsheet/pub?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE&single=true&gid=0&output=csv
 #
-##########################################################################
 # Information-subStructureTypes ---------------------------------------------------
 # Types of structures
-#################################################
+# 
 # vector		--one dimension
 # matrix		--two dimensions
 # list			--different classes
@@ -30,8 +31,8 @@
 # array			--three or more dimensions | is.array()
 # NA			--missing values
 #
-# Types of Data or modes
-#################################################
+# Types of Data or modes ------------------------------------------------------
+#
 # Numeric 	{is.integer() is.double()}
 # Text 		is.character()
 # Factor	is.factor()
@@ -40,7 +41,7 @@
 # Complex	is.complex() #imaginary value i.
 # NA		is.na()
 #
-# Vector Chart
+# Vector Chart ----------------------------------------------------------------
 #	typeof		Mode		storage.mode
 #
 #	logical		logical		logical
@@ -50,18 +51,18 @@
 #	character	character	character
 #	list		list		list
 #	raw			raw			raw
-##########################################################################
+# 
 # Information-subNotes ---------------------------------------------------
 # Notes
-#-------------------------------------------------------------------------
+#
 #- R is case sensitive. Can use tolower() or toupper() for munging data.
 #- \\ to escape special characters
 #- variables should only use alpha numeric characters, period ".", and underscore "_"
 #
-##########################################################################
+#
 # Information-subPackages ---------------------------------------------------
 # PACKAGES of note:
-# ------------------------------------------------------------------------
+#
 # 'sig' Print function signatures
 # 'XML' scraping tool for html & XML pages
 # 'httr' working with HTTP connections
@@ -71,14 +72,14 @@
 # 'futile.logger' logging package
 #
 #
-##########################################################################
-#Packages for Spatial analysis
+#
+# Packages for Spatial analysis ---------------------------------------------------
 #
 # 'maps' -provides some basic world maps
 # library(maps)
 # map("state", boundary = FALSE, col="gray", add = TRUE)
 #
-##########################################################################
+#
 # Information-subTips&Tricks ---------------------------------------------------
 # Tips & Tricks
 #
@@ -87,7 +88,7 @@
 # Ctrl+up command history
 # Ctrl+L clear console
 #
-##########################################################################
+#
 #
 #Conditional checks
 # (contain text in quotes, i.e. "text" == "text") #will return TRUE
@@ -95,7 +96,7 @@
 # != not equal condition
 # >= 
 # <=
-##########################################################################
+#
 #
 # Help ---------------------------------------------------
 # Great help resource
@@ -128,12 +129,13 @@ sessionInfo()
 # look at current options
 options()
 #
-##########################################################################
 #
-# Package Management
+#
+# Package Management ---------------------------------------------------
 # http://cran.r-project.org/
 #
-##########################################################################
+#
+# Package Packrat() can package up all dependent packages for a project with specific versions in a sandbox area that will not affect the local package installation.   
 #
 # list or search installed packages
 search()
@@ -162,14 +164,13 @@ library(ggplot2)
 install.packages("ctv")
 library("ctv")
 available.views()
+# install all of the packages associated with a Task View
 install.views("TimeSeries")
+# update any packages associated with a Task View
 update.views("TimeSeries")
 #
-##########################################################################
 #
-# System Utilities
-#
-##########################################################################
+# System Utilities ---------------------------------------------------
 #
 # additional functions
 library("R.utils")
@@ -195,8 +196,14 @@ memory.limit()
 memory.size()
 memory.limit() - memory.size()	#available memory
 memory.profile()
+# garbage collection
+# should happen automatically, but can be called manually. Good for getting memory usage.
 gc()
 #
+# Memory and Objects ---------------------------
+# get memory usage for an object
+object.size(date)                   
+
 #dump to file
 # not the best
 cat(paste(Sys.getenv()), sep = "\r", fill = TRUE, label = paste(names(Sys.getenv())), append = FALSE, file="System.variables.txt")
@@ -297,24 +304,17 @@ close(con)
 head(USGS_Quakes)
 tail(USGS_Quakes)
 #
-##########################################################################
 #
 # Built in R data sets
 data()
 #
-##########################################################################
 #
-##########################################################################
+# WORKING WITH CAL HEAD-COUNT DATA --------------------------------------------------------
 #
-#
-# WORKING WITH CAL HEAD-COUNT DATA
-#
-#
-##########################################################################
 #
 #Load the CSV file into a variable; read.table() is common for text files {.txt}; scan() is the most primitive form of reading data from a file into a variable.
 # Create a Timestamp for laoding the data
-LastLoadTimestamp_CalData = as.POSIXct(Sys.time())
+LastLoadTimestamp_CalData <- as.POSIXct(Sys.time())
 # Get the difference between last load and current time
 as.POSIXlt(Sys.time()) - LastLoadTimestamp_CalData
 # assumes a project template layout
@@ -326,7 +326,7 @@ download.file(URI,"CAL-HeadCount.csv","internal")
 CalData <- read.csv('CAL-HeadCount.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
 #
 # Check the last few records of the dataset
-tail(CalData, 5)
+tail(CalData, 10)
 # To remove the total column --since its a calculated field
 rmtCalData <- CalData[,-6] #remove column #6 (which is the total column)
 #or
@@ -436,14 +436,12 @@ dCalData_Date$yday	#day of the year
 difftime(dCalData_Date[1], dCalData_Date[length(dCalData_Date)])
 difftime(dCalData_Date[1], tail(dCalData_Date,1))
 #
-#################################################
 #
 # Working with Time
 #
 # Packages to work with time series
 # chron,
 #
-#################################################
 #
 if(require('chron')==FALSE) install.packages('chron')
 library('chron')
@@ -471,14 +469,14 @@ dCalData_TimeStamp <- paste(dCalData_Date, dCalData_Time)
 difftime(dCalData_TimeStamp[1], dCalData_TimeStamp[2])
 difftime(tail(dCalData_TimeStamp, 2)[1], tail(dCalData_TimeStamp, 2)[2])
 #
-#################################################
+# ??????????????????????????????????????
 #!NEEDS RESEARCH!
 #using timeDate package#
 if(require('timeDate')==FALSE) install.packages('timeDate')
 library('timeDate')
 #dCalData_Time <- as.timeDate(dCalData_Time)
 #class(dCalData_Time)	#is now a timeDate
-#################################################
+# ??????????????????????????????????????
 #
 #show the first record with all columns
 CalData[1,1:6]
@@ -495,15 +493,8 @@ adjCalData_East <- CalData$East[CalData$East > 0]
 adjCalData_West <- CalData$West[CalData$West > 0]
 adjCalData_Total <- CalData$Total[CalData$Total > 0]
 #
-# Subsetting data
-subset(CalData, CalData$East > 25)
-subset(CalData, CalData$Counter == "DG")
-subset(CalData, CalData$Counter == "DG" & CalData$East > 25)
-#or
-counterDG <- CalData[CalData$Counter == "DG",]
 #
-# Find the number of times a counter made an observation
-nrow(subset(CalData, CalData$Counter == "DG"))
+# Subsetting data ----------
 #
 #show the first 6 records or n records; last 6 records
 head(CalData)
@@ -513,11 +504,32 @@ tail(CalData)
 sort(CalData[,6])
 order(CalData[,6])
 rank(CalData[,6])
+#
+subset(CalData, CalData$East > 25)
+subset(CalData, CalData$Counter == "DG")
+subset(CalData, CalData$Counter == "DG" & CalData$East > 25)
+#or
+counterDG <- CalData[CalData$Counter == "DG",]
+#
+# Find the number of times a counter made an observation
+nrow(subset(CalData, CalData$Counter == "DG"))
+# multiple conditions
+## subset to when no one was present
+CalData[CalData$East == 0 & CalData$West == 0,]
+nrow(CalData[CalData$East == 0 & CalData$West == 0,])
+## subset when no one was present on one side using OR operator "|"
+CalData[CalData$East == 0 | CalData$West == 0,]
+nrow(CalData[CalData$East == 0 | CalData$West == 0,])
+#
 #Get sums of columns
 with(CalData, sum(Total))
 with(CalData, sum(East))
 with(CalData, sum(West))
-#Get statisitical summary data
+#
+#
+#Get statisitical summary data ----------
+#
+#
 summary(CalData)
 # Get individual summary
 summary(CalData$Counter)
@@ -589,6 +601,8 @@ nchar(CalData$Total)
 any(CalData$East > 50) #will return TRUE or FALSE
 any(CalData$East == 50)
 any(CalData$East >= 50)
+any(CalData$Counter == "DG")
+any(CalData$Counter == "na")
 #
 # Probabilty Statistics
 quantile(CalData$East)
@@ -685,7 +699,7 @@ prop.table(tblCalData_Total)
 kmeans(CalData$East, 3)
 kmeans(CalData$West, 3)
 #
-##########################################################################
+#
 # Visualization (Plots and Graphs)
 #
 # Cairo high quality PNG,JPEG,TIFF,SVG,PDF
@@ -701,7 +715,7 @@ kmeans(CalData$West, 3)
 # clicks on the plot will be recorded and the points displayed once locator() is escaped.
 # locator()
 #
-##########################################################################
+#
 # PLAYWITH
 # Playwith package provides a GUI interface to manipulate graphs in R
 if(require('playwith')==FALSE) install.packages('playwith')
@@ -709,7 +723,7 @@ library('playwith')
 #
 # Example
 # playwith(hist(CalData$Total))
-##########################################################################
+#
 #GrapheR
 # GUI package to help with graphing in R
 if(require('GrapheR')==FALSE) install.packages('GrapheR')
@@ -717,7 +731,7 @@ library('GrapheR')
 #
 # Example
 # run.GrapheR()
-###########################################################################
+#
 #
 # Titles, Legends, and Text
 #
@@ -733,7 +747,6 @@ library('GrapheR')
 # ; mtext("some text", side = 1) # the bottom
 # Example
 # hist(CalData$Total) ; mtext("bottom text", side = 1)
-###########################################################################
 #
 # use colors() to get possible color values.
 colors()
@@ -844,18 +857,18 @@ legend(x = 'topright', y = NULL, legend = "Scatter Plot", fill = NULL, col = 'si
 
 #Pie Chart
 pie(iCalData_Total, clockwise = TRUE)
-#################################################
+#
 # !NEEDS RESEARCH!
 # Quantile-Quantile Plot
 # use qq()
-#################################################
+#
 #
 # When performing sampling/resampling
 # use the set.seed() to make the analysis reproducible.
 # set.seed() will allow the same results each time.
 #
 #Sampling & Re-Sampling
-#################################################
+#
 # Sampling
 sample(iCalData_East, size = 100, replace = TRUE)
 sample(iCalData_West, size = 100, replace = TRUE)
@@ -873,7 +886,7 @@ resample(iCalData_Total[iCalData_Total > 50], size = 10, replace = FALSE)
 rbinom(iCalData_Total, 10, .05)
 #
 #Hypothesis Testing
-#################################################
+#
 #Testing for Normal Distribution using Shapiro Test
 shapiro.test(iCalData_East)
 shapiro.test(iCalData_East)
@@ -922,7 +935,7 @@ cor.test(iCalData_East, iCalData_West)
 chisq.test(iCalData_East, iCalData_West)
 chisq.test(iCalData_East, iCalData_West, simulate.p.value = TRUE, B = 100)
 
-#Kolmogorov­Smirnov test (Testing two samples for same distribution)
+#Kolmogorov?Smirnov test (Testing two samples for same distribution)
 ks.test(iCalData_East, iCalData_West)
 #
 
@@ -935,7 +948,7 @@ sCalData <- stack(list(East = iCalData_East, West = iCalData_West))
 #can check the names for the columns
 names(sCalData)
 aov(values ~ ind, data = sCalData)
-#################################################
+#
 #Distributions
 #Basic random number generator
 runif(1)
@@ -951,13 +964,11 @@ pbinom(1, size=8, prob=.5)	#cumulative probability
 pnorm(25, mean(CalData$Total, na.rm = TRUE), sd(CalData$Total, na.rm = TRUE)) #normal distribution
 #
 #
-##########################################################################
-#
-#End Of File (EOF)
+# End Of File (EOF) ----------
 # common end of file tasks
 #
-##########################################################################
-# save the R session
+#
+# save the R session ----------
 save.image(file="D:/Workspace/R/CAL-HeadCount/CAL-HeadCount.rda")
 # Quite without saving session.
 q("no")
