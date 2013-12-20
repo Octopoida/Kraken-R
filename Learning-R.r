@@ -4,7 +4,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	39
+# Version:	40
 
 
 # Purpose: Using CAL HeadCount to learn R. Single file to keep it simple, even though using Project Template is a good idea
@@ -59,13 +59,19 @@
 #
 # R is case sensitive. Can use tolower() or toupper() for munging data.
 # \\ to escape special characters
-# variables should only use alpha numeric characters, period ".", and underscore "_"
-#  recommend to only use underscore "_" for variable objects. Periods are used with
-#  functions, such as "data.frame".
+# variables should only use alpha numeric characters, . (period),
+#	and _ (underscore); recommend to only use underscore "_"
+#	for variable objects.
+#	Periods are used with functions, such as "data.frame".
+# Using ' (single quote) or the " (double quote) treats as string;
+# 	to get at a character function such as + - / ? < > etc.,
+#	the ` (tick) needs to be used: `+`
 
 
 # Packages of note ------------------------------------------------------------
 #
+# 'random'			uses random.org to generate non-deterministic random numbers
+# 'plyr'			Tools for splitting, applying and combining data
 # 'reshape2'		modern data wrangling package
 # 'stringr'			string manipulation
 # 'sig' 			Print function signatures
@@ -78,11 +84,18 @@
 # 'futile.logger' 	logging package
 
 
-# Packages for Spatial analysis ---------------------------------------------------
+# Packages for advanced graphing ----------------------------------------------
 #
-# 'maps' -provides some basic world maps
+# ggplot2		based on grammer graphics
+# igraph		creating undirected and directed graphs
+
+
+# Packages for Spatial analysis -----------------------------------------------
+#
+# 'maps'			provides some basic world maps
 # library(maps)
 # map("state", boundary = FALSE, col="gray", add = TRUE)
+# 'UScensus2010'	US Census 2010 shape files and additional demographic data
 
 
 # Tips&Tricks ---------------------------------------------------
@@ -121,6 +134,11 @@
 # $		used to extract elements from a list or data frame.
 
 
+# CRANberries -----------------------------------------------------------------
+# is a website that keeps track of all CRAN package updates
+# http://dirk.eddelbuettel.com/cranberries/
+
+
 # Help ------------------------------------------------------------------------
 # Great help resource
 # http://en.wikibooks.org/wiki/R_Programming
@@ -151,7 +169,7 @@ sessionInfo()
 # Type of OS
 .Platform$OS.type
 #
-# look at current options
+# get list of options
 options()
 
 
@@ -368,25 +386,21 @@ data()
 # Column variables, populate data
 year <- as.ts(c("2012", "2012", "2013", "2013", "2013"))	#without as.ts, it's loaded as a factor.
 quarter <- c("Spring", "Fall", "Winter", "Spring", "Fall")
-total_reservations <- as.numeric(c("128", "152", "125", "153", "124"))	#without as.numeric, it's loaded as a factor.
-total_hours_scheduled <- as.ts(c("306:15:00", "505:00:00", "411:00:00", "545:30:00", "387:30:00"))	#without as.ts, it's loaded as a factor.
-total_hours_used <- as.ts(c("231:15:00", "386:15:00", "308:30:00", "374:45:00", "207:35:00"))	#without as.ts, it's loaded as a factor.
-no_show_count <- as.numeric(c("34", "28", "26", "37", "26"))	#without as.numeric, it's loaded as a factor.
+total_reservations <- as.numeric(c("128", "152", "125", "153", "127"))	#without as.numeric, it's loaded as a factor.
+total_hours_scheduled <- as.ts(c("306:15:00", "505:00:00", "411:00:00", "545:30:00", "395:00:00"))	#without as.ts, it's loaded as a factor.
+total_hours_used <- as.ts(c("231:15:00", "386:15:00", "308:30:00", "374:45:00", "241:05:00"))	#without as.ts, it's loaded as a factor.
+no_show_count <- as.numeric(c("34", "28", "26", "37", "33"))	#without as.numeric, it's loaded as a factor.
 # create the data frame
 faculty_usage <- data.frame(year, quarter, total_reservations, total_hours_scheduled, total_hours_used, no_show_count)
 faculty_usage
 View(faculty_usage)	#view in table format
 #structure of the data frame
-str(faculty_usage)	 #note that all are factors
+str(faculty_usage)	 #note that without using "as.", all columns would be factors.
 faculty_usage
 # adding additional columns
 faculty_usage$percent_no_show <- (no_show_count / total_reservations) * 100
 round(faculty_usage$percent_no_show, digits = 1)
 faculty_usage$percent_no_show <- round(faculty_usage$percent_no_show, digits = 1)
-
-
-
-
 
 
 
