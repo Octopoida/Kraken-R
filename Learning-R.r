@@ -1,21 +1,25 @@
-# Author Information ----------------------------------------------------
+# Author Information ----------------------------------------------------------
 #
 # AUTHOR:	David Geeraerts
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	40
+# Version:	42
 
 
-# Purpose: Using CAL HeadCount to learn R. Single file to keep it simple, even though using Project Template is a good idea
-#			--Project Template is an R package which defines the folder structure for a project.
+# Purpose: Using The Evergreen State College, Computer Applications Lab (CAL)
+#	HeadCount to learn R. Single file to keep it simple,
+#	even though using Project Template is a good idea
+#	Project Template is an R package which defines the folder structure
+#	for a project.
 #
-# Copyleft ---------------------------------------------------
-# Copyright License: Creative Commons: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
+# Copyleft --------------------------------------------------------------------
+# Copyright License, Creative Commons:
+# Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
 # http://creativecommons.org/licenses/by-nc-sa/3.0/
 
 
-# Data Types -----------------------------------------------
+# Data Types ------------------------------------------------------------------
 # Types of structures
 # 
 # vector		--one dimension
@@ -92,6 +96,8 @@
 
 # Packages for Spatial analysis -----------------------------------------------
 #
+# 'ggmap'			Use Google maps API, OpenStreet map API.
+# 'OpenStreetMap'	use OpenStreetMap raster images
 # 'maps'			provides some basic world maps
 # library(maps)
 # map("state", boundary = FALSE, col="gray", add = TRUE)
