@@ -4,14 +4,14 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	42
+# Version:	43
 
-
+# Purpose ---------------------------------------------------------------------
 # Purpose: Using The Evergreen State College, Computer Applications Lab (CAL)
 #	HeadCount to learn R. Single file to keep it simple,
-#	even though using Project Template is a good idea
-#	Project Template is an R package which defines the folder structure
-#	for a project.
+#	even though using Project Template is a good idea.
+#	See Project Template for more information 
+#
 #
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -104,7 +104,31 @@
 # 'UScensus2010'	US Census 2010 shape files and additional demographic data
 
 
-# Tips&Tricks ---------------------------------------------------
+# Package Template ------------------------------------------------------------
+#
+# 	[http://projecttemplate.net/]
+#	R package which defines the folder structure; used for reproducible data
+#	install.packages('ProjectTemplate')
+#	library('ProjectTemplate')
+
+
+# Parallel & Distributed R ----------------------------------------------------
+#
+# CRAN Task View: High-Performance and Parallel computing in R
+# http://cran.r-project.org/web/views/HighPerformanceComputing.html
+# http://www.r-bloggers.com/how-to-go-parallel-in-r-basics-tips/
+#
+# Packages in R (two types {shared memory & distributed}
+#
+#	Shared Memory			Distributed
+#
+#	'foreach'				'rmpi'
+#	'parallel'				'pbdr' (programming with big data in R)
+#	'snow'					'rhipe'
+#	'multicore'				'rhadoop'
+
+
+# Tips & Tricks ---------------------------------------------------------------
 #
 # TAB for command completion
 # Esc interrupt current command (i.e. when console is waiting for input by showing +
