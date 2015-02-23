@@ -1,18 +1,18 @@
 # Author Information ----------------------------------------------------------
-#
 # AUTHOR:	David Geeraerts
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	43
+# Version:	44
+
 
 # Purpose ---------------------------------------------------------------------
 # Purpose: Using The Evergreen State College, Computer Applications Lab (CAL)
 #	HeadCount to learn R. Single file to keep it simple,
 #	even though using Project Template is a good idea.
 #	See Project Template for more information 
-#
-#
+
+
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
 # Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
@@ -58,7 +58,6 @@
 
 
 # Notes -----------------------------------------------------------------------
-# 
 # !! R IS CASE SENSITIVE !!
 #
 # R is case sensitive. Can use tolower() or toupper() for munging data.
@@ -70,6 +69,20 @@
 # Using ' (single quote) or the " (double quote) treats as string;
 # 	to get at a character function such as + - / ? < > etc.,
 #	the ` (tick) needs to be used: `+`
+
+
+# R SWIRL ---------------------------------------------------------------------
+# Learn to program with an interactive R console; it's a learning environment.
+# install.packages('swirl')
+# library('swirl')
+# swirl()
+# for a list of additional content:
+#	https://github.com/swirldev/swirl_courses#swirl-courses
+# To install additional content:
+#	install_from_swirl("")
+#	install_from_swirl("Getting_and_Cleaning_Data")
+#	install_from_swirl("Data_Analysis")
+#	install_from_swirl("Statistical_Inference")
 
 
 # Packages of note ------------------------------------------------------------
@@ -89,13 +102,11 @@
 
 
 # Packages for advanced graphing ----------------------------------------------
-#
 # ggplot2		based on grammer graphics
 # igraph		creating undirected and directed graphs
 
 
 # Packages for Spatial analysis -----------------------------------------------
-#
 # 'ggmap'			Use Google maps API, OpenStreet map API.
 # 'OpenStreetMap'	use OpenStreetMap raster images
 # 'maps'			provides some basic world maps
@@ -105,7 +116,6 @@
 
 
 # Package Template ------------------------------------------------------------
-#
 # 	[http://projecttemplate.net/]
 #	R package which defines the folder structure; used for reproducible data
 #	install.packages('ProjectTemplate')
@@ -113,7 +123,6 @@
 
 
 # Parallel & Distributed R ----------------------------------------------------
-#
 # CRAN Task View: High-Performance and Parallel computing in R
 # http://cran.r-project.org/web/views/HighPerformanceComputing.html
 # http://www.r-bloggers.com/how-to-go-parallel-in-r-basics-tips/
@@ -227,6 +236,9 @@ library(psych)
 # Install a package with any dependencies --depend on/link to/import/suggest
 install.packages('ggplot2', dependencies = TRUE)
 library(ggplot2)
+# Install a package only if needed, i.e. it's not already installed
+if(require('psych')==FALSE) install.packages('psych')
+#
 # uninstall a package
 # remove.packages("psych")
 #
@@ -254,11 +266,17 @@ shell("hostname")
 # shell.exec() can be used to open a file
 # shell.exec("D:/Workspace/file.txt)
 # shell.exec("D:\\Workspace\\file.txt)
-#
+
+
+# Time Execution --------------------------------------------------------------
 # To time the execution of any script
 # uses proc.time()
 startTimer <- proc.time()
 proc.time() - startTimer
+# Find out how long execution takes
+system.time(pie(rep(1, 12), col = rainbow(12)))
+# Pause for specified time (in seconds)
+Sys.sleep(10)
 
 
 # System variables ------------------------------------------------------------
@@ -269,19 +287,11 @@ memory.limit()
 memory.size()
 memory.limit() - memory.size()	#available memory
 memory.profile()
+# get memory usage for an object
+object.size(date)                   
 # garbage collection
 # should happen automatically, but can be called manually. Good for getting memory usage.
 gc()
-#
-# System Memory and Objects ----------------------------------------------------------
-# get memory usage for an object
-object.size(date)                   
-
-#dump to file
-# not the best
-cat(paste(Sys.getenv()), sep = "\r", fill = TRUE, label = paste(names(Sys.getenv())), append = FALSE, file="System.variables.txt")
-# best way and formated
-cat(paste(names(Sys.getenv()), "=", Sys.getenv()), sep = "\r", fill = TRUE, label = NULL, append = FALSE, file="System.variables.txt")
 
 
 # System Date & Time -----------------------------------------------------------------
@@ -314,22 +324,25 @@ class(Sys.Date())
 # {logical, numeric, complex, character, list (only for object list), or raw}
 mode(Sys.Date())
 storage.mode(Sys.Date())
-#
-# Find out how long execution takes
-system.time(pie(rep(1, 12), col = rainbow(12)))
-# Pause for specified time (in seconds)
-Sys.sleep(10)
-
-
-# Time Series -----------------------------------------------------------------
+# Time Series packages for advanced analysis
 # Packages: ts, lubridate, chron, 
 if(require('chron')==FALSE) install.packages('chron')
 if(require('lubridate')==FALSE) install.packages('lubridate')
 if(require('ts')==FALSE) install.packages('ts')
 
 
+# Write to a file -------------------------------------------------------------
+# not the best
+cat(paste(Sys.getenv()), sep = "\r", fill = TRUE, label = paste(names(Sys.getenv())), append = FALSE, file="System.variables.txt")
+# best way and formatted
+cat(paste(names(Sys.getenv()), "=", Sys.getenv()), sep = "\r", fill = TRUE, label = NULL, append = FALSE, file="System.variables.txt")
+# Another method is to use capture.output()
+capture.output(memory.limit(), file = "System.variables.txt", append = TRUE)
+# Add txt content to appended file using c() 
+capture.output(c("MaxMem:", memory.limit()), file = "System.variables.txt", append = TRUE)
+
+
 # Output Controls -------------------------------------------------------------
-#
 # Console Message
 message("text")
 # warning message
@@ -431,8 +444,6 @@ faculty_usage
 faculty_usage$percent_no_show <- (no_show_count / total_reservations) * 100
 round(faculty_usage$percent_no_show, digits = 1)
 faculty_usage$percent_no_show <- round(faculty_usage$percent_no_show, digits = 1)
-
-
 
 
 # CAL HEAD-COUNT DATA, Working with -------------------------------------------
@@ -1093,11 +1104,10 @@ rbinom(8, 1, .5)	#random byte
 dbinom(1, size=8, prob=.5)	#probability discrete distribution
 pbinom(1, size=8, prob=.5)	#cumulative probability
 pnorm(25, mean(CalData$Total, na.rm = TRUE), sd(CalData$Total, na.rm = TRUE)) #normal distribution
-#
-#
+
+
 # End Of File (EOF) -----------------------------------------------------------
 # common end of file tasks
-#
 #
 # save the R session
 save.image(file="D:/Workspace/R/CAL-HeadCount/CAL-HeadCount.rda")
