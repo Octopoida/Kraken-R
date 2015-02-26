@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	44
+# Version:	45
 
 
 # Purpose ---------------------------------------------------------------------
@@ -115,6 +115,29 @@
 # 'UScensus2010'	US Census 2010 shape files and additional demographic data
 
 
+# R Workflow (LCFD Model) -----------------------------------------------------
+# The LCFD model breaks an R script into its [4] component parts:
+# load.r 	getting and loading the data
+# clean.r	cleaning, munging, and all around tidying of data
+# function.r	custom functions or processes can be stored in this file
+# do.r		  main processing of the data, including output (i.e. graphs)
+
+
+# R Startup Sequence ----------------------------------------------------------
+# to find R_Home: R.home()
+#	File			Variable		Location
+#
+# 1. Renviron.site	R_ENVIRON		R_Home/etc/Rprofile.site
+# 2. .Renviron		R_ENVIRON_USER	If set for user
+# 3. Rprofile.site	R_PROFILE		system file		
+# 4. .Rprofile		R_PROFILE		one for system (R_Home/library/base/r/)
+# 5. .Rprofile		R_PROFILE_USER	user profile
+# 6. .RData							found in the working directory
+# 7. .First							may exist for a project, loads functions; defined in .Rprofile or .Rprofile.sys 
+# 8. .First.sys						load default packages
+# 9. .Rhistory		R_HISTFILE		load history file
+
+
 # Package Template ------------------------------------------------------------
 # 	[http://projecttemplate.net/]
 #	R package which defines the folder structure; used for reproducible data
@@ -198,28 +221,53 @@ library(help="psych")
 vignette()
 
 
-# R Version Information
+# R Information & Options -----------------------------------------------------
 # simple
 getRversion()
 # Returns variable values
 R.Version()
+# System information
+Sys.info()
 # more session information
 sessionInfo()
 # Type of OS
 .Platform$OS.type
+# can easily setup a conditional check and do something.
+if(.Platform$OS.type == "windows") {getRversion()}
 #
 # get list of options
 options()
+options("digits")
+#to change an option for the session
+options(digits = 15)
+#change the default continue character from "+" to "..."
+options(continue = "...")
 
 
 # Package Management ---------------------------------------------------
-# http://cran.r-project.org/
+# Repositories
+#	CRAN
+# 	http://cran.r-project.org/
+#	BioConductor
+#	http://bioconductor.org/biocLite.R
+#	OMEGA
+#	http://www.omegahat.org/R
 #
 #
-# Package Packrat() can package up all dependent packages for a project with specific versions in a sandbox area that will not affect the local package installation.   
+# Package search with documentation (CRAN + Bioconductor + GitHub)
+# http://www.rdocumentation.org/
+#
+# Package		Use
+#
+# packrat() 	can package up all dependent packages for a project with specific versions in a sandbox area that will not affect the local package installation.
+# drat()		build a local repository
+# biocLite() 	bioinformatics repository source("http://bioconductor.org/biocLite.R")
+# devtools()	install_github("user/repo")	access Github packages
 #
 # list or search installed packages
 search()
+# list which paths will be searched for packages
+searchpaths()
 #
 # where are packages stored
 .libPaths()
@@ -232,6 +280,7 @@ installed.packages()
 # require('packageName')
 # Install
 install.packages('psych')
+# activates the package
 library(psych)
 # Install a package with any dependencies --depend on/link to/import/suggest
 install.packages('ggplot2', dependencies = TRUE)
@@ -254,15 +303,15 @@ install.views("TimeSeries")
 update.views("TimeSeries")
 
 
-# System Utilities ---------------------------------------------------
+# System Utilities ------------------------------------------------------------
 #
 # additional functions
 library("R.utils")
 # very powerful feature of R is to leverage Windows command-shell or GNU/Linux BASH
-system("hostname")
-system("whoami")
+system('hostname')
+system('whoami')
 #OR
-shell("hostname")
+shell('hostname')
 # shell.exec() can be used to open a file
 # shell.exec("D:/Workspace/file.txt)
 # shell.exec("D:\\Workspace\\file.txt)
@@ -394,7 +443,7 @@ source("Months.r", local = FALSE, echo = TRUE, verbose = FALSE)
 objects()
 character() #any objects that are character
 numeric()	#any objects that are numeric
-#
+#clear
 # list all instantiated objects
 ls()
 # quickly remove all instantiated objects
