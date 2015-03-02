@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	45
+# Version:	46
 
 
 # Purpose ---------------------------------------------------------------------
@@ -102,7 +102,7 @@
 
 
 # Packages for advanced graphing ----------------------------------------------
-# ggplot2		based on grammer graphics
+# ggplot2		based on grammar graphics
 # igraph		creating undirected and directed graphs
 
 
@@ -466,22 +466,23 @@ tail(USGS_Quakes)
 
 # Built in R data sets --------------------------------------------------------
 data()
+# HistData	#Historical Data
+#install.packages('HistData')
+#library(HistData)
 
 
 # Manual data frame -----------------------------------------------------------
 # an example of creating a data frame manually
 # uses CAL-Usage-Audit data
-# https://docs.google.com/spreadsheet/ccc?key=0AjQL08YDc6cUdGsxMzJodUpYYXJ3bFdGcXFTbkFuVVE&usp=sharing
-# Google URL shortner (http://goo.gl/)
-# http://goo.gl/kH0PfD
+# https://docs.google.com/spreadsheets/d/1e8FRS3INSldjHo329_F_H0acE7sTGeuZTJ_cK2gGvy4
 #
 # Column variables, populate data
-year <- as.ts(c("2012", "2012", "2013", "2013", "2013"))	#without as.ts, it's loaded as a factor.
-quarter <- c("Spring", "Fall", "Winter", "Spring", "Fall")
-total_reservations <- as.numeric(c("128", "152", "125", "153", "127"))	#without as.numeric, it's loaded as a factor.
-total_hours_scheduled <- as.ts(c("306:15:00", "505:00:00", "411:00:00", "545:30:00", "395:00:00"))	#without as.ts, it's loaded as a factor.
-total_hours_used <- as.ts(c("231:15:00", "386:15:00", "308:30:00", "374:45:00", "241:05:00"))	#without as.ts, it's loaded as a factor.
-no_show_count <- as.numeric(c("34", "28", "26", "37", "33"))	#without as.numeric, it's loaded as a factor.
+year <- as.ts(c("2012", "2012", "2013", "2013", "2013", "2014", "2014"))	#without as.ts, it's loaded as a factor.
+quarter <- c("Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring")	#nominal data will be factor.
+total_reservations <- as.numeric(c("128", "152", "125", "153", "127", "149", "168"))	#without as.numeric, it's loaded as a factor.
+total_hours_scheduled <- as.ts(c("306:15:00", "505:00:00", "411:00:00", "545:30:00", "395:00:00", "511:30:00", "518:30:00"))	#without as.ts, it's loaded as a factor.
+total_hours_used <- as.ts(c("231:15:00", "386:15:00", "308:30:00", "374:45:00", "241:05:00", "377:15:00", "428:30:00"))	#without as.ts, it's loaded as a factor.
+no_show_count <- as.numeric(c("34", "28", "26", "37", "33", "32", "29"))	#without as.numeric, it's loaded as a factor.
 # create the data frame
 faculty_usage <- data.frame(year, quarter, total_reservations, total_hours_scheduled, total_hours_used, no_show_count)
 faculty_usage
@@ -507,7 +508,7 @@ faculty_usage$percent_no_show <- round(faculty_usage$percent_no_show, digits = 1
 #
 #
 # Load the CSV file into a variable; read.table() is common for text files {.txt}; scan() is the most primitive form of reading data from a file into a variable.
-# Create a Timestamp for laoding the data
+# Create a Timestamp for loading the data
 LastLoadTimestamp_CalData <- as.POSIXct(Sys.time())
 # Get the difference between last load and current time
 as.POSIXlt(Sys.time()) - LastLoadTimestamp_CalData
