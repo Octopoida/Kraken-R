@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	46
+# Version:	47
 
 
 # Purpose ---------------------------------------------------------------------
@@ -168,7 +168,7 @@
 # Ctrl+L clear console
 
 
-# Conditional checks
+# Conditional checks ----------------------------------------------------------
 # (contain text in quotes, i.e. "text" == "text") #will return TRUE
 # == 	equals condition
 # != 	not equal condition
@@ -191,7 +191,7 @@
 # [[]]	double bracket used to extract from a list or data frame, and only a single element.
 #		use double bracket when using computed indices within an index:
 #		z <- matrix(c("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"), nrow = 10, ncol = 10)
-#		f <- z[,10]
+#		f <- z[ ,10]
 #		i <- f[[1]]
 # $		used to extract elements from a list or data frame.
 
@@ -230,6 +230,9 @@ R.Version()
 Sys.info()
 # more session information
 sessionInfo()
+#another session info based on devtools
+# devtools::session_info()
+if(require('devtools')==TRUE) devtools::session_info()
 # Type of OS
 .Platform$OS.type
 # can easily setup a conditional check and do something.
@@ -278,7 +281,9 @@ installed.packages()
 # load a package
 # library('packageName')
 # require('packageName')
-# Install
+# install multiple packages
+# install.packages(c('packageName', 'packageName'))
+# Install example
 install.packages('psych')
 # activates the package
 library(psych)
@@ -326,6 +331,10 @@ proc.time() - startTimer
 system.time(pie(rep(1, 12), col = rainbow(12)))
 # Pause for specified time (in seconds)
 Sys.sleep(10)
+# Microbenchmarking: performance on a small piece of code
+if(require('microbenchmark')==FALSE) install.packages('microbenchmark')
+library(microbenchmark)
+microbenchmark(pie(rep(1, 12), col = rainbow(12)))
 
 
 # System variables ------------------------------------------------------------
@@ -343,12 +352,12 @@ object.size(date)
 gc()
 
 
-# System Date & Time -----------------------------------------------------------------
+# System Date & Time ----------------------------------------------------------
 Sys.Date()
 Sys.time()
 Sys.timezone()
 # expressions can be grouped together with the use of {exp();exp()...}
-{Sys.Date();Sys.time()}
+{Sys.time();Sys.timezone()}
 #
 # build in function returns date & time as character string
 date()
@@ -523,7 +532,7 @@ CalData <- read.csv('CAL-HeadCount.csv', sep = ',', header = TRUE)	#if tab use s
 # Check the last few records of the dataset
 tail(CalData, 10)
 # To remove the total column --since its a calculated field
-rmtCalData <- CalData[,-6] #remove column #6 (which is the total column)
+rmtCalData <- CalData[ ,-6] #remove column #6 (which is the total column)
 #or
 CalData <- CalData[,-6]
 #
@@ -908,6 +917,7 @@ kmeans(CalData$West, 3)
 # clicks on the plot will be recorded and the points displayed once locator() is escaped.
 # locator()
 #
+# Plotting time-series can use plot.ts()
 #
 # PLAYWITH
 # Playwith package provides a GUI interface to manipulate graphs in R
