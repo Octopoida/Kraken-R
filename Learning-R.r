@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	47
+# Version:	48
 
 
 # Purpose ---------------------------------------------------------------------
@@ -247,7 +247,14 @@ options(digits = 15)
 options(continue = "...")
 
 
-# Package Management ---------------------------------------------------
+# Upgrading R -----------------------------------------------------------------
+# using installr package
+if(require('installr')==FALSE) install.packages('installr')
+library(installr)
+updateR()
+
+
+# Package Management ----------------------------------------------------------
 # Repositories
 #	CRAN
 # 	http://cran.r-project.org/
