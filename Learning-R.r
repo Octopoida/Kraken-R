@@ -3,8 +3,11 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	48
+# Version:	49
 
+# Version control with GitHub
+# Access the latest version, or submit contributions
+# https://github.com/Octopoida/Learning-R 
 
 # Purpose ---------------------------------------------------------------------
 # Purpose: Using The Evergreen State College, Computer Applications Lab (CAL)
@@ -117,10 +120,10 @@
 
 # R Workflow (LCFD Model) -----------------------------------------------------
 # The LCFD model breaks an R script into its [4] component parts:
-# load.r 	getting and loading the data
-# clean.r	cleaning, munging, and all around tidying of data
+# load.r 		getting and loading the data
+# clean.r		cleaning, munging, and all around tidying of data
 # function.r	custom functions or processes can be stored in this file
-# do.r		  main processing of the data, including output (i.e. graphs)
+# do.r		  	main processing of the data, including output (i.e. graphs)
 
 
 # R Startup Sequence ----------------------------------------------------------
@@ -493,12 +496,12 @@ data()
 # https://docs.google.com/spreadsheets/d/1e8FRS3INSldjHo329_F_H0acE7sTGeuZTJ_cK2gGvy4
 #
 # Column variables, populate data
-year <- as.ts(c("2012", "2012", "2013", "2013", "2013", "2014", "2014"))	#without as.ts, it's loaded as a factor.
-quarter <- c("Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring")	#nominal data will be factor.
-total_reservations <- as.numeric(c("128", "152", "125", "153", "127", "149", "168"))	#without as.numeric, it's loaded as a factor.
-total_hours_scheduled <- as.ts(c("306:15:00", "505:00:00", "411:00:00", "545:30:00", "395:00:00", "511:30:00", "518:30:00"))	#without as.ts, it's loaded as a factor.
-total_hours_used <- as.ts(c("231:15:00", "386:15:00", "308:30:00", "374:45:00", "241:05:00", "377:15:00", "428:30:00"))	#without as.ts, it's loaded as a factor.
-no_show_count <- as.numeric(c("34", "28", "26", "37", "33", "32", "29"))	#without as.numeric, it's loaded as a factor.
+year <- as.ts(c("2012", "2012", "2013", "2013", "2013", "2014", "2014", "2014", "2015", "2015"))	#without as.ts, it's loaded as a factor.
+quarter <- c("Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring")	#nominal data will be factor.
+total_reservations <- as.numeric(c("128", "152", "125", "153", "127", "149", "168", "182", "169", "227"))	#without as.numeric, it's loaded as a factor.
+total_hours_scheduled <- as.ts(c("306:15:00", "505:00:00", "411:00:00", "545:30:00", "395:00:00", "511:30:00", "518:30:00", "549:15:00", "459:00:00", "697:00:00"))	#without as.ts, it's loaded as a factor.
+total_hours_used <- as.ts(c("231:15:00", "386:15:00", "308:30:00", "374:45:00", "241:05:00", "377:15:00", "428:30:00", "374:30:00", "361:00:00", "508:15:00"))	#without as.ts, it's loaded as a factor.
+no_show_count <- as.numeric(c("34", "28", "26", "37", "33", "32", "29", "45", "24", "61"))	#without as.numeric, it's loaded as a factor.
 # create the data frame
 faculty_usage <- data.frame(year, quarter, total_reservations, total_hours_scheduled, total_hours_used, no_show_count)
 faculty_usage
