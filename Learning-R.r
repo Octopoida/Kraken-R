@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	49
+# Version:	50
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -36,6 +36,7 @@
 
 # Types of Data or modes ------------------------------------------------------
 #
+# Logical	is.logical()	{TRUE, FALSE, NA}
 # vector	is.atomic()
 # vector	is.vector()
 # Numeric 	{is.integer() is.double()}
@@ -58,7 +59,8 @@
 #	character	character	character
 #	list		list		list
 #	raw			raw			raw
-
+#
+# *when creating vectors, use the c() function --concatenate function
 
 # Notes -----------------------------------------------------------------------
 # !! R IS CASE SENSITIVE !!
@@ -169,6 +171,16 @@
 # Esc interrupt current command (i.e. when console is waiting for input by showing +
 # Ctrl+up command history
 # Ctrl+L clear console
+
+
+# Operators -------------------------------------------------------------------
+#
+# +		Addition
+# - 	Subtraction
+# *		Multiplication
+# /		Division
+# ^		Exponentiation
+# %%	Modulo
 
 
 # Conditional checks ----------------------------------------------------------
@@ -462,25 +474,40 @@ source("Months.r", local = FALSE, echo = TRUE, verbose = FALSE)
 objects()
 character() #any objects that are character
 numeric()	#any objects that are numeric
-#clear
+#clearing objects/variables
 # list all instantiated objects
 ls()
-# quickly remove all instantiated objects
+# remove a variable
+## creating a variable first
+var_Name <- 100
+## remove a variable
+rm(var_Name)
+## remove multiple variables
+# rm (var_Name1, var_Name2)
+# quickly remove all instantiated objects/variables
 rm(list=ls())
-#
-# Example, Connection
-# Working with Connections, such as [geo]JSON feed
-# uses RJSONIO package
-# Sample data from USGS Earthquake feed
-install.packages('RJSONIO')
-library(RJSONIO)
-URI <- "http://earthquake.usgs.gov/earthquakes/feed/geojson/significant/month"
-download.file(URI,"USGS_Quakes.json","internal")
-con = file("USGS_Quakes.json")
-USGS_Quakes = fromJSON(con) #makes it like a list
-close(con)
-head(USGS_Quakes)
-tail(USGS_Quakes)
+
+
+# Coercion --------------------------------------------------------------------
+# make a variable into a certain data type
+# as.*()
+# as.logical(), as.numeric (), as.character(), etc.
+var <- 1
+var_log <- as.logical(var)
+
+
+# Naming vectors, applying labels
+# Example uses playing cards
+var_suite <- c("s", "h", "c", "d")
+names(var_suite) <- c("spade", "heart", "club", "diamond")
+# days of the week are often represented numerically:
+var_days <- c(1:5)
+names(var_days) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+# or define a days of the week vector and reuse it
+days_vector <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+names(var_days) <- days_vector
+# Finding the number of elements in a vector
+length(var_days)
 
 
 # Built in R data sets --------------------------------------------------------
@@ -513,6 +540,23 @@ faculty_usage
 faculty_usage$percent_no_show <- (no_show_count / total_reservations) * 100
 round(faculty_usage$percent_no_show, digits = 1)
 faculty_usage$percent_no_show <- round(faculty_usage$percent_no_show, digits = 1)
+
+
+# Example, Connection
+# Working with Connections, such as [geo]JSON feed
+# uses RJSONIO package
+# Sample data from USGS Earthquake feed
+install.packages('RJSONIO')
+library(RJSONIO)
+URI <- "http://earthquake.usgs.gov/earthquakes/feed/geojson/significant/month"
+download.file(URI,"USGS_Quakes.json","internal")
+con = file("USGS_Quakes.json")
+USGS_Quakes = fromJSON(con) #makes it like a list
+close(con)
+head(USGS_Quakes)
+tail(USGS_Quakes)
+
+
 
 
 # CAL HEAD-COUNT DATA, Working with -------------------------------------------
