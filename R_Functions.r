@@ -3,9 +3,10 @@
 # AUTHOR:	David Geeraerts
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
-# TITLE:	Learning R
+# TITLE:	Kraken-R Functions
 # Version:	29
-# Purpose: Using CAL HeadCount as learning data
+# Purpose: Monolithic (Kraken-R) functions
+#
 # Copyright License: Creative Commons: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
 # http://creativecommons.org/licenses/by-nc-sa/3.0/
 #
