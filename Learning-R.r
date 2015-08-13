@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	50
+# Version:	51
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -27,7 +27,7 @@
 # 
 # vector		--one dimension
 # factor		--used for qualitative variables
-# matrix		--two dimensions
+# matrix		--two dimensions with single atomic data type
 # array			--three or more dimensions | is.array()
 # list			--different classes
 # data frame	--multiple vectors with possible different classes
@@ -198,6 +198,10 @@
 # ||	or	(can also be written as single character "|")
 # all	logical test that all values are true
 # any	logical test that some values are true
+#
+# example
+# var_numeric <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+# var_sub <- var_numeric > 5
 
 
 # Subsetting data basics ------------------------------------------------------
@@ -209,6 +213,17 @@
 #		f <- z[ ,10]
 #		i <- f[[1]]
 # $		used to extract elements from a list or data frame.
+# -		use - "minus" to remove an element from the vector:
+# 		numbers  <- c("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
+# 		numbers  <- [-1]	## this will remove the first element in the index, "zero".
+#		Working with index either by using numeric index call [1] or using labels with the index vector ["odd"]
+#		numbers <- c("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
+#		numbers[c(2,4,6)]	#use c() when selecting multiple index's 
+#		numbers[2:10]	#select a sequential series
+#		names(numbers) <- c("zero", "odd", "even", "odd", "even", "odd", "even", "odd", "even", "odd")
+#		Conditional selection
+#		var_numeric <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+#		var_numeric_sub <- var_numeric[var_numeric > 5] #will select all elements greater than 5
 
 
 # CRANberries -----------------------------------------------------------------
@@ -515,6 +530,19 @@ data()
 # HistData	#Historical Data
 #install.packages('HistData')
 #library(HistData)
+
+
+# Matrix ----------------------------------------------------------------------
+# simple example
+var_mymatrix <- matrix(1:2, ncol = 2, byrow = TRUE)
+# load data with rbind/cbind
+#Parity
+var_even <- c(0, 2, 4, 6, 8)
+var_odd <- c(1, 3, 5, 7, 9)
+var_mymatrix <- cbind(var_even, var_odd)
+#label rows, columns
+rownames(var_mymatrix) <- list("rownumber1", "rownumber2", "rownumber3", "rownumber4", "rownumber5")
+colnames(var_mymatrix) <- list("parity_even", "parity_odd")
 
 
 # Manual data frame -----------------------------------------------------------
