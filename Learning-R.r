@@ -3,17 +3,20 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	51
+# Version:	52
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
-# https://github.com/Octopoida/Learning-R 
+# https://github.com/Octopoida/Kraken-R
 
 # Purpose ---------------------------------------------------------------------
-# Purpose: Using The Evergreen State College, Computer Applications Lab (CAL)
-#	HeadCount to learn R. Single file to keep it simple,
-#	even though using Project Template is a good idea.
-#	See Project Template for more information 
+# Purpose: Kraken-R is a monolithic R script for learning R.
+# It uses The Evergreen State College,
+# Computer Applications Lab (CAL) for Scientific Computing,
+# HeadCount to learn R. Single file to keep it simple,
+# even though using Project Template & LCFD file Model is a good idea.
+# See Project Template for more information:
+# [http://projecttemplate.net/]
 
 
 # Copyleft --------------------------------------------------------------------
@@ -22,12 +25,12 @@
 # http://creativecommons.org/licenses/by-nc-sa/3.0/
 
 
-# Data Types ------------------------------------------------------------------
+# Data structures ------------------------------------------------------------------
 # Types of structures
 # 
-# vector		--one dimension
+# vector		--one dimension --1D
 # factor		--used for qualitative variables
-# matrix		--two dimensions with single atomic data type
+# matrix		--two dimensions with single atomic data type --2D
 # array			--three or more dimensions | is.array()
 # list			--different classes
 # data frame	--multiple vectors with possible different classes
@@ -209,18 +212,18 @@
 # []	single bracket used to extract an object of the same class, and more than one element. 
 # [[]]	double bracket used to extract from a list or data frame, and only a single element.
 #		use double bracket when using computed indices within an index:
-#		z <- matrix(c("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"), nrow = 10, ncol = 10)
-#		f <- z[ ,10]
-#		i <- f[[1]]
+#		var_z <- matrix(c("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"), nrow = 10, ncol = 10)
+#		var_f <- var_z[ ,10]
+#		var_i <- var_f[[1]]
 # $		used to extract elements from a list or data frame.
 # -		use - "minus" to remove an element from the vector:
-# 		numbers  <- c("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
-# 		numbers  <- [-1]	## this will remove the first element in the index, "zero".
+# 		var_numbers  <- c("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
+# 		var_numbers  <- [-1]	## this will remove the first element in the index, "zero".
 #		Working with index either by using numeric index call [1] or using labels with the index vector ["odd"]
-#		numbers <- c("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
-#		numbers[c(2,4,6)]	#use c() when selecting multiple index's 
-#		numbers[2:10]	#select a sequential series
-#		names(numbers) <- c("zero", "odd", "even", "odd", "even", "odd", "even", "odd", "even", "odd")
+#		var_numbers <- c("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
+#		var_numbers[c(2,4,6)]	#use c() when selecting multiple index's 
+#		var_numbers[2:10]	#select a sequential series
+#		var_names(var_numbers) <- c("zero", "odd", "even", "odd", "even", "odd", "even", "odd", "even", "odd")
 #		Conditional selection
 #		var_numeric <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 #		var_numeric_sub <- var_numeric[var_numeric > 5] #will select all elements greater than 5
@@ -534,15 +537,25 @@ data()
 
 # Matrix ----------------------------------------------------------------------
 # simple example
-var_mymatrix <- matrix(1:2, ncol = 2, byrow = TRUE)
-# load data with rbind/cbind
-#Parity
+var_myMatrix <- matrix(1:2, ncol = 2, byrow = TRUE)
+# 2nd simple example using vectors
+# instantiate vectors
+#Parity even
 var_even <- c(0, 2, 4, 6, 8)
+#Parity odd
 var_odd <- c(1, 3, 5, 7, 9)
-var_mymatrix <- cbind(var_even, var_odd)
+# create matrix with vectors
+var_myMatrix <- matrix(c(var_even, var_odd), ncol = 2, byrow = TRUE)
+#
 #label rows, columns
-rownames(var_mymatrix) <- list("rownumber1", "rownumber2", "rownumber3", "rownumber4", "rownumber5")
-colnames(var_mymatrix) <- list("parity_even", "parity_odd")
+rownames(var_myMatrix) <- list("rownumber1", "rownumber2", "rownumber3", "rownumber4", "rownumber5")
+colnames(var_myMatrix) <- list("parity_even", "parity_odd")
+#		Get totals on the rows:
+var_myMatrix_rowSum <- rowSums(var_myMatrix)
+# quick ways to sums in a matrix using colSums()/rowSums()
+var_myMatrix_colSum <- colSums(var_myMatrix)
+# add a column of data with rbind()/cbind(); such as calculated columns
+var_myMatrix_row_total <- cbind(var_myMatrix, var_myMatrix_rowSum)
 
 
 # Manual data frame -----------------------------------------------------------

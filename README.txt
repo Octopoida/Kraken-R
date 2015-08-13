@@ -1,4 +1,4 @@
-Title: Learning-R
+Title: Kraken-R
 
 Author Information ----------------------------------------------------------
 
@@ -8,10 +8,13 @@ LOCATION: Olympia, Washington U.S.A.
 
 
 Purpose ---------------------------------------------------------------------
-Purpose: Using The Evergreen State College, Computer Applications Lab (CAL)
+Purpose: Kraken-R is a monolithic R script for learning R.
+It uses The Evergreen State College,
+Computer Applications Lab (CAL) for Scientific Computing,
 HeadCount to learn R. Single file to keep it simple,
-even though using Project Template is a good idea.
-See Project Template for more information
+even though using Project Template & LCFD file Model is a good idea.
+See Project Template for more information:
+[http://projecttemplate.net/]
 
 
 Copyleft --------------------------------------------------------------------
