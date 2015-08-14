@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	52
+# Version:	53
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -29,12 +29,16 @@
 # Types of structures
 # 
 # vector		--one dimension --1D
-# factor		--used for qualitative variables
+# factor		--used for categorical/qualitative variables
 # matrix		--two dimensions with single atomic data type --2D
 # array			--three or more dimensions | is.array()
 # list			--different classes
 # data frame	--multiple vectors with possible different classes
 # NA			--missing values
+#
+# Notes:
+# factors encode as integer vectors for memory efficiency
+# factors can be nominal or ordinal, using ordered = TRUE/FALSE parameter
 
 
 # Types of Data or modes ------------------------------------------------------
@@ -74,6 +78,8 @@
 #	and _ (underscore); recommend to only use underscore "_"
 #	for variable objects.
 #	Periods are used with functions, such as "data.frame".
+# A variable can not start with a number!
+# A variable can not use these special symbols: ^ ! $ @ + - / * 
 # Using ' (single quote) or the " (double quote) treats as string;
 # 	to get at a character function such as + - / ? < > etc.,
 #	the ` (tick) needs to be used: `+`
@@ -93,7 +99,7 @@
 #	install_from_swirl("Statistical_Inference")
 
 
-# Packages of note ------------------------------------------------------------
+# Notable Packages ------------------------------------------------------------
 #
 # 'random'			uses random.org to generate non-deterministic random numbers
 # 'plyr'			Tools for splitting, applying and combining data
@@ -252,6 +258,9 @@ example(help)
 library(help="psych")
 # vignette, for examples of functions
 vignette()
+
+# Get arguments/parameters for a function
+args(help)
 
 
 # R Information & Options -----------------------------------------------------
@@ -558,6 +567,18 @@ var_myMatrix_colSum <- colSums(var_myMatrix)
 var_myMatrix_row_total <- cbind(var_myMatrix, var_myMatrix_rowSum)
 
 
+# Factors ---------------------------------------------------------------------
+# simple [nominal] factor example
+var_myVector <- c("Bacteria", "Protozoa", "Chromista", "Plantae", "Fungi", "Animalia")
+var_myFactor <- factor(var_myVector)
+# simple [ordinal] example, that is ordered
+var_bioClad_vector <- c("domain", "kingdom", "phylum", "class", "order", "family", "genus", "species")
+var_bioClad_factor <- factor(var_bioClad_vector,
+						ordered = TRUE,
+						levels = c("domain", "kingdom", "phylum", "class", "order", "family", "genus", "species"),
+						labels = c("Domain", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"))
+
+
 # Manual data frame -----------------------------------------------------------
 # an example of creating a data frame manually
 # uses CAL-Usage-Audit data
@@ -565,7 +586,7 @@ var_myMatrix_row_total <- cbind(var_myMatrix, var_myMatrix_rowSum)
 #
 # Column variables, populate data
 year <- as.ts(c("2012", "2012", "2013", "2013", "2013", "2014", "2014", "2014", "2015", "2015"))	#without as.ts, it's loaded as a factor.
-quarter <- c("Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring")	#nominal data will be factor.
+quarter <- as.factor(c("Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring"))	#nominal data will be factor.
 total_reservations <- as.numeric(c("128", "152", "125", "153", "127", "149", "168", "182", "169", "227"))	#without as.numeric, it's loaded as a factor.
 total_hours_scheduled <- as.ts(c("306:15:00", "505:00:00", "411:00:00", "545:30:00", "395:00:00", "511:30:00", "518:30:00", "549:15:00", "459:00:00", "697:00:00"))	#without as.ts, it's loaded as a factor.
 total_hours_used <- as.ts(c("231:15:00", "386:15:00", "308:30:00", "374:45:00", "241:05:00", "377:15:00", "428:30:00", "374:30:00", "361:00:00", "508:15:00"))	#without as.ts, it's loaded as a factor.
@@ -581,6 +602,34 @@ faculty_usage
 faculty_usage$percent_no_show <- (no_show_count / total_reservations) * 100
 round(faculty_usage$percent_no_show, digits = 1)
 faculty_usage$percent_no_show <- round(faculty_usage$percent_no_show, digits = 1)
+
+# Building a function ---------------------------------------------------------
+# using a deck of cards to provide an example of building a function() {}							
+# create a function to shuffle and show one card  							
+shuffle <- function() {
+						var_deck_vector <- c("2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "10C", "JC", "QC", "KC", "AC",
+						"2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AS",
+						"2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "JH", "QH", "KH", "AH",
+						"2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD", "AD")
+						
+						var_deck_factor <- factor(var_deck_vector,
+							levels = c("2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AS",
+										"2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "JH", "QH", "KH", "AH",
+										"2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "10C", "JC", "QC", "KC", "AC",
+										"2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD", "AD"),
+										
+							labels = c("2 of spades", "3 of spades", "4 of spades", "5 of spades", "6 of spades", "7 of spades", "8 of spades", "9 of spades", "10 of spades",
+										"Jack of spades", "Queen of spades", "King of spades", "Ace of spades",
+										"2 of hearts", "3 of hearts", "4 of hearts", "5 of hearts", "6 of hearts", "7 of hearts", "8 of hearts", "9 of hearts", "10 of hearts", "Jack of hearts", "Queen of hearts", "King of hearts", "Ace of hearts",
+										"2 of clubs", "3 of clubs", "4 of clubs", "5 of clubs", "6 of clubs", "7 of clubs", "8 of clubs", "9 of clubs", "10 of clubs", "Jack of clubs", "Queen of clubs", "King of clubs", "Ace of clubs",
+										"2 of diamonds", "3 of diamonds", "4 of diamonds", "5 of diamonds", "6 of diamonds", "7 of diamonds", "8 of diamonds", "9 of diamonds", "10 of diamonds", "Jack of diamonds", "Queen of diamonds", "King of diamonds", "Ace of diamonds"),
+							ordered = TRUE)
+							
+							sample(var_deck_factor, size = 1, replace = FALSE)
+						}
+
+#use the function
+shuffle()
 
 
 # Example, Connection
