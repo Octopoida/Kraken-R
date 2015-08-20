@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	53
+# Version:	54
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -32,13 +32,17 @@
 # factor		--used for categorical/qualitative variables
 # matrix		--two dimensions with single atomic data type --2D
 # array			--three or more dimensions | is.array()
-# list			--different classes
+# list			--different R classes
 # data frame	--multiple vectors with possible different classes
 # NA			--missing values
 #
 # Notes:
 # factors encode as integer vectors for memory efficiency
 # factors can be nominal or ordinal, using ordered = TRUE/FALSE parameter
+# data frame elements in the same column should be of the same data type
+# data frame columns should be of equal length, meaning same number of rows/records/observations
+# data frame subsetting with [] returns a dataframe
+# data frame sbsetting with [[]]/$ returns a vector or a matrix  
 
 
 # Types of Data or modes ------------------------------------------------------
@@ -578,6 +582,24 @@ var_bioClad_factor <- factor(var_bioClad_vector,
 						levels = c("domain", "kingdom", "phylum", "class", "order", "family", "genus", "species"),
 						labels = c("Domain", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"))
 
+						
+# Lists -----------------------------------------------------------------------
+# simple example of lists and using names
+var_myVector <- 2:10
+var_myMatrix <- matrix(1:10, ncol= 2)
+var_myFactor <- factor(c("J", "Q", "K", "A"), ordered = TRUE, levels = c("J", "Q", "K", "A"), labels = c("Jack", "Queen", "King", "Ace"))
+# list with names
+var_myList <- list( numbercards = var_myVector,  oddandeven = var_myMatrix, facecards = var_myFactor)
+str(var_myList)
+# subsetting with lists
+var_myList[1]	#returns the first list, in this case numbercards
+var_myList[[1]][[1]]	#returns the first list, AND the first element
+var_myList$numbercards[[4]]	#returns the fourth element in the named list numbercards, in this case 5
+var_myList[c(T, F, T)]	#uses logic to return lists: True returns list, F omits list
+#add another list to a list
+var_myList <- c(var_myList, list(Card_Company = "Bicycle", Card_Series = c("Red", "Blue")))
+str(var_myList)
+
 
 # Manual data frame -----------------------------------------------------------
 # an example of creating a data frame manually
@@ -592,16 +614,39 @@ total_hours_scheduled <- as.ts(c("306:15:00", "505:00:00", "411:00:00", "545:30:
 total_hours_used <- as.ts(c("231:15:00", "386:15:00", "308:30:00", "374:45:00", "241:05:00", "377:15:00", "428:30:00", "374:30:00", "361:00:00", "508:15:00"))	#without as.ts, it's loaded as a factor.
 no_show_count <- as.numeric(c("34", "28", "26", "37", "33", "32", "29", "45", "24", "61"))	#without as.numeric, it's loaded as a factor.
 # create the data frame
-faculty_usage <- data.frame(year, quarter, total_reservations, total_hours_scheduled, total_hours_used, no_show_count)
+faculty_usage <- data.frame(year, quarter, total_reservations, total_hours_scheduled, total_hours_used, no_show_count, stringsAsFactors = FALSE)
 faculty_usage
 View(faculty_usage)	#view in table format
 #structure of the data frame
 str(faculty_usage)	 #note that without using "as.", all columns would be factors.
-faculty_usage
-# adding additional columns
+# head: show only the # of records --quick view of the data
+head(faculty_usage, 5)	#first 5 records
+# tail: show only the last # of records
+tail(faculty_usage, 5)
+# dimensions for the data frame: rows, columns
+dim(faculty_usage)
+# adding additional columns; can also use cbind()
 faculty_usage$percent_no_show <- (no_show_count / total_reservations) * 100
 round(faculty_usage$percent_no_show, digits = 1)
 faculty_usage$percent_no_show <- round(faculty_usage$percent_no_show, digits = 1)
+# naming/renaming columns, after the fact
+names(faculty_usage) <- c("year", "quarter", "total_reservations", "total_hours_scheduled", "total_hours_used", "no_show_count", "%_no_show")
+# ordering a selection, such as column
+## using sort() will not preserve the index, only returns a vector
+# returns the index for the values
+order(faculty_usage$total_reservations)
+# best way to use order()
+faculty_usage[order(faculty_usage$total_reservations, decreasing = FALSE),]
+# subsetting example
+##  define logical vector for condition
+faculty_usage_fall <- quarter == "Fall"
+### use condition to subset
+faculty_usage[faculty_usage_fall == TRUE,]
+#### OR, simply
+faculty_usage[faculty_usage$quarter == "Fall", ]
+#### OR, using subset()
+subset(faculty_usage, subset = quarter == "Fall")
+
 
 # Building a function ---------------------------------------------------------
 # using a deck of cards to provide an example of building a function() {}							
@@ -613,16 +658,22 @@ shuffle <- function() {
 						"2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD", "AD")
 						
 						var_deck_factor <- factor(var_deck_vector,
-							levels = c("2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AS",
-										"2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "JH", "QH", "KH", "AH",
-										"2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "10C", "JC", "QC", "KC", "AC",
-										"2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD", "AD"),
+							levels = c("2S", "2H", "2C", "2D", "3S", "3H", "3C", "3D", "4S", "4H", "4C", "4D", "5S", "5H", "5C", "5D", "6S", "6H", "6C", "6D", "7S", "7H", "7C", "7D", "8S", "8H", "8C", "8D", "9S", "9H", "9C", "9D", "10S", "10H", "10C", "10D", "JS", "JH", "JC", "JD", "QS", "QH", "QC", "QD", "KS", "KH", "KC", "KD", "AS", "AH", "AC", "AD"),
 										
-							labels = c("2 of spades", "3 of spades", "4 of spades", "5 of spades", "6 of spades", "7 of spades", "8 of spades", "9 of spades", "10 of spades",
-										"Jack of spades", "Queen of spades", "King of spades", "Ace of spades",
-										"2 of hearts", "3 of hearts", "4 of hearts", "5 of hearts", "6 of hearts", "7 of hearts", "8 of hearts", "9 of hearts", "10 of hearts", "Jack of hearts", "Queen of hearts", "King of hearts", "Ace of hearts",
-										"2 of clubs", "3 of clubs", "4 of clubs", "5 of clubs", "6 of clubs", "7 of clubs", "8 of clubs", "9 of clubs", "10 of clubs", "Jack of clubs", "Queen of clubs", "King of clubs", "Ace of clubs",
-										"2 of diamonds", "3 of diamonds", "4 of diamonds", "5 of diamonds", "6 of diamonds", "7 of diamonds", "8 of diamonds", "9 of diamonds", "10 of diamonds", "Jack of diamonds", "Queen of diamonds", "King of diamonds", "Ace of diamonds"),
+							labels = c("2 of spades", "2 of hearts", "2 of clubs", "2 of diamonds",
+										"3 of spades", "3 of hearts", "3 of clubs", "3 of diamonds",
+										"4 of spades", "4 of hearts", "4 of clubs", "4 of diamonds",
+										"5 of spades", "5 of hearts", "5 of clubs", "5 of diamonds",
+										"6 of spades", "6 of hearts", "6 of clubs", "6 of diamonds",
+										"7 of spades", "7 of hearts", "7 of clubs", "7 of diamonds",
+										"8 of spades", "8 of hearts", "8 of clubs", "8 of diamonds",
+										"9 of spades", "9 of hearts", "9 of clubs", "9 of diamonds",
+										"10 of spades", "10 of hearts", "10 of clubs", "10 of diamonds",
+										"Jack of spades", "Jack of hearts", "Jack of clubs", "Jack of diamonds",
+										"Queen of spades", "Queen of hearts", "Queen of clubs", "Queen of diamonds",
+										"King of spades", "King of hearts", "King of clubs", "King of diamonds",
+										"Ace of spades", "Ace of hearts", "Ace of clubs", "Ace of diamonds"),
+			
 							ordered = TRUE)
 							
 							sample(var_deck_factor, size = 1, replace = FALSE)
