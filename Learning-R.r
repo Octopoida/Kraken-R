@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	54
+# Version:	55
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -47,16 +47,17 @@
 
 # Types of Data or modes ------------------------------------------------------
 #
-# Logical	is.logical()	{TRUE, FALSE, NA}
-# vector	is.atomic()
-# vector	is.vector()
-# Numeric 	{is.integer() is.double()}
-# Text 		is.character()
-# Factor	is.factor()
-# Function	is.function()
-# List		is.list()
-# Complex	is.complex() #imaginary value i.
-# NA		is.na()
+# Logical	is.logical()	as.logical()	{TRUE, FALSE, NA}
+# vector	is.atomic()		as.atomic()
+# vector	is.vector()		as.vector()
+# Numeric 	is.integer()	as.integer()	#or use L : 1L, 2L 3L
+# Numeric	is.double()		as.double()
+# Text 		is.character()	as.character()
+# Factor	is.factor()		as.factor()
+# Function	is.function()	as.function()
+# List		is.list()		as.list()
+# Complex	is.complex() 	as.complex()				#imaginary value i.
+# NA		is.na()			
 
 
 # Vector Chart ----------------------------------------------------------------
@@ -72,6 +73,9 @@
 #	raw			raw			raw
 #
 # *when creating vectors, use the c() function --concatenate function
+# *double has a precision of 16 digits (64 bits)
+# *integer has a precision of 32 bits [+/- 2*10^9
+
 
 # Notes -----------------------------------------------------------------------
 # !! R IS CASE SENSITIVE !!
@@ -122,6 +126,17 @@
 # Packages for advanced graphing ----------------------------------------------
 # ggplot2		based on grammar graphics
 # igraph		creating undirected and directed graphs
+#
+# Basic graphing with R
+# plot()	#most basic
+# hist()	#histogram
+# barplot()	#barplot
+# boxplot()	#boxplot
+# pie()		#pie chart
+# pairs()	#matrix of scatterplots
+# par()		#change a plotting parameter
+##	par(col = "blue")	#change color to blue
+##	par()$col	#check the plotting parameter for color
 
 
 # Packages for Spatial analysis -----------------------------------------------
@@ -247,6 +262,9 @@
 # Help ------------------------------------------------------------------------
 # Great help resource
 # http://en.wikibooks.org/wiki/R_Programming
+# One of the better help resources
+# http://www.rdocumentation.org/
+#
 # see the latest R version changes
 View(news())
 
@@ -406,6 +424,7 @@ gc()
 
 
 # System Date & Time ----------------------------------------------------------
+## POSIXct reference constant: January 1st 1970 12:00 am  0 UTC
 Sys.Date()
 Sys.time()
 Sys.timezone()
@@ -421,7 +440,7 @@ as.POSIXlt(Sys.time(), tz = "GMT")
 as.POSIXct(Sys.time())
 format(Sys.time(), "%a %b %d %X %Y %Z")
 # long format
-format(Sys.time(), "%A %B %d %X %Y %Z")
+format(Sys.time(), "%A %B %d %Y %X %Z")
 #time with miliseconds
 format(Sys.time(), "%H:%M:%OS3")
 #
@@ -505,6 +524,10 @@ source("Months.r", local = FALSE, echo = TRUE, verbose = FALSE)
 objects()
 character() #any objects that are character
 numeric()	#any objects that are numeric
+# get object information
+attributes() #attributes of object, if any
+dim()	#dimensions
+class() #class type of object
 #clearing objects/variables
 # list all instantiated objects
 ls()
