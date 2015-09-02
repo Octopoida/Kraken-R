@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	56
+# Version:	57
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -11,10 +11,16 @@
 
 # Purpose ---------------------------------------------------------------------
 # Purpose: Kraken-R is a monolithic R script for learning R.
+# The script style is as a cheatsheet of sorts to help remember how to do
+# certain things, and strives to provide better examples than what is
+# available in R help or vignettes.
 # It uses The Evergreen State College,
 # Computer Applications Lab (CAL) for Scientific Computing,
-# HeadCount to learn R. Single file to keep it simple,
+# HeadCount to learn R, as well as some other datasets.
+# Single file to keep it simple,
 # even though using Project Template & LCFD file Model is a good idea.
+# LCFD: Load, Clean, Function, Do --each as a seperate script.
+# [https://cran.r-project.org/]
 # See Project Template for more information:
 # [http://projecttemplate.net/]
 
