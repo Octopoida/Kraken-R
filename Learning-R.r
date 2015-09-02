@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	55
+# Version:	56
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -149,6 +149,8 @@
 
 
 # R Workflow (LCFD Model) -----------------------------------------------------
+# makeProject()
+# https://cran.r-project.org/
 # The LCFD model breaks an R script into its [4] component parts:
 # load.r 		getting and loading the data
 # clean.r		cleaning, munging, and all around tidying of data
