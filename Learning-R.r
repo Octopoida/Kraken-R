@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	57
+# Version:	58
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -209,7 +209,7 @@
 # Ctrl+L clear console
 
 
-# Operators -------------------------------------------------------------------
+# Mathimatical Operators -------------------------------------------------------------------
 #
 # +		Addition
 # - 	Subtraction
@@ -219,7 +219,8 @@
 # %%	Modulo
 
 
-# Conditional checks ----------------------------------------------------------
+# Relational Operators ----------------------------------------------------------
+#	(Conditional checking)
 # (contain text in quotes, i.e. "text" == "text") #will return TRUE
 # == 	equals condition
 # != 	not equal condition
@@ -230,14 +231,33 @@
 # ! 	not
 # &		and (use single inside index [] for subsetting)
 # |		or	(use single inside index [] for subsetting)
-# &&	and (can also be written as single character "&")
-# ||	or	(can also be written as single character "|")
+# &&	and (but only examines the first element)
+# ||	or	(but only examines the first element)
 # all	logical test that all values are true
 # any	logical test that some values are true
 #
-# example
+# examples
 # var_numeric <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 # var_sub <- var_numeric > 5
+#
+## Notes
+##	Use the (exclamation) ! for NOT, i.e. !is.logical = is not logical
+
+
+# Conditional Statements ------------------------------------------------------
+## if statement
+# if(condtion) {expression}
+# if(condtion) {expression} else {expression}
+## else if condition
+# if(condtion) {expression} else if(condition) {expression} else {expression} 
+#
+### notes:
+###	the "else" or "else if" must be on the same line as the closing bracket; i.e.
+### if(condition) {
+###		print("expression 1")
+###	} else if (condition) {
+###		print(expression 2")
+###	}
 
 
 # Subsetting data basics ------------------------------------------------------
