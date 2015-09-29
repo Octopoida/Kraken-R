@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	58
+# Version:	59
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -258,6 +258,50 @@
 ###	} else if (condition) {
 ###		print(expression 2")
 ###	}
+#
+#
+# while loop
+# while(condition) {expression}
+## with multiple expressions
+# while(condition) {
+#	expression 1;
+#	expression 2;
+#	}
+## using break
+# while(condition) {expression
+#	if(condition) {break}
+#  expression
+#	}
+#
+#
+# for loop
+# for(variable in sequence) {expression}
+## using break
+# for(variable in sequence) {
+#	if(condition) {break}
+# expression}
+## using next
+# for(variable in sequence) {
+#	if(condition) {next}
+#	}
+## for loop with index
+# for(i in 1:length(var)) {
+# print(var[i])
+# }
+#
+# Nested for loop
+# for(variable in sequence) {
+#	for(variable in sequence) {
+#		expression
+#		}
+#	}
+## example using 3 x 3 matrix
+# var_matrix <- matrix(c("A", "B", "C", "D", "E", "F", "G", "H", "I"), nrow = 3, ncol = 3)
+# for(i in 1:nrow(var_matrix)) {
+#	for(j in 1:ncol(var_matrix)) {
+#		print(paste("Matrix Position:", i, j,"Value:",var_matrix[i,j]))
+#		}
+#	}
 
 
 # Subsetting data basics ------------------------------------------------------
