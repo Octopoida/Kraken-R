@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.A. 
 # TITLE:	Learning R
-# Version:	59
+# Version:	60
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -18,10 +18,12 @@
 # Computer Applications Lab (CAL) for Scientific Computing,
 # HeadCount to learn R, as well as some other datasets.
 # Single file to keep it simple,
-# even though using Project Template & LCFD file Model is a good idea.
+# even though using Project Template & LCFD file model as project workflows is a good idea.
+# LCFD project workflow by Josh Reich
 # LCFD: Load, Clean, Function, Do --each as a seperate script.
-# [https://cran.r-project.org/]
-# See Project Template for more information:
+# [http://stackoverflow.com/questions/1429907/workflow-for-statistical-analysis-and-report-writing/1434424#1434424]
+# R Package for LCFD is 'makeProject'
+# Project Template information:
 # [http://projecttemplate.net/]
 
 
