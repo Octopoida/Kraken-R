@@ -1,13 +1,14 @@
 # Author Information ----------------------------------------------------------
 # AUTHOR:	David Geeraerts
 # EMAIL:	geeraerd@evergreen.edu
-# LOCATION:	Olympia, Washington U.S.A. 
+# LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Version:	60
+# Version:	61
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
 # https://github.com/Octopoida/Kraken-R
+
 
 # Purpose ---------------------------------------------------------------------
 # Purpose: Kraken-R is a monolithic R script for learning R.
@@ -117,6 +118,7 @@
 
 # Notable Packages ------------------------------------------------------------
 #
+# 'readr'			read tabular data. Replaces read.csv
 # 'random'			uses random.org to generate non-deterministic random numbers
 # 'plyr'			Tools for splitting, applying and combining data
 # 'reshape2'		modern data wrangling package
@@ -201,6 +203,7 @@
 #	'parallel'				'pbdr' (programming with big data in R)
 #	'snow'					'rhipe'
 #	'multicore'				'rhadoop'
+#	'mclapply'
 
 
 # Tips & Tricks ---------------------------------------------------------------
@@ -815,6 +818,7 @@ LastLoadTimestamp_CalData <- as.POSIXct(Sys.time())
 as.POSIXlt(Sys.time()) - LastLoadTimestamp_CalData
 # assumes a project template layout
 setwd("D:/Workspace/R/CAL-HeadCount")
+# Reading in the data; should use readr() to laod the tabular data.
 CalData <- read.csv('./data/CAL-HeadCount.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
 # or to automate the process
 URI <- "https://docs.google.com/spreadsheet/pub?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE&single=true&gid=0&output=csv"
