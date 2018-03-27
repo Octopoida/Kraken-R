@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Version:	61
+# Version:	62
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -48,6 +48,10 @@
 # Notes:
 # factors encode as integer vectors for memory efficiency
 # factors can be nominal or ordinal, using ordered = TRUE/FALSE parameter
+#	nominal (=, ≠)
+#	ordinal (>, <)
+#	interval (+, -)
+#	ratio (x, ÷)
 # data frame elements in the same column should be of the same data type
 # data frame columns should be of equal length, meaning same number of rows/records/observations
 # data frame subsetting with [] returns a dataframe
@@ -123,6 +127,7 @@
 # 'plyr'			Tools for splitting, applying and combining data
 # 'reshape2'		modern data wrangling package
 # 'stringr'			string manipulation
+# 'glue'			Interpreted string literals
 # 'sig' 			Print function signatures
 # 'XML' 			scraping tool for html & XML pages
 # 'XML2R'			XML parse
@@ -155,6 +160,7 @@
 # 'maps'			provides some basic world maps
 # library(maps)
 # map("state", boundary = FALSE, col="gray", add = TRUE)
+# 'usmap'	mapping the USA
 # 'UScensus2010'	US Census 2010 shape files and additional demographic data
 
 
@@ -221,7 +227,7 @@
 # *		Multiplication
 # /		Division
 # ^		Exponentiation
-# %%	Modulo
+# %%	Modulo	(finds the remainder after division of one number by another)
 
 
 # Relational Operators ----------------------------------------------------------
@@ -505,8 +511,8 @@ gc()
 Sys.Date()
 Sys.time()
 Sys.timezone()
-# expressions can be grouped together with the use of {exp();exp()...}
-{Sys.time();Sys.timezone()}
+# expressions can be grouped together with the use of: exp();exp()...
+Sys.time();Sys.timezone()
 #
 # build in function returns date & time as character string
 date()
@@ -632,10 +638,10 @@ var_log <- as.logical(var)
 var_suite <- c("s", "h", "c", "d")
 names(var_suite) <- c("spade", "heart", "club", "diamond")
 # days of the week are often represented numerically:
-var_days <- c(1:5)
-names(var_days) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+var_days <- c(1:7)
+names(var_days) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 # or define a days of the week vector and reuse it
-days_vector <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+days_vector <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 names(var_days) <- days_vector
 # Finding the number of elements in a vector
 length(var_days)
@@ -789,8 +795,10 @@ shuffle()
 # Sample data from USGS Earthquake feed
 install.packages('RJSONIO')
 library(RJSONIO)
-URI <- "http://earthquake.usgs.gov/earthquakes/feed/geojson/significant/month"
-download.file(URI,"USGS_Quakes.json","internal")
+# USGS API Documentation -Earthquake Catalog
+#	https://earthquake.usgs.gov/fdsnws/event/1/#extensions
+URI <- "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson"
+download.file(URI,"USGS_Quakes.json")
 con = file("USGS_Quakes.json")
 USGS_Quakes = fromJSON(con) #makes it like a list
 close(con)
@@ -798,18 +806,15 @@ head(USGS_Quakes)
 tail(USGS_Quakes)
 
 
-
-
 # CAL HEAD-COUNT DATA, Working with -------------------------------------------
 #
 # Get the data from Google docs
 # Source File
-# https://docs.google.com/spreadsheet/ccc?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE#gid=0
+# https://docs.google.com/spreadsheets/d/1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI
 # 
-# "Log" worksheet as a csv file.
+# "LogData" worksheet as a csv file.
 # URI for csv file
-# https://docs.google.com/spreadsheet/pub?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE&single=true&gid=0&output=csv
-#
+# https://docs.google.com/spreadsheets/d/1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI/export?format=csv&id=1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI&gid=1772624498
 #
 # Load the CSV file into a variable; read.table() is common for text files {.txt}; scan() is the most primitive form of reading data from a file into a variable.
 # Create a Timestamp for loading the data
@@ -818,19 +823,19 @@ LastLoadTimestamp_CalData <- as.POSIXct(Sys.time())
 as.POSIXlt(Sys.time()) - LastLoadTimestamp_CalData
 # assumes a project template layout
 setwd("D:/Workspace/R/CAL-HeadCount")
-# Reading in the data; should use readr() to laod the tabular data.
-CalData <- read.csv('./data/CAL-HeadCount.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
+
 # or to automate the process
-URI <- "https://docs.google.com/spreadsheet/pub?key=0AjQL08YDc6cUdDNxbWJTLU5RZUt6ZVlRN1Y0c3hVTlE&single=true&gid=0&output=csv"
-download.file(URI,"CAL-HeadCount.csv","internal")
+URI <- "https://docs.google.com/spreadsheets/d/1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI/export?format=csv&id=1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI&gid=1772624498"
+download.file(URI,"CAL-HeadCount.csv")
+# Reading in the data; should use readr() to load the tabular data.
 CalData <- read.csv('CAL-HeadCount.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
 #
 # Check the last few records of the dataset
 tail(CalData, 10)
-# To remove the total column --since its a calculated field
-rmtCalData <- CalData[ ,-6] #remove column #6 (which is the total column)
+# To remove the Validity.Check column
+rmtCalData <- CalData[ ,-7] #remove column #7 (which is the Validity.Check column)
 #or
-CalData <- CalData[,-6]
+CalData <- CalData[,-7]
 #
 # How was the data loaded? The data was loaded as a list.
 typeof(CalData)
@@ -838,7 +843,7 @@ is.matrix(CalData)
 is.list(CalData)
 # better to load CalData as a data frame
 CalData <- as.data.frame(CalData)
-is.date.frame(CalData)
+is.data.frame(CalData)
 #
 # First things to do when looking at a new dataset
 # Look at the dimensions of the data
@@ -1025,7 +1030,7 @@ with(CalData, sum(East))
 with(CalData, sum(West))
 
 
-# CAL statisitical summary ----------------------------------------------------
+# CAL statistical summary ----------------------------------------------------
 #
 summary(CalData)
 # Get individual summary
