@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Version:	62
+# Version:	63
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -755,9 +755,9 @@ subset(faculty_usage, subset = quarter == "Fall")
 
 
 # Building a function ---------------------------------------------------------
-# using a deck of cards to provide an example of building a function() {}							
-# create a function to shuffle and show one card  							
-shuffle <- function() {
+# using a deck of cards to provide an example of building a function() {}
+# create a function to shuffle and show x number of cards where x is default to 1
+shuffle <- function(x = 1) {
 						var_deck_vector <- c("2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "10C", "JC", "QC", "KC", "AC",
 						"2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AS",
 						"2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "JH", "QH", "KH", "AH",
@@ -782,8 +782,12 @@ shuffle <- function() {
 			
 							ordered = TRUE)
 							
-							sample(var_deck_factor, size = 1, replace = FALSE)
+							sample(var_deck_factor, size = x, replace = FALSE)
 						}
+
+#To find out the arguments of a function
+#	no arguments are build in at this time.
+args(shuffle)
 
 #use the function
 shuffle()
@@ -1293,8 +1297,7 @@ hist(tblCalData_East,
 	labels = TRUE,
 	axes = TRUE,
 	warn.unused = TRUE)
-	
-	
+
 hist(tblCalData_West,
 	main = "West CAl Head Count",
 	xlab = "Count",
@@ -1311,24 +1314,24 @@ hist(tblCalData_West,
 	labels = TRUE,
 	axes = TRUE,
 	warn.unused = TRUE)
-	
+
 hist(tblCalData_Total,
-     main = "Total CAl Head Count",
-     xlab = "Count",
-     ylab = "Number",
-     breaks = 5,
-     xlim = c(0,85),
-     ylim = c(0,45),
-     freq = TRUE,
-     include.lowest = TRUE,
-     right = TRUE,
-     col = 'gray',
-     border = 'black',
-     density = NULL,
-     labels = TRUE,
-     axes = TRUE,
-     warn.unused = TRUE)
-	 
+	main = "Total CAl Head Count",
+	xlab = "Count",
+	ylab = "Number",
+	breaks = 5,
+	xlim = c(0,85),
+	ylim = c(0,45),
+	freq = TRUE,
+	include.lowest = TRUE,
+	right = TRUE,
+	col = 'gray',
+	border = 'black',
+	density = NULL,
+	labels = TRUE,
+	axes = TRUE,
+	warn.unused = TRUE)
+
 # Density plotting
 density(tblCalData_East, bw = 'nrd0', kernal = 'gaussian', na.rm = TRUE)
 density(tblCalData_West, bw = 'sf', kernal = 'gaussian', na.rm = TRUE)
@@ -1340,7 +1343,6 @@ plot(density(tblCalData_Total, bw = 'nrd0', kernal = 'gaussian', na.rm = TRUE), 
 
 # lines added to an existing graph/plot
 lines(density(tblCalData_Total, bw = 'UCV', kernal = 'gaussian', na.rm = TRUE), lty = 3)
-
 
 # Boxplot
 boxplot(iCalData_East)
@@ -1361,18 +1363,16 @@ legend(x = 'topright', y = NULL, legend = "Scatter Plot", fill = NULL, col = 'si
 
 # Pie Chart
 pie(iCalData_Total, clockwise = TRUE)
-#
+
 # !NEEDS RESEARCH!
 # Quantile-Quantile Plot
 # use qq()
 #
-#
 # When performing sampling/resampling
 # use the set.seed() to make the analysis reproducible.
 # set.seed() will allow the same results each time.
-#
 # Sampling & Re-Sampling
-#
+
 # Sampling
 sample(iCalData_East, size = 100, replace = TRUE)
 sample(iCalData_West, size = 100, replace = TRUE)
@@ -1384,13 +1384,13 @@ resample <- function(x, ...) x[sample(length(x), ...)]
 resample(iCalData_East[iCalData_East > 25], size = 10, replace = FALSE)
 resample(iCalData_West[iCalData_West > 25], size = 10, replace = FALSE)
 resample(iCalData_Total[iCalData_Total > 50], size = 10, replace = FALSE)
-#
+
 # Types of sampling functions
 # rbinom, pbinom, qbinom, dbinom 
 rbinom(iCalData_Total, 10, .05)
-#
+
 # Hypothesis Testing
-#
+
 # Testing for Normal Distribution using Shapiro Test
 shapiro.test(iCalData_East)
 shapiro.test(iCalData_East)
@@ -1451,7 +1451,7 @@ sCalData <- stack(list(East = iCalData_East, West = iCalData_West))
 # can check the names for the columns
 names(sCalData)
 aov(values ~ ind, data = sCalData)
-#
+
 # Distributions
 # Basic random number generator
 runif(1)
