@@ -3,7 +3,13 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Version:	63
+# Version:	64
+
+# Copyleft --------------------------------------------------------------------
+# Copyright License, Creative Commons:
+# Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
+# http://creativecommons.org/licenses/by-nc-sa/3.0/
+
 
 # Version control with GitHub
 # Access the latest version, or submit contributions
@@ -28,15 +34,9 @@
 # [http://projecttemplate.net/]
 
 
-# Copyleft --------------------------------------------------------------------
-# Copyright License, Creative Commons:
-# Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)  
-# http://creativecommons.org/licenses/by-nc-sa/3.0/
-
-
 # Data structures ------------------------------------------------------------------
 # Types of structures
-# 
+
 # vector		--one dimension --1D
 # factor		--used for categorical/qualitative variables
 # matrix		--two dimensions with single atomic data type --2D
@@ -44,7 +44,7 @@
 # list			--different R classes
 # data frame	--multiple vectors with possible different classes
 # NA			--missing values
-#
+
 # Notes:
 # factors encode as integer vectors for memory efficiency
 # factors can be nominal or ordinal, using ordered = TRUE/FALSE parameter
@@ -59,7 +59,6 @@
 
 
 # Types of Data or modes ------------------------------------------------------
-#
 # Logical	is.logical()	as.logical()	{TRUE, FALSE, NA}
 # vector	is.atomic()		as.atomic()
 # vector	is.vector()		as.vector()
@@ -76,7 +75,7 @@
 # Vector Chart ----------------------------------------------------------------
 #	(or class)
 #	typeof		Mode		storage.mode
-#
+
 #	logical		logical		logical
 #	integer		numeric		integer
 #	double		numeric		double
@@ -84,7 +83,7 @@
 #	character	character	character
 #	list		list		list
 #	raw			raw			raw
-#
+
 # *when creating vectors, use the c() function --concatenate function
 # *double has a precision of 16 digits (64 bits)
 # *integer has a precision of 32 bits [+/- 2*10^9
@@ -92,7 +91,6 @@
 
 # Notes -----------------------------------------------------------------------
 # !! R IS CASE SENSITIVE !!
-#
 # R is case sensitive. Can use tolower() or toupper() for munging data.
 # \\ to escape special characters
 # variables should only use alpha numeric characters, . (period),
@@ -121,7 +119,6 @@
 
 
 # Notable Packages ------------------------------------------------------------
-#
 # 'readr'			read tabular data. Replaces read.csv
 # 'random'			uses random.org to generate non-deterministic random numbers
 # 'plyr'			Tools for splitting, applying and combining data
@@ -141,7 +138,7 @@
 # Packages for advanced graphing ----------------------------------------------
 # ggplot2		based on grammar graphics
 # igraph		creating undirected and directed graphs
-#
+
 # Basic graphing with R
 # plot()	#most basic
 # hist()	#histogram
@@ -150,8 +147,8 @@
 # pie()		#pie chart
 # pairs()	#matrix of scatterplots
 # par()		#change a plotting parameter
-##	par(col = "blue")	#change color to blue
-##	par()$col	#check the plotting parameter for color
+#	par(col = "blue")	#change color to blue
+#	par()$col	#check the plotting parameter for color
 
 
 # Packages for Spatial analysis -----------------------------------------------
@@ -177,7 +174,7 @@
 # R Startup Sequence ----------------------------------------------------------
 # to find R_Home: R.home()
 #	File			Variable		Location
-#
+
 # 1. Renviron.site	R_ENVIRON		R_Home/etc/Rprofile.site
 # 2. .Renviron		R_ENVIRON_USER	If set for user
 # 3. Rprofile.site	R_PROFILE		system file		
@@ -200,11 +197,9 @@
 # CRAN Task View: High-Performance and Parallel computing in R
 # http://cran.r-project.org/web/views/HighPerformanceComputing.html
 # http://www.r-bloggers.com/how-to-go-parallel-in-r-basics-tips/
-#
+
 # Packages in R (two types {shared memory & distributed}
-#
 #	Shared Memory			Distributed
-#
 #	'foreach'				'rmpi'
 #	'parallel'				'pbdr' (programming with big data in R)
 #	'snow'					'rhipe'
@@ -213,15 +208,14 @@
 
 
 # Tips & Tricks ---------------------------------------------------------------
-#
 # TAB for command completion
 # Esc interrupt current command (i.e. when console is waiting for input by showing +
 # Ctrl+up command history
 # Ctrl+L clear console
 
 
-# Mathimatical Operators -------------------------------------------------------------------
-#
+# Mathematical Operators -------------------------------------------------------------------
+
 # +		Addition
 # - 	Subtraction
 # *		Multiplication
@@ -246,67 +240,65 @@
 # ||	or	(but only examines the first element)
 # all	logical test that all values are true
 # any	logical test that some values are true
-#
+
 # examples
 # var_numeric <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 # var_sub <- var_numeric > 5
-#
+
 ## Notes
 ##	Use the (exclamation) ! for NOT, i.e. !is.logical = is not logical
 
 
 # Conditional Statements ------------------------------------------------------
-## if statement
+# if statement
 # if(condtion) {expression}
 # if(condtion) {expression} else {expression}
-## else if condition
+# else if condition
 # if(condtion) {expression} else if(condition) {expression} else {expression} 
-#
-### notes:
-###	the "else" or "else if" must be on the same line as the closing bracket; i.e.
-### if(condition) {
-###		print("expression 1")
-###	} else if (condition) {
-###		print(expression 2")
-###	}
-#
-#
+
+# notes:
+#	the "else" or "else if" must be on the same line as the closing bracket; i.e.
+# if(condition) {
+#		print("expression 1")
+#	} else if (condition) {
+#		print(expression 2")
+#	}
+
 # while loop
 # while(condition) {expression}
-## with multiple expressions
+# with multiple expressions
 # while(condition) {
 #	expression 1;
 #	expression 2;
 #	}
-## using break
+# using break
 # while(condition) {expression
 #	if(condition) {break}
 #  expression
 #	}
-#
-#
+
 # for loop
 # for(variable in sequence) {expression}
-## using break
+# using break
 # for(variable in sequence) {
 #	if(condition) {break}
 # expression}
-## using next
+# using next
 # for(variable in sequence) {
 #	if(condition) {next}
 #	}
-## for loop with index
+# for loop with index
 # for(i in 1:length(var)) {
 # print(var[i])
 # }
-#
+
 # Nested for loop
 # for(variable in sequence) {
 #	for(variable in sequence) {
 #		expression
 #		}
 #	}
-## example using 3 x 3 matrix
+# example using 3 x 3 matrix
 # var_matrix <- matrix(c("A", "B", "C", "D", "E", "F", "G", "H", "I"), nrow = 3, ncol = 3)
 # for(i in 1:nrow(var_matrix)) {
 #	for(j in 1:ncol(var_matrix)) {
@@ -384,7 +376,7 @@ if(require('devtools')==TRUE) devtools::session_info()
 .Platform$OS.type
 # can easily setup a conditional check and do something.
 if(.Platform$OS.type == "windows") {getRversion()}
-#
+
 # get list of options
 options()
 options("digits")
@@ -409,28 +401,26 @@ updateR()
 #	http://bioconductor.org/biocLite.R
 #	OMEGA
 #	http://www.omegahat.org/R
-#
-#
+
 # Package search with documentation (CRAN + Bioconductor + GitHub)
 # http://www.rdocumentation.org/
-#
+
 # Package		Use
-#
 # packrat() 	can package up all dependent packages for a project with specific versions in a sandbox area that will not affect the local package installation.
 # drat()		build a local repository
 # biocLite() 	bioinformatics repository source("http://bioconductor.org/biocLite.R")
 # devtools()	install_github("user/repo")	access Github packages
-#
+
 # list or search installed packages
 search()
 # list which paths will be searched for packages
 searchpaths()
-#
+
 # where are packages stored
 .libPaths()
 # can also be used to set the directory location of packages
 # .libPaths("C:/ProgramData/R/library")
-#
+
 installed.packages()
 # load a package
 # library('packageName')
@@ -439,19 +429,16 @@ installed.packages()
 # install.packages(c('packageName', 'packageName'))
 # Install example
 install.packages('psych')
-# activates the package
+# loads the package
 library(psych)
 # Install a package with any dependencies --depend on/link to/import/suggest
 install.packages('ggplot2', dependencies = TRUE)
 library(ggplot2)
 # Install a package only if needed, i.e. it's not already installed
 if(require('psych')==FALSE) install.packages('psych')
-#
-# uninstall a package
-# remove.packages("psych")
-#
-# http://cran.r-project.org/web/views/
+
 # CRAN Task Views
+# http://cran.r-project.org/web/views/
 # have to install and load ctv first
 install.packages("ctv")
 library("ctv")
@@ -461,19 +448,30 @@ install.views("TimeSeries")
 # update any packages associated with a Task View
 update.views("TimeSeries")
 
+# unload a package
+detach("package:ctv", unload = TRUE)
+# uninstall a package
+remove.packages("ctv")
+
 
 # System Utilities ------------------------------------------------------------
-#
 # additional functions
 library("R.utils")
 # very powerful feature of R is to leverage Windows command-shell or GNU/Linux BASH
+#	GNU/Linux BASH
 system('hostname')
 system('whoami')
 #OR
+#	Windows
 shell('hostname')
 # shell.exec() can be used to open a file
 # shell.exec("D:/Workspace/file.txt)
 # shell.exec("D:\\Workspace\\file.txt)
+
+# System2
+#	it is now recommend that all system commands use the system2 package.
+#	Will work for: Windows, GNU/Linux, Mac
+system2('whoami')
 
 
 # Time Execution --------------------------------------------------------------
@@ -611,6 +609,11 @@ numeric()	#any objects that are numeric
 attributes() #attributes of object, if any
 dim()	#dimensions
 class() #class type of object
+# bulk execution on an object
+#	uses build in dataset "cars"
+#	returns the class for each variable
+lapply(cars, class)
+
 #clearing objects/variables
 # list all instantiated objects
 ls()
@@ -649,7 +652,7 @@ length(var_days)
 
 # Built in R data sets --------------------------------------------------------
 data()
-# HistData	#Historical Data
+#Historical Data
 #install.packages('HistData')
 #library(HistData)
 
@@ -665,7 +668,7 @@ var_even <- c(0, 2, 4, 6, 8)
 var_odd <- c(1, 3, 5, 7, 9)
 # create matrix with vectors
 var_myMatrix <- matrix(c(var_even, var_odd), ncol = 2, byrow = TRUE)
-#
+
 #label rows, columns
 rownames(var_myMatrix) <- list("rownumber1", "rownumber2", "rownumber3", "rownumber4", "rownumber5")
 colnames(var_myMatrix) <- list("parity_even", "parity_odd")
@@ -711,7 +714,7 @@ str(var_myList)
 # an example of creating a data frame manually
 # uses CAL-Usage-Audit data
 # https://docs.google.com/spreadsheets/d/1e8FRS3INSldjHo329_F_H0acE7sTGeuZTJ_cK2gGvy4
-#
+
 # Column variables, populate data
 year <- as.ts(c("2012", "2012", "2013", "2013", "2013", "2014", "2014", "2014", "2015", "2015"))	#without as.ts, it's loaded as a factor.
 quarter <- as.factor(c("Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring"))	#nominal data will be factor.
@@ -811,15 +814,14 @@ tail(USGS_Quakes)
 
 
 # CAL HEAD-COUNT DATA, Working with -------------------------------------------
-#
 # Get the data from Google docs
 # Source File
 # https://docs.google.com/spreadsheets/d/1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI
-# 
+
 # "LogData" worksheet as a csv file.
 # URI for csv file
 # https://docs.google.com/spreadsheets/d/1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI/export?format=csv&id=1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI&gid=1772624498
-#
+
 # Load the CSV file into a variable; read.table() is common for text files {.txt}; scan() is the most primitive form of reading data from a file into a variable.
 # Create a Timestamp for loading the data
 LastLoadTimestamp_CalData <- as.POSIXct(Sys.time())
@@ -833,14 +835,14 @@ URI <- "https://docs.google.com/spreadsheets/d/1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6Du
 download.file(URI,"CAL-HeadCount.csv")
 # Reading in the data; should use readr() to load the tabular data.
 CalData <- read.csv('CAL-HeadCount.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
-#
+
 # Check the last few records of the dataset
 tail(CalData, 10)
 # To remove the Validity.Check column
 rmtCalData <- CalData[ ,-7] #remove column #7 (which is the Validity.Check column)
 #or
 CalData <- CalData[,-7]
-#
+
 # How was the data loaded? The data was loaded as a list.
 typeof(CalData)
 is.matrix(CalData)
@@ -848,7 +850,7 @@ is.list(CalData)
 # better to load CalData as a data frame
 CalData <- as.data.frame(CalData)
 is.data.frame(CalData)
-#
+
 # First things to do when looking at a new dataset
 # Look at the dimensions of the data
 # number of records, number of columns
@@ -857,10 +859,10 @@ dim(CalData)
 # is.na(CalData)
 sum(is.na(CalData))	#better way of getting the info
 table(is.na(CalData))
-#
+
 # look at the data in table format
 View(CalData)
-#
+
 # view headers in source order
 names(CalData)
 # Double check that columns are the expected default data type
@@ -868,7 +870,7 @@ is.numeric(CalData$East)	#should be TRUE
 is.numeric(CalData$West)	#should be TRUE
 is.numeric(CalData$Total)	#should be TRUE
 is.character(CalData$Counter) # false since its a factor
-#
+
 # List the headers (in alpha-Numeric order)
 ls(CalData)
 # Search for an item in the list
@@ -893,7 +895,7 @@ storage.mode(CalData)
 # test the class object, two ways of checking
 if(class(CalData)=='data.frame') TRUE else FALSE
 if(any(class(CalData)=='data.frame')) TRUE else FALSE
-#
+
 # Create a list for all interger elements
 iCalData = list(CalData$East, CalData$West, CalData$Total)
 # Reference a list by position
@@ -903,28 +905,28 @@ iCalData = list(East=CalData$East, West=CalData$West, Total=CalData$Total)
 names(iCalData) #now the list has names
 # remove "Total" from the list
 iCalData[["Total"]] <- NULL
-#
+
 # Create a unique list for the counters
 # see the list first
 levels(CalData$Counter)
 list(CalData$Counter)
-# 
+
 Counters <- levels(CalData$Counter)
-#
+
 # make all the initials in Counter uppercase
 toupper(CalData$Counter)
-#
+
 # Can rename variables such as column names
 names(CalData)[1] <- "Initials"
 names(CalData)[1] <- "Counters"
-#
+
 # Working with CalData Data Frame
 # specify to use a data frame
 dfCalData = data.frame(CalData)
 # view the structure
 str(dfCalData)
 str(CalData)
-#
+
 # Working with Dates
 class(CalData$Date)	# shows that its a factor
 dCalData_Date <- as.Date(CalData$Date, format = "%m/%d/%Y")
@@ -947,23 +949,21 @@ difftime(dCalData_Date[1], tail(dCalData_Date,1))
 
 
 # CAL Working with Time -----------------------------------------------------------
-#
 # Packages to work with time series
 # chron,
-#
-#
+
 if(require('chron')==FALSE) install.packages('chron')
 library('chron')
-#
+
 # check columns Date & Time
 is.ts(CalData$Date)
 is.ts(CalData$Time)
 is.chron(CalData$Date)
 is.chron(CalData$Time)
-#
+
 class(CalData$Date)	#is a factor that needs to be changed
 class(CalData$Time)	#is a factor that needs to be changed
-#
+
 CalData$Date <- as.ts(CalData$Date)
 CalData$Time <- as.ts(CalData$Time)
 
@@ -974,7 +974,7 @@ class(dCalData_Time)	#is now a times class
 dCalData_TimeStamp <- paste(dCalData_Date, dCalData_Time)
 difftime(dCalData_TimeStamp[1], dCalData_TimeStamp[2])
 difftime(tail(dCalData_TimeStamp, 2)[1], tail(dCalData_TimeStamp, 2)[2])
-#
+
 # ??????????????????????????????????????
 # !NEEDS RESEARCH!
 # using timeDate package#
@@ -983,7 +983,7 @@ library('timeDate')
 # dCalData_Time <- as.timeDate(dCalData_Time)
 # class(dCalData_Time)	#is now a timeDate
 # ??????????????????????????????????????
-#
+
 # show the first record with all columns
 CalData[1,1:6]
 # Show the first 10 records, all
@@ -1001,7 +1001,6 @@ adjCalData_Total <- CalData$Total[CalData$Total > 0]
 
 
 # CAL Subsetting data -------------------------------------------------------------
-#
 # show the first 6 records or n records; last 6 records
 head(CalData)
 head(CalData, n = 10)
@@ -1011,13 +1010,13 @@ Counters[order(Counters, na.last = TRUE, decreasing = FALSE)]
 sort(CalData[,6])
 order(CalData[,6])
 rank(CalData[,6])
-#
+
 subset(CalData, CalData$East > 25)
 subset(CalData, CalData$Counter == "DG")
 subset(CalData, CalData$Counter == "DG" & CalData$East > 25)
 #or
 counterDG <- CalData[CalData$Counter == "DG",]
-#
+
 # Find the number of times a counter made an observation
 nrow(subset(CalData, CalData$Counter == "DG"))
 # multiple conditions
@@ -1027,7 +1026,7 @@ nrow(CalData[CalData$East == 0 & CalData$West == 0,])
 # subset when no one was present on one side using OR operator "|"
 CalData[CalData$East == 0 | CalData$West == 0,]
 nrow(CalData[CalData$East == 0 | CalData$West == 0,])
-#
+
 # Get sums of columns
 with(CalData, sum(Total))
 with(CalData, sum(East))
@@ -1035,7 +1034,6 @@ with(CalData, sum(West))
 
 
 # CAL statistical summary ----------------------------------------------------
-#
 summary(CalData)
 # Get individual summary
 summary(CalData$Counter)
@@ -1043,7 +1041,7 @@ summary(CalData$East)
 summary(CalData$West)
 summary(CalData$Total)
 summary(CalData$Time)
-#
+
 # Tukey's five number: {min, lower-hinge, median, upper-hinge, maximum}
 fivenum(CalData$East)
 fivenum(CalData$West)
@@ -1069,7 +1067,7 @@ var(CalData$Total, na.rm = TRUE)
 mad(CalData$East, na.rm = TRUE)
 mad(CalData$West, na.rm = TRUE)
 mad(CalData$Total, na.rm = TRUE)
-#
+
 # examples of using [] or $
 min(CalData[,6])
 max(CalData[,6])
@@ -1102,14 +1100,14 @@ length(na.omit(CalData$West))
 length(na.omit(CalData$Total))
 # get the character length
 nchar(CalData$Total)
-#
+
 # Conditional search
 any(CalData$East > 50) #will return TRUE or FALSE
 any(CalData$East == 50)
 any(CalData$East >= 50)
 any(CalData$Counter == "DG")
 any(CalData$Counter == "na")
-#
+
 # Probabilty Statistics
 quantile(CalData$East)
 quantile(CalData$West)
@@ -1118,7 +1116,7 @@ quantile(CalData$Total)
 quantile(CalData$East, prob = seq(0,.1,.2,.3), na.rm = TRUE, names = TRUE)
 quantile(CalData$West)
 quantile(CalData$Total)
-# 
+
 quantile(CalData$East, na.rm = TRUE, names = TRUE)
 quantile(CalData$West, na.rm = TRUE, names = TRUE)
 quantile(CalData$Total, na.rm = TRUE, names = TRUE)
@@ -1156,7 +1154,7 @@ meanCalData = sapply(iCalData, mean, na.rm = TRUE, USE.NAMES = TRUE)
 iCalData_East = CalData$East
 iCalData_West = CalData$West
 iCalData_Total = CalData$Total
-#
+
 # Requires psych package
 if(require('psych')==FALSE) install.packages('psych')
 library('psych')
@@ -1208,12 +1206,12 @@ kmeans(CalData$West, 3)
 
 
 # Visualization (Plots and Graphs) --------------------------------------------
-#
+
 # Cairo high quality PNG,JPEG,TIFF,SVG,PDF
 # Advanced graphing with ggplot2 install.packages('ggplote2')
 # Documentaion for ggplot2
 # http://docs.ggplot2.org/current/index.html
-#
+
 # Advanced dynamic graphing with rggobi install.packages('rggobi')
 # par() can modify default graphics parameters
 # type par() to see current settings and available elements
@@ -1221,44 +1219,43 @@ kmeans(CalData$West, 3)
 # For a given plot to find a point
 # clicks on the plot will be recorded and the points displayed once locator() is escaped.
 # locator()
-#
+
 # Plotting time-series can use plot.ts()
-#
+
 # PLAYWITH
 # Playwith package provides a GUI interface to manipulate graphs in R
 if(require('playwith')==FALSE) install.packages('playwith')
 library('playwith')
-#
+
 # Example
 # playwith(hist(CalData$Total))
-#
+
 #GrapheR
 # GUI package to help with graphing in R
 if(require('GrapheR')==FALSE) install.packages('GrapheR')
 library('GrapheR')
-#
+
 # Example
 # run.GrapheR()
-#
-#
+
 # Titles, Legends, and Text
-#
+
 # Title
 # title(main = "main title", sub = "sub title")
-#
+
 # Legend
 # position can be "bottomleft", "bottomright", "topleft", "topright" 
 # legend(x = 'topright', y = NULL, legend = c("CAL East","CAL West"), fill = NULL, col = 'sienna1', bty = 'n')
-#
+
 # Text in margins
 # mtext() puts some texts in the margin. The margin can be at the bottom (1), the left (2), the top (3) or the right (4).
 # ; mtext("some text", side = 1) # the bottom
 # Example
 # hist(CalData$Total) ; mtext("bottom text", side = 1)
-#
+
 # use colors() to get possible color values.
 colors()
-#
+
 # stemplot
 stem(tblCalData_East)
 stem(tblCalData_West, scale = 3, width = 80)
@@ -1274,7 +1271,7 @@ hist(tblCalData_Total)
 par(mfrow=c(1,2))
 hist(tblCalData_East)
 hist(tblCalData_West)
-#
+
 # hist breaks
 # determines the number of histo bars 
 # breaks = n
@@ -1367,7 +1364,7 @@ pie(iCalData_Total, clockwise = TRUE)
 # !NEEDS RESEARCH!
 # Quantile-Quantile Plot
 # use qq()
-#
+
 # When performing sampling/resampling
 # use the set.seed() to make the analysis reproducible.
 # set.seed() will allow the same results each time.
@@ -1401,7 +1398,7 @@ shapiro.test(iCalData_East)
 # lillie.test	Lilliefors (Kolmogorov-Smirnov) test for normality
 # pearson.test	Pearson chi-square test for normality
 # sf.test		Shapiro-Francia test for normality
-#
+
 # Simple F Test to compare two variances
 var.test(CalData$East, CalData$West)
 
@@ -1469,7 +1466,7 @@ pnorm(25, mean(CalData$Total, na.rm = TRUE), sd(CalData$Total, na.rm = TRUE)) #n
 
 # End Of File (EOF) -----------------------------------------------------------
 # common end of file tasks
-#
+
 # save the R session
 save.image(file="D:/Workspace/R/CAL-HeadCount/CAL-HeadCount.rda")
 # Quite without saving session.
