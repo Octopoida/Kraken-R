@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Version:	64
+# Version:	65
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -34,7 +34,64 @@
 # [http://projecttemplate.net/]
 
 
-# Data structures ------------------------------------------------------------------
+# R Workflow (LCFD Model) -----------------------------------------------------
+# makeProject()
+# https://cran.r-project.org/
+# The LCFD model breaks an R script into its [4] component parts:
+# load.r 		getting and loading the data
+# clean.r		cleaning, munging, and all around tidying of data
+# function.r	custom functions or processes can be stored in this file
+# do.r		  	main processing of the data, including output (i.e. graphs)
+
+
+# Package Template ------------------------------------------------------------
+# 	[http://projecttemplate.net/]
+#	R package which defines the folder structure; used for reproducible data
+#	install.packages('ProjectTemplate')
+#	library('ProjectTemplate')
+
+
+# Google's R Style Guide ------------------------------------------------------
+# Google's R Style Guide
+#	(main thing is to be consistent)
+# https://google.github.io/styleguide/Rguide.xml
+
+
+# R Cheat Sheets --------------------------------------------------------------
+# A collection of printable R cheat sheets
+# https://www.rstudio.com/resources/cheatsheets/
+
+
+# R SWIRL ---------------------------------------------------------------------
+# Learn to program with an interactive R console; it's a learning environment.
+# install.packages('swirl')
+# library('swirl')
+# swirl()
+# for a list of additional content:
+#	https://github.com/swirldev/swirl_courses#swirl-courses
+# To install additional content:
+#	install_from_swirl("")
+#	install_from_swirl("Getting_and_Cleaning_Data")
+#	install_from_swirl("Data_Analysis")
+#	install_from_swirl("Statistical_Inference")
+
+
+# R Startup Sequence ----------------------------------------------------------
+# to find R_Home: R.home()
+#	File			Variable		Location
+
+# 1. Renviron.site	R_ENVIRON		R_Home/etc/Rprofile.site
+# 2. .Renviron		R_ENVIRON_USER	If set for user
+# 3. Rprofile.site	R_PROFILE		system file		
+# 4. .Rprofile		R_PROFILE		one for system (R_Home/library/base/r/)
+# 5. .Rprofile		R_PROFILE_USER	user profile
+# 6. .RData							found in the working directory
+# 7. .First							may exist for a project, loads functions; defined in .Rprofile or .Rprofile.sys 
+# 8. .First.sys						load default packages
+# 9. .Rhistory		R_HISTFILE		load history file
+
+
+# Data structures -------------------------------------------------------------
 # Types of structures
 
 # vector		--one dimension --1D
@@ -60,7 +117,7 @@
 
 # Types of Data or modes ------------------------------------------------------
 # Logical	is.logical()	as.logical()	{TRUE, FALSE, NA}
-# vector	is.atomic()		as.atomic()
+# vector	is.atomic()
 # vector	is.vector()		as.vector()
 # Numeric 	is.integer()	as.integer()	#or use L : 1L, 2L 3L
 # Numeric	is.double()		as.double()
@@ -102,20 +159,6 @@
 # Using ' (single quote) or the " (double quote) treats as string;
 # 	to get at a character function such as + - / ? < > etc.,
 #	the ` (tick) needs to be used: `+`
-
-
-# R SWIRL ---------------------------------------------------------------------
-# Learn to program with an interactive R console; it's a learning environment.
-# install.packages('swirl')
-# library('swirl')
-# swirl()
-# for a list of additional content:
-#	https://github.com/swirldev/swirl_courses#swirl-courses
-# To install additional content:
-#	install_from_swirl("")
-#	install_from_swirl("Getting_and_Cleaning_Data")
-#	install_from_swirl("Data_Analysis")
-#	install_from_swirl("Statistical_Inference")
 
 
 # Notable Packages ------------------------------------------------------------
@@ -161,38 +204,6 @@
 # 'UScensus2010'	US Census 2010 shape files and additional demographic data
 
 
-# R Workflow (LCFD Model) -----------------------------------------------------
-# makeProject()
-# https://cran.r-project.org/
-# The LCFD model breaks an R script into its [4] component parts:
-# load.r 		getting and loading the data
-# clean.r		cleaning, munging, and all around tidying of data
-# function.r	custom functions or processes can be stored in this file
-# do.r		  	main processing of the data, including output (i.e. graphs)
-
-
-# R Startup Sequence ----------------------------------------------------------
-# to find R_Home: R.home()
-#	File			Variable		Location
-
-# 1. Renviron.site	R_ENVIRON		R_Home/etc/Rprofile.site
-# 2. .Renviron		R_ENVIRON_USER	If set for user
-# 3. Rprofile.site	R_PROFILE		system file		
-# 4. .Rprofile		R_PROFILE		one for system (R_Home/library/base/r/)
-# 5. .Rprofile		R_PROFILE_USER	user profile
-# 6. .RData							found in the working directory
-# 7. .First							may exist for a project, loads functions; defined in .Rprofile or .Rprofile.sys 
-# 8. .First.sys						load default packages
-# 9. .Rhistory		R_HISTFILE		load history file
-
-
-# Package Template ------------------------------------------------------------
-# 	[http://projecttemplate.net/]
-#	R package which defines the folder structure; used for reproducible data
-#	install.packages('ProjectTemplate')
-#	library('ProjectTemplate')
-
-
 # Parallel & Distributed R ----------------------------------------------------
 # CRAN Task View: High-Performance and Parallel computing in R
 # http://cran.r-project.org/web/views/HighPerformanceComputing.html
@@ -215,7 +226,6 @@
 
 
 # Mathematical Operators -------------------------------------------------------------------
-
 # +		Addition
 # - 	Subtraction
 # *		Multiplication
@@ -305,6 +315,14 @@
 #		print(paste("Matrix Position:", i, j,"Value:",var_matrix[i,j]))
 #		}
 #	}
+
+# R built-in (for) functions that loop through objects {vectors, lists}
+# lapply()	applied over list or vectors
+# sapply()	wrapper for lapply; returns a vector, matrix, or array
+# vapply()	wrapper for sapply; returns specific value
+# rapply()	wrapper for lapply; recursive version of lapply
+# dapply()	wrapper for lapply; returns a data.frame
+# mapply()	wrapper for sapply; multivariate version; returns multiple list or vector
 
 
 # Subsetting data basics ------------------------------------------------------
@@ -727,7 +745,7 @@ faculty_usage <- data.frame(year, quarter, total_reservations, total_hours_sched
 faculty_usage
 View(faculty_usage)	#view in table format
 #structure of the data frame
-str(faculty_usage)	 #note that without using "as.", all columns would be factors.
+str(faculty_usage)	#note that without using "as.", all columns would be factors.
 # head: show only the # of records --quick view of the data
 head(faculty_usage, 5)	#first 5 records
 # tail: show only the last # of records
@@ -791,11 +809,13 @@ shuffle <- function(x = 1) {
 #To find out the arguments of a function
 #	no arguments are build in at this time.
 args(shuffle)
+shuffle()	#use the function, with default
+shuffle(5)	#return 5 cards
+# sort the returning cards in descending order
+sort(shuffle(5), decreasing = TRUE)
 
-#use the function
-shuffle()
 
-
+# Working with web connections-------------------------------------------
 # Example, Connection
 # Working with Connections, such as [geo]JSON feed
 # uses RJSONIO package
@@ -906,12 +926,21 @@ names(iCalData) #now the list has names
 # remove "Total" from the list
 iCalData[["Total"]] <- NULL
 
+# Object comparison for identical()
+#	needs to be numeric
+n_east <- as.numeric(CalData$East)
+n_west <- as.numeric(CalData$West)
+identical(median(n_east), median(n_west))
+
 # Create a unique list for the counters
 # see the list first
 levels(CalData$Counter)
 list(CalData$Counter)
 
 Counters <- levels(CalData$Counter)
+
+#sort the (unique) initials for the counters
+sort(unique(toupper(CalData$Counter)))
 
 # make all the initials in Counter uppercase
 toupper(CalData$Counter)
