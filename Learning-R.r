@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Version:	65
+# Version:	66
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -347,6 +347,24 @@
 #		var_numeric_sub <- var_numeric[var_numeric > 5] #will select all elements greater than 5
 
 
+# Regular Expression ------------------------------------------------------
+# logical return {TRUE, FALSE}
+# grepl(pattern = "<regex>" , x = <object>)
+#	look for numeric 2 at the begining of the date
+grepl(pattern = ^2 , x = Sys.Date())
+# is there a 2 at the end of the date?
+grepl(pattern = "2$" , x = Sys.Date())
+# grep returns the index of an item
+# grep(pattern = "<regex>" , x = <object>)
+grep(pattern = ^2 , x = Sys.Date())
+
+# Replacement
+# Sub replaces the first match only
+# sub(pattern, replacement, x, ignore.case = FALSE)
+# gsub replaces all matches
+#gsub(pattern, replacement, x, ignore.case = FALSE)
+
+
 # CRANberries -----------------------------------------------------------------
 # is a website that keeps track of all CRAN package updates
 # http://dirk.eddelbuettel.com/cranberries/
@@ -492,21 +510,6 @@ shell('hostname')
 system2('whoami')
 
 
-# Time Execution --------------------------------------------------------------
-# To time the execution of any script
-# uses proc.time()
-startTimer <- proc.time()
-proc.time() - startTimer
-# Find out how long execution takes
-system.time(pie(rep(1, 12), col = rainbow(12)))
-# Pause for specified time (in seconds)
-Sys.sleep(10)
-# Microbenchmarking: performance on a small piece of code
-if(require('microbenchmark')==FALSE) install.packages('microbenchmark')
-library(microbenchmark)
-microbenchmark(pie(rep(1, 12), col = rainbow(12)))
-
-
 # System variables ------------------------------------------------------------
 Sys.getenv()
 Sys.getenv("R_HOME")
@@ -527,11 +530,26 @@ gc()
 Sys.Date()
 Sys.time()
 Sys.timezone()
+
+today <- Sys.Date()	#store current date in variable
+now <- Sys.time()	#store current time
+unclass(today)	#to see the numeric value based on calculation against internal reference date
+unclass(now)	#to see the numeric value based on calculation against internal reference time
+
 # expressions can be grouped together with the use of: exp();exp()...
 Sys.time();Sys.timezone()
-#
+
 # build in function returns date & time as character string
 date()
+
+# ensure that a variable is stored as date or time
+var_reference_date <- as.Date("1970-01-01")
+class(var_reference)	#it's a date class
+
+#ensure that a varialbe is stored as time
+var_reference_time <- c("00:00:00")	#class will be character
+var_reference_time <- as.POSIXct("1970-01-01 00:00:00")	#timezone (tz) not specified; will defualt to system tz.
+
 # conditional checking
 is.vector(date()) && is.character(date()) && is.numeric.POSIXt(date())	#returns false, not a POSIXt, just a vector character string.
 # POSIX format
@@ -542,7 +560,7 @@ format(Sys.time(), "%a %b %d %X %Y %Z")
 format(Sys.time(), "%A %B %d %Y %X %Z")
 #time with miliseconds
 format(Sys.time(), "%H:%M:%OS3")
-#
+
 # Get the current day of the week
 format(Sys.time(), "%A")
 #
@@ -558,6 +576,26 @@ storage.mode(Sys.Date())
 if(require('chron')==FALSE) install.packages('chron')
 if(require('lubridate')==FALSE) install.packages('lubridate')
 if(require('ts')==FALSE) install.packages('ts')
+
+
+# Time Execution --------------------------------------------------------------
+# To time the execution of any script
+# Simple meta(global) 
+var_script_start <- Sys.time()
+var_script_end <- Sys.time()
+var_script_run <- var_script_end - var_script_start
+
+# uses proc.time()
+startTimer <- proc.time()
+proc.time() - startTimer
+# Find out how long execution takes
+system.time(pie(rep(1, 12), col = rainbow(12)))
+# Pause for specified time (in seconds)
+Sys.sleep(10)
+# Microbenchmarking: performance on a small piece of code
+if(require('microbenchmark')==FALSE) install.packages('microbenchmark')
+library(microbenchmark)
+microbenchmark(pie(rep(1, 12), col = rainbow(12)))
 
 
 # Write to a file -------------------------------------------------------------
@@ -709,7 +747,7 @@ var_bioClad_factor <- factor(var_bioClad_vector,
 						levels = c("domain", "kingdom", "phylum", "class", "order", "family", "genus", "species"),
 						labels = c("Domain", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"))
 
-						
+
 # Lists -----------------------------------------------------------------------
 # simple example of lists and using names
 var_myVector <- 2:10
@@ -736,6 +774,11 @@ str(var_myList)
 # Column variables, populate data
 year <- as.ts(c("2012", "2012", "2013", "2013", "2013", "2014", "2014", "2014", "2015", "2015"))	#without as.ts, it's loaded as a factor.
 quarter <- as.factor(c("Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring", "Fall", "Winter", "Spring"))	#nominal data will be factor.
+# another way of creating quarter with rep (replicate)
+quarter <- as.factor(factor(rep(c("Fall", "Winter", "Spring"), times = 3), ordered = TRUE, levels = c("Fall", "Winter", "Spring")))
+# How to add "Spring" to quarter at the beginning?
+
+
 total_reservations <- as.numeric(c("128", "152", "125", "153", "127", "149", "168", "182", "169", "227"))	#without as.numeric, it's loaded as a factor.
 total_hours_scheduled <- as.ts(c("306:15:00", "505:00:00", "411:00:00", "545:30:00", "395:00:00", "511:30:00", "518:30:00", "549:15:00", "459:00:00", "697:00:00"))	#without as.ts, it's loaded as a factor.
 total_hours_used <- as.ts(c("231:15:00", "386:15:00", "308:30:00", "374:45:00", "241:05:00", "377:15:00", "428:30:00", "374:30:00", "361:00:00", "508:15:00"))	#without as.ts, it's loaded as a factor.
