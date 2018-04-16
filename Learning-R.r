@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Version:	66
+# Version:	67
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -345,9 +345,14 @@
 #		Conditional selection
 #		var_numeric <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 #		var_numeric_sub <- var_numeric[var_numeric > 5] #will select all elements greater than 5
+# '[['	used as a function, such as in *apply() functions
+#	lapply(x, '[[', ("label"))
 
 
 # Regular Expression ------------------------------------------------------
+# Website for RegX testing
+#	https://regex101.com/
+
 # logical return {TRUE, FALSE}
 # grepl(pattern = "<regex>" , x = <object>)
 #	look for numeric 2 at the begining of the date
