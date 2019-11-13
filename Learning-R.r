@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Version:	67
+# Edition:	68
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -474,6 +474,9 @@ install.packages('psych')
 library(psych)
 # Install a package with any dependencies --depend on/link to/import/suggest
 install.packages('ggplot2', dependencies = TRUE)
+# install package(s) with a defined repository --needed for commandline
+#	List of repositories: https://cran.r-project.org/mirrors.html
+install.packages('ggplot2', dependencies = TRUE, repos='https://ftp.osuosl.org/pub/cran/')
 library(ggplot2)
 # Install a package only if needed, i.e. it's not already installed
 if(require('psych')==FALSE) install.packages('psych')
