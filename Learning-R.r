@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Edition:	68
+# Edition:	71
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -49,13 +49,18 @@
 #	R package which defines the folder structure; used for reproducible data
 #	install.packages('ProjectTemplate')
 #	library('ProjectTemplate')
-
+#
+# Package Projects ------------------------------------------------------------
+# https://cran.r-project.org/web/packages/projects/readme/README.html
+#	Research publishing focus
 
 # Google's R Style Guide ------------------------------------------------------
 # Google's R Style Guide
 #	(main thing is to be consistent)
 # https://google.github.io/styleguide/Rguide.xml
 
+# Defensive Programming in R, by Chris von Csefalvay
+# https://bitsandbugs.io/2018/07/27/defensive-programming-in-r/#8
 
 # R Cheat Sheets --------------------------------------------------------------
 # A collection of printable R cheat sheets
@@ -75,6 +80,9 @@
 #	install_from_swirl("Data_Analysis")
 #	install_from_swirl("Statistical_Inference")
 
+# R Books for learning
+# R Programming for Data Science by Roger D. Peng
+#	https://bookdown.org/rdpeng/rprogdatascience/
 
 # R Startup Sequence ----------------------------------------------------------
 # to find R_Home: R.home()
@@ -205,10 +213,11 @@
 
 
 # Parallel & Distributed R ----------------------------------------------------
+#	Best to run parallel on GNU/Linux, as Windows has limitations --with some workarounds.
 # CRAN Task View: High-Performance and Parallel computing in R
 # http://cran.r-project.org/web/views/HighPerformanceComputing.html
 # http://www.r-bloggers.com/how-to-go-parallel-in-r-basics-tips/
-
+# https://www.r-bloggers.com/2021/11/running-r-clusters-on-an-amd-threadripper-3990x-in-windows-11-update/
 # Packages in R (two types {shared memory & distributed}
 #	Shared Memory			Distributed
 #	'foreach'				'rmpi'
@@ -531,6 +540,7 @@ object.size(date)
 # garbage collection
 # should happen automatically, but can be called manually. Good for getting memory usage.
 gc()
+gc(verbose=TRUE)
 
 
 # System Date & Time ----------------------------------------------------------
@@ -690,6 +700,8 @@ rm(var_Name)
 # rm (var_Name1, var_Name2)
 # quickly remove all instantiated objects/variables
 rm(list=ls())
+# List variables by size
+sort( sapply(ls(),function(x) {object.size(get(x))}),decreasing=TRUE )
 
 
 # Coercion --------------------------------------------------------------------
