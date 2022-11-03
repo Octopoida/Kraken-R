@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Edition:	71
+# Edition:	72
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -211,6 +211,10 @@
 # 'usmap'	mapping the USA
 # 'UScensus2010'	US Census 2010 shape files and additional demographic data
 
+# Google Earth Engine API for R
+#	https://developers.google.com/earth-engine
+#	https://github.com/r-spatial/rgee
+# 'rgee'	Google Earth Engine for R 
 
 # Parallel & Distributed R ----------------------------------------------------
 #	Best to run parallel on GNU/Linux, as Windows has limitations --with some workarounds.
