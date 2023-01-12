@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Edition:	72
+# Edition:	73
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -229,7 +229,14 @@
 #	'snow'					'rhipe'
 #	'multicore'				'rhadoop'
 #	'mclapply'
-
+#
+# High Performance Computing with R -----------------------------------------
+#	[OpenMPI](https://www.open-mpi.org/) implemenation of MPI.
+#		R package for MPI: Rmpi() --https://cran.r-project.org/web/packages/Rmpi/index.html
+#		R packge for OpenMP: Rcpp() --https://cran.r-project.org/web/packages/Rcpp/index.html
+#
+#	OpenMPI is the protocol between nodes in a cluster for parrallel processing.
+#	OpenMP is the protocol for shared memory between nodes in a cluster.
 
 # Tips & Tricks ---------------------------------------------------------------
 # TAB for command completion
@@ -600,7 +607,7 @@ if(require('lubridate')==FALSE) install.packages('lubridate')
 if(require('ts')==FALSE) install.packages('ts')
 
 
-# Time Execution --------------------------------------------------------------
+# Time Execution (Benchmarking) -----------------------------------------------
 # To time the execution of any script
 # Simple meta(global) 
 var_script_start <- Sys.time()
@@ -614,10 +621,19 @@ proc.time() - startTimer
 system.time(pie(rep(1, 12), col = rainbow(12)))
 # Pause for specified time (in seconds)
 Sys.sleep(10)
+
+# Can use lapply and mcapply to compare differences for parallel processing
+system.time((lapply))
+system.time((mclapply))
+
 # Microbenchmarking: performance on a small piece of code
 if(require('microbenchmark')==FALSE) install.packages('microbenchmark')
 library(microbenchmark)
 microbenchmark(pie(rep(1, 12), col = rainbow(12)))
+
+# R Profiler for performance analysis
+Rpro()
+summaryRprof()
 
 
 # Write to a file -------------------------------------------------------------
