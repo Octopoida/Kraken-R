@@ -1,4 +1,4 @@
-<img src="/images/Kraken-R-Logo-1.png" alt="Logo generated using Midjourney Image Generator" title="R Logo" width="300" height="300"/><img src="/images/R-Logo.png" alt="Logo generated using Midjourney Image Generator" title="R Logo" width="300" height="300"/><img src="/images/Kraken-R-Logo-2.png" alt="Logo generated using Midjourney Image Generator" title="R Logo" width="300" height="300"/>
+<img src="/images/Kraken-R-Logo-1.png" alt="Logo generated using Midjourney Image Generator" title="R Logo" width="250" height="250"/><img src="/images/R-Logo.png" alt="Logo generated using Midjourney Image Generator" title="R Logo" width="250" height="250"/><img src="/images/Kraken-R-Logo-2.png" alt="Logo generated using Midjourney Image Generator" title="R Logo" width="250" height="250"/>
 
 # Kraken-R
 
