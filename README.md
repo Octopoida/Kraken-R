@@ -25,6 +25,10 @@ R Package for LCFD is 'makeProject'
 Project Template information:
 [http://projecttemplate.net/]
 
+#### Learning R additional resources
+- [Learning-Statistics-Resources](Learning-Statistics-Resources.md)
+- [Learning-GIS-Resources](Learning-GIS-Resources.md)
+
 
 #### Copyleft
 Copyleft License, Creative Commons:

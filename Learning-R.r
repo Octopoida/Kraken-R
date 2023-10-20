@@ -210,6 +210,8 @@
 # map("state", boundary = FALSE, col="gray", add = TRUE)
 # 'usmap'	mapping the USA
 # 'UScensus2010'	US Census 2010 shape files and additional demographic data
+# 'raster'	workingn with raster data
+# 'rgdal'	Geospatial Data Abstraction Library 
 
 # Google Earth Engine API for R
 #	https://developers.google.com/earth-engine
