@@ -1,5 +1,35 @@
 # Learning Statistics Resources
+A collection of resources for learning statistics and R.
 
+
+## [Bookdown](https://bookdown.org/)
+
+
+## [OpenIntro.org](https://openintro.org)
+[Statistics](https://openintro.org/book/stat/)
+
+
+## Online Books
+
+[Fexible Imputation of Missing Data by Stef Van Buuren](https://stefvanbuuren.name/fimd/)
+
+
+## Hadley Wickham Books (Online)
+
+[R for Data Science](https://r4ds.hadley.nz/)
+
+[Advanced R](https://adv-r.hadley.nz/)
+
+[ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
+
+[R Packages](https://r-pkgs.org/)
+
+[Mastering Shiny](https://mastering-shiny.org/)
+
+
+## Roger D. Peng
+
+[R Programming for Data Science](https://bookdown.org/rdpeng/rprogdatascience/)
 
 
 ## Khan Academy
@@ -11,13 +41,6 @@
 [AP College Statistics](https://www.khanacademy.org/math/ap-statistics)
 
 
-
-## OpenIntro.org
-
-
-## Online Books
-
-[Fexible Imputation of Missing Data by Stef Van Buuren](https://stefvanbuuren.name/fimd/)
 
 
 ## Articles

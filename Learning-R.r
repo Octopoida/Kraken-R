@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Edition:	73
+# Edition:	74
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -185,12 +185,13 @@
 # 'knitr' 			enables R Markdown files --> .rmd file
 # 'futile.logger' 	logging package
 
+# PDF ----------------------------------------------
+# Package for working with PDF's [pdftools](https://docs.ropensci.org/pdftools/)
+# 'pdftools'		extracting text and metadata from pdf
+# includes utility 'pdf_txt(PDFFile.pdf)	#converts pdf to text
 
-# Packages for advanced graphing ----------------------------------------------
-# ggplot2		based on grammar graphics
-# igraph		creating undirected and directed graphs
 
-# Basic graphing with R
+# Basic graphing with R ----------------------------------------------
 # plot()	#most basic
 # hist()	#histogram
 # barplot()	#barplot
@@ -200,6 +201,10 @@
 # par()		#change a plotting parameter
 #	par(col = "blue")	#change color to blue
 #	par()$col	#check the plotting parameter for color
+
+# Packages for advanced graphing ----------------------------------------------
+# ggplot2		based on grammar graphics
+# igraph		creating undirected and directed graphs
 
 
 # Packages for Spatial analysis -----------------------------------------------
@@ -311,6 +316,9 @@
 
 # for loop
 # for(variable in sequence) {expression}
+# Basic loop to read a file with list
+for (item in File_list){print(item)}
+
 # using break
 # for(variable in sequence) {
 #	if(condition) {break}
@@ -654,7 +662,7 @@ capture.output(c("MaxMem:", memory.limit()), file = "System.variables.txt", appe
 message("text")
 # warning message
 warning()
-#
+
 # Output to a log file using sink()
 # see if there are any open connections
 sink.number()
@@ -664,7 +672,7 @@ sink("R-Output.log.txt", append = TRUE, split = FALSE)
 sink()
 # Check connection is closed
 sink.number()
-#
+
 # Output to... {pdf, png, svg, jpg, etc.}
 # display list of graphical devices
 ?Devices
@@ -672,11 +680,11 @@ sink.number()
 # ...followed by creating a plot/graph.
 # close device connection(s)
 dev.off()
-#
+
 # Setting values (best practice is the use of <-
 # x <- 1
 # assign("x", C(x,y,z)
-#
+
 #getting user input
 om <- "Your Selection:"	#output message
 x <- readline(prompt = "User Input (Y or N) : ")
@@ -684,16 +692,31 @@ if (x == 'Y' || x == 'y') cat(c(om,"Yes")) else cat (c(om,"No"))
 
 
 # Working with directories ----------------------------------------------------
+# Old school way, which requires explicit paths
 # get working directory
 getwd()
 # Set the working directory (Windows OS syntax)
 setwd("D:\\Workspace\\R")
+setwd("D:/Workspace/R")
 #
 # Executing an R script from file
 source("Week_Days.r")
 source("Months.r", local = FALSE, echo = TRUE, verbose = FALSE)
 # Can be a URL
 # source("http://www.awebsite.info")
+# New school way, works with relative paths; required RStudio
+# Using the <Project>.Rproj file
+[.Rproj](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects)
+
+
+
+
+# Working with PDF ----------------------------------------------------
+# Where to output to
+output_file <- "FileName.txt"
+PDF_FileName <- pdf_text(pdf_file.pdf)
+# writelines provides the best formattting to make it look like the original pdf
+writeLines(PDF_FileName.txt, output_file)
 
 
 # Objects ---------------------------------------------------------------------
@@ -900,7 +923,7 @@ shuffle(5)	#return 5 cards
 sort(shuffle(5), decreasing = TRUE)
 
 
-# Working with web connections-------------------------------------------
+# Working with web connections -------------------------------------------
 # Example, Connection
 # Working with Connections, such as [geo]JSON feed
 # uses RJSONIO package
@@ -918,14 +941,22 @@ head(USGS_Quakes)
 tail(USGS_Quakes)
 
 
-# CAL HEAD-COUNT DATA, Working with -------------------------------------------
+# Web scrapping -------------------------------------------
+# The easiest way to get rvest is to install the whole tidyverse:
+install.packages("tidyverse")
+
+# Alternatively, install just rvest:
+install.packages("rvest")
+
+
+# CAL Analytics, Working with -------------------------------------------
 # Get the data from Google docs
 # Source File
-# https://docs.google.com/spreadsheets/d/1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI
+# https://docs.google.com/spreadsheets/d/1e8FRS3INSldjHo329_F_H0acE7sTGeuZTJ_cK2gGvy4/edit?usp=sharing
 
-# "LogData" worksheet as a csv file.
+# "Summary" worksheet as a csv file.
 # URI for csv file
-# https://docs.google.com/spreadsheets/d/1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI/export?format=csv&id=1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI&gid=1772624498
+# https://docs.google.com/spreadsheets/d/1e8FRS3INSldjHo329_F_H0acE7sTGeuZTJ_cK2gGvy4/export?format=csv&id=1e8FRS3INSldjHo329_F_H0acE7sTGeuZTJ_cK2gGvy4&gid=305606125
 
 # Load the CSV file into a variable; read.table() is common for text files {.txt}; scan() is the most primitive form of reading data from a file into a variable.
 # Create a Timestamp for loading the data
@@ -933,13 +964,14 @@ LastLoadTimestamp_CalData <- as.POSIXct(Sys.time())
 # Get the difference between last load and current time
 as.POSIXlt(Sys.time()) - LastLoadTimestamp_CalData
 # assumes a project template layout
-setwd("D:/Workspace/R/CAL-HeadCount")
+# Best to use .Rproject in RStudio
+# setwd("D:/Workspace/R/CAL")
 
 # or to automate the process
-URI <- "https://docs.google.com/spreadsheets/d/1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI/export?format=csv&id=1fi_UJeXQUzBgDBGHkIy-AP0B_8P2f6DuMsD6sETwovI&gid=1772624498"
-download.file(URI,"CAL-HeadCount.csv")
+URI <- "https://docs.google.com/spreadsheets/d/1e8FRS3INSldjHo329_F_H0acE7sTGeuZTJ_cK2gGvy4/export?format=csv&id=1e8FRS3INSldjHo329_F_H0acE7sTGeuZTJ_cK2gGvy4&gid=305606125"
+download.file(URI,"CAL-Analytics.csv")
 # Reading in the data; should use readr() to load the tabular data.
-CalData <- read.csv('CAL-HeadCount.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
+CalData <- read.csv('CAL-Analytics.csv', sep = ',', header = TRUE)	#if tab use sep='/t'
 
 # Check the last few records of the dataset
 tail(CalData, 10)
@@ -1002,18 +1034,24 @@ if(class(CalData)=='data.frame') TRUE else FALSE
 if(any(class(CalData)=='data.frame')) TRUE else FALSE
 
 # Create a list for all interger elements
-iCalData = list(CalData$East, CalData$West, CalData$Total)
+iCalData = list(CalData$Total.Reservations, CalData$Unique.Reservations)
 # Reference a list by position
 iCalData[[1]]
 names(iCalData) #will be null; no names defined
-iCalData = list(East=CalData$East, West=CalData$West, Total=CalData$Total)
+iCalData = list(CalData$Total.Reservations, CalData$Unique.Reservations)
 names(iCalData) #now the list has names
+
+#	Everything below here is using a diferent sheet.
+#	needs to be updated.
+#	<Start>
+
 # remove "Total" from the list
 iCalData[["Total"]] <- NULL
 
 # Object comparison for identical()
 #	needs to be numeric
-n_east <- as.numeric(CalData$East)
+
+a_fall <- as.numeric(CalData$Total.Reservations)
 n_west <- as.numeric(CalData$West)
 identical(median(n_east), median(n_west))
 
@@ -1563,7 +1601,7 @@ sCalData <- stack(list(East = iCalData_East, West = iCalData_West))
 names(sCalData)
 aov(values ~ ind, data = sCalData)
 
-# Distributions
+# Distributions -----------------------------------------------------------
 # Basic random number generator
 runif(1)
 runif(100, min=1, max=100)
@@ -1577,6 +1615,7 @@ dbinom(1, size=8, prob=.5)	#probability discrete distribution
 pbinom(1, size=8, prob=.5)	#cumulative probability
 pnorm(25, mean(CalData$Total, na.rm = TRUE), sd(CalData$Total, na.rm = TRUE)) #normal distribution
 
+#	<End>
 
 # End Of File (EOF) -----------------------------------------------------------
 # common end of file tasks
