@@ -16,7 +16,7 @@ even though using Project Template & LCFD file model as project workflows is a g
 *(each as a seperate script)*
 
 - Load
-- Clean
+- Clean or munge or parse
 - Function
 - Do
 

@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Edition:	74
+# Edition:	75
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -60,7 +60,7 @@
 # https://google.github.io/styleguide/Rguide.xml
 
 # Defensive Programming in R, by Chris von Csefalvay
-# https://bitsandbugs.io/2018/07/27/defensive-programming-in-r/#8
+# https://www.r-bloggers.com/2018/07/the-ten-rules-of-defensive-programming-in-r/
 
 # R Cheat Sheets --------------------------------------------------------------
 # A collection of printable R cheat sheets
@@ -98,6 +98,8 @@
 # 8. .First.sys						load default packages
 # 9. .Rhistory		R_HISTFILE		load history file
 
+# Get the current version of R
+R.version.string
 
 # Data structures -------------------------------------------------------------
 # Types of structures
@@ -203,25 +205,70 @@
 #	par()$col	#check the plotting parameter for color
 
 # Packages for advanced graphing ----------------------------------------------
-# ggplot2		based on grammar graphics
-# igraph		creating undirected and directed graphs
+# ggplot2		# based on grammar graphics
+# igraph		# network analysis; creating undirected and directed graphs
+
+# Grpahics Toolkit!
+#	taken from ggplot2 book
+# [ggplot2 Reference manual](https://ggplot2.tidyverse.org/reference/)
+
+install.packages(c(
+  "colorBlindness", "directlabels", "dplyr", "ggforce", "gghighlight", 
+  "ggnewscale", "ggplot2", "ggraph", "ggrepel", "ggtext", "ggthemes", 
+  "hexbin", "Hmisc", "mapproj", "maps", "munsell", "ozmaps", 
+  "paletteer", "patchwork", "rmapshaper", "scico", "seriation", "sf", 
+  "stars", "tidygraph", "tidyr", "wesanderson" 
+))
 
 
-# Packages for Spatial analysis -----------------------------------------------
+# [US Census Data](https://rconsortium.github.io/censusguide/r-packages-all.html)
+
+
+# Packages for Spatial analysis (GIS) -----------------------------------------------
+# [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html)
+
+#	coordinate reference system (CRS)
+#	geodetic datume {WGS84, NAD83}	+	map projection {Mercator}
+	
+# 'maps'	# provides some basic world maps
+	# library(maps)
+	# map("state", boundary = FALSE, col="gray", add = TRUE)
+# 'usmap'	mapping the USA
+
+# 'sp'			# Classes and Methods for Spatial Data
+# 'sf'			# Simple Features for R
+# 'stars'		# Spatiotemporal Arrays, Raster and Vector Data Cubes
+# 'lidR'		# manipulating and visualizing airborne laser scanning (ALS) data -- Read and write .las and .laz
+# 'spatialreg'	# estimation functions for spatial cross-sectional models
+# 'gstat'		# Spatial and spatio-temporal geostatistical modelling, prediction and simulation.
+# 'geoR'		# geostatistical data analysis 
+# 'spacetime'	# designed to handle spatio-temporal data
+# 'splancs'		# Spatial and Space-Time Point Pattern Analysis
+# 'spdep'		# Spatial Dependence: Weighting Schemes, Statistics
+
+# Raster data -----------------------------------------------
+# 'GDAL' (the Geospatial Data Abstraction Library) for reading GeoTIFF
+# 'raster'	workingn with raster data
+# 'terra'	# work with raster datasets that are stored on disk and are too large to be loaded into memory.
+# 'gdalcubes'	# making processing collections of satellite imagery easier, faster, and more interactive.
+
+
+# Data Sources -----------------------------------------------
+'USAboundaries'	# contemporary state, county, and Congressional district boundaries, as well as zip code tabulation area centroids.
+'tigris'	# US Census Bureau
+'naturalearth'	# Natural Earth is a public domain map dataset available at 1:10m, 1:50m, and 1:110 million scales
+
+
 # 'ggmap'			Use Google maps API, OpenStreet map API.
 # 'OpenStreetMap'	use OpenStreetMap raster images
-# 'maps'			provides some basic world maps
-# library(maps)
-# map("state", boundary = FALSE, col="gray", add = TRUE)
-# 'usmap'	mapping the USA
-# 'UScensus2010'	US Census 2010 shape files and additional demographic data
-# 'raster'	workingn with raster data
-# 'rgdal'	Geospatial Data Abstraction Library 
+
 
 # Google Earth Engine API for R
 #	https://developers.google.com/earth-engine
 #	https://github.com/r-spatial/rgee
 # 'rgee'	Google Earth Engine for R 
+
+
 
 # Parallel & Distributed R ----------------------------------------------------
 #	Best to run parallel on GNU/Linux, as Windows has limitations --with some workarounds.
@@ -244,6 +291,7 @@
 #
 #	OpenMPI is the protocol between nodes in a cluster for parrallel processing.
 #	OpenMP is the protocol for shared memory between nodes in a cluster.
+#	[Rmpi Tutorial](https://glennklockwood.com/data-intensive/r/on-hpc.html)
 
 # Tips & Tricks ---------------------------------------------------------------
 # TAB for command completion
@@ -277,6 +325,7 @@
 # ||	or	(but only examines the first element)
 # all	logical test that all values are true
 # any	logical test that some values are true
+# %>% 	piping
 
 # examples
 # var_numeric <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
@@ -511,6 +560,9 @@ library(ggplot2)
 # Install a package only if needed, i.e. it's not already installed
 if(require('psych')==FALSE) install.packages('psych')
 
+# update a package
+update.packages(ask = FALSE, checkBuilt = TRUE)
+
 # CRAN Task Views
 # http://cran.r-project.org/web/views/
 # have to install and load ctv first
@@ -698,7 +750,7 @@ getwd()
 # Set the working directory (Windows OS syntax)
 setwd("D:\\Workspace\\R")
 setwd("D:/Workspace/R")
-#
+
 # Executing an R script from file
 source("Week_Days.r")
 source("Months.r", local = FALSE, echo = TRUE, verbose = FALSE)
@@ -708,8 +760,30 @@ source("Months.r", local = FALSE, echo = TRUE, verbose = FALSE)
 # Using the <Project>.Rproj file
 [.Rproj](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects)
 
+# Within R/RStudio
+##	Create a Main/Launch file with
+source("00-Load.R")
+source("01-Munge.R")
+source("02-Functions.R")
+source("03-Do.R")
+
+# Windows commandline
+Rscript 00-Load.cmd
 
 
+# Create a directory
+dir.create("cache")
+## better
+if (!dir.exists("cache")) {dir.create("cache")}
+if (!dir.exists("scripts")) {dir.create("scripts")}
+
+# files
+file.create("scripts/00-Load.R")
+## Create LCFD
+if (!file.exists("scripts/00-Load.R")) {file.create("scripts/00-Load.R")}
+if (!file.exists("scripts/01-Clean.R")) {file.create("scripts/01-Clean.R")}
+if (!file.exists("scripts/02-Functions.R")) {file.create("scripts/02-Functions.R")}
+if (!file.exists("scripts/03-Do.R")) {file.create("scripts/03-Do.R")}
 
 # Working with PDF ----------------------------------------------------
 # Where to output to
@@ -886,7 +960,8 @@ subset(faculty_usage, subset = quarter == "Fall")
 # Building a function ---------------------------------------------------------
 # using a deck of cards to provide an example of building a function() {}
 # create a function to shuffle and show x number of cards where x is default to 1
-shuffle <- function(x = 1) {
+# Using naming convention based on Google style guide, private functions start with "."
+.shuffle <- function(x = 1) {
 						var_deck_vector <- c("2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "10C", "JC", "QC", "KC", "AC",
 						"2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AS",
 						"2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "JH", "QH", "KH", "AH",
@@ -916,11 +991,11 @@ shuffle <- function(x = 1) {
 
 #To find out the arguments of a function
 #	no arguments are build in at this time.
-args(shuffle)
-shuffle()	#use the function, with default
-shuffle(5)	#return 5 cards
+args(.shuffle)
+.shuffle()	#use the function, with default
+.shuffle(5)	#return 5 cards
 # sort the returning cards in descending order
-sort(shuffle(5), decreasing = TRUE)
+sort(.shuffle(5), decreasing = TRUE)
 
 
 # Working with web connections -------------------------------------------
@@ -1364,7 +1439,46 @@ kmeans(CalData$West, 3)
 # Documentaion for ggplot2
 # http://docs.ggplot2.org/current/index.html
 
+# geoms (Plot types)
+geom_line()	# line plot
+geom_point()	# point plot
+geom_polygon()	# draws polygons, which are filled paths
+geom_boxplot()	# boxplot
+geom_jitter()	#plots every point, so good for small datasets
+geom_violin()
+geom_bar()		#bar plot
+geom_bar(stat = "identity")	# stacking like values on top of oneanother
+geom_area()		# area plot
+
+geom_histogram()	# uses bars
+geom_freqpoly()		# uses lines
+geom_density()		# like geom_freqpoly(); more complex computation.
+
+# Specialty plots
+geom_rect()	# rectangle, used when all the tiles are the same size
+geom_tile()	# tile
+geom_raster()	# draw rectangles
+geom_text()	# add text to a plot; parameters (angle, family, fontface, hjust and vjust)
+
+# Revealing uncertainty
+geom_errorbar()	# Discrete x, range
+geom_linerange()	# Discrete x, range
+geom_crossbar()	# Discrete x, range & center
+geom_pointrange()	# Discrete x, range & center
+geom_ribbon()	# Continuous x, range
+geom_smooth(stat = "identity")	# Continuous x, range & center
+
+# Spatial Data Plotting I.e. maps
+geom_polygon()	# Polygon maps
+geom_sf()	# simple features
+coord_sf()	 # CRS is controlled by coord_sf()
+
+
+
 # Advanced dynamic graphing with rggobi install.packages('rggobi')
+# for exploring high-dimensional data
+# http://ggobi.org/book.html
+
 # par() can modify default graphics parameters
 # type par() to see current settings and available elements
 #

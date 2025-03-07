@@ -1,0 +1,38 @@
+---
+# YAML Header for R Markdown
+# Note: nothing should go above the YAML header
+title: "Learning R 2.0"
+lang: "en-US"
+author: "David Geeraerts"
+email: "geeraerd@evergreen.edu"
+date: "2025-03-06"
+params:
+    edition: 2.0
+output:
+    html_document:
+        toc: TRUE
+        toc_float: TRUE
+        collapsed: TRUE
+        theme:
+            bootswatch: solar
+---
+
+Copyright License, Creative Commons: [Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+Project available on [GitHub](https://github.com/Octopoida/Kraken-R)
+
+
+
+
+# Introduction
+
+# R Basics
+
+## Header 2
+
+### Header 3
+
+#### Header 4
+
+##### Header 5
+

@@ -18,8 +18,8 @@ binomsize = function(a,d) {
   r=c(1,2*estimate(a,d))
   v=binsearch(function(n) {sig(a,n) - d},range=r,lower=min(r),upper=max(r))
   v$where[[length(v$where)]] }
-#
+# Name private functions with a "."
 #create a resample function
-resample = function(x, ...) x[sample(length(x), ...)]
+.resample = function(x, ...) x[sample(length(x), ...)]
 #
   
