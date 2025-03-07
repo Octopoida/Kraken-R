@@ -1,3 +1,13 @@
-#Files
+# Files
 *.backup
+
+# Folders
+tmp/
+logs/
+
+# R Studio files
+.Rhistory
+.RData
+.Rproj
 .Rproj.user
+.Ruserdata

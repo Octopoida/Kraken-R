@@ -11,7 +11,12 @@ Single file to keep it simple,
 even though using Project Template & LCFD file model as project workflows is a good idea.
 [LCFD project workflow by Josh Reich](http://stackoverflow.com/questions/1429907/workflow-for-statistical-analysis-and-report-writing/1434424#1434424)
 
-#### LCFD:
+
+### Start here:
+- [Learning-R.r](Learning-R.r) -- old style
+- [Learning-R.Rmd](Learning-R.Rmd) -- new style
+
+### LCFD:
 
 *(each as a seperate script)*
 
@@ -20,17 +25,16 @@ even though using Project Template & LCFD file model as project workflows is a g
 - Function
 - Do
 
-
 R Package for LCFD is 'makeProject'
 Project Template information:
 [http://projecttemplate.net/]
 
-#### Learning R additional resources
+### Learning R additional resources
 - [Learning-Statistics-Resources](Learning-Statistics-Resources.md)
 - [Learning-GIS-Resources](Learning-GIS-Resources.md)
 
 
-#### Copyleft
+## Copyleft
 Copyleft License, Creative Commons:
 Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 http://creativecommons.org/licenses/by-nc-sa/3.0/
