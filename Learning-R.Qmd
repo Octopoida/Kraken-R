@@ -1,0 +1,146 @@
+---
+# YAML Header for Quarto
+# Note: nothing should go above the YAML header
+lang: "en-US"
+title: "Learning R 2.0"
+subtitle: "Kraken-R Project"
+abstract: "Kraken-R is a monolithic R script for learning R."
+abstract-title: "Kraken-R Project-Learning-R"
+author: "David Geeraerts"
+email: "geeraerd@evergreen.edu"
+date-format: iso
+date: "2025-03-12"
+date-modified: "2025-03-11"
+params:
+    edition: 2.0
+format:
+    html:
+        toc: TRUE
+        toc-title: Content
+        toc-location: left
+        toc-depth: 6
+        toc-expand: 6
+        code-fold: false
+        html-math-method:
+          method: mathjax
+        citations-hover: false
+        footnotes-hover: false
+        crossrefs-hover: false
+        theme: solar
+execute:
+  freeze: false
+---
+
+::: {layout="[50,50,50,50]"}
+
+![](images/Kraken-R-Logo-1.png)
+
+![](images/R-Logo.png)
+![](images/Kraken-R-Logo-2.png)
+
+:::
+
+
+- Project available on [GitHub](https://github.com/Octopoida/Kraken-R)
+
+##### YAML Header Notes:
+- [format html reference](https://quarto.org/docs/reference/formats/html.html)
+
+- [HTML Themes](https://github.com/quarto-dev/quarto-cli/tree/main/src/resources/formats/html/bootstrap/themes)
+
+- Quarto Project
+
+
+# Introduction
+
+# R Basics
+
+
+
+### Code
+Documenation for [code chunks](https://yihui.org/knitr/options/)
+```{r}
+print("R code")
+print("All the engines!")
+names(knitr::knit_engines$get())
+```
+
+- Code advanced setup, with Code chunk options
+```{R}
+#| outputcap-location: column
+#| label: someLabel
+#| fig-cap: caption for figure
+#| warning: false
+library(ggplot2)
+# Create a sample data frame
+data <- data.frame(
+  x = rnorm(100),
+  y = rnorm(100)
+)
+
+# Create a scatter plot
+ggplot(data, aes(x = x, y = y)) +
+  geom_point() +
+  labs(title = "Scatter Plot Example", x = "X-Axis", y = "Y-Axis")
+
+```
+
+
+
+#### DIV and Spans
+
+.big-text {
+  font-size: 120px;
+}
+
+::: {.big-text}
+Controlled tex with fenced Div block
+:::
+
+#### Special Formatting
+This is [special]{style="color:red;"} formatting.
+
+
+#### Nested fenced Div
+
+
+#### Callout Blocks
+
+:::{.callout-note}
+Note that there are five types of callouts, including:
+`note`, `tip`, `warning`, `caution`, and `important`
+:::
+
+
+#### Tabsets
+
+::: {.panel-tabset}
+
+## Output
+```{R}
+#| echo: false
+#| eval: true
+head(mtcars)
+```
+
+## Code
+```{R}
+#| echo: fenced
+#| eval: false
+head(mtcars)
+```
+
+:::
+
+
+## Header 2
+
+### Header 3
+
+#### Header 4
+
+##### Header 5
+
+###### Header 6
+
+Copyright License, Creative Commons: [Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)](http://creativecommons.org/licenses/by-nc-sa/3.0/)
