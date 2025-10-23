@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Edition:	75
+# Edition:	76
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -185,7 +185,7 @@ R.version.string
 # 'RMySQL' 			for MySQL connections
 # 'bigmemory' 		for handling large datasets too big for RAM
 # 'knitr' 			enables R Markdown files --> .rmd file
-# 'futile.logger' 	logging package
+# 'logger' 			logging package
 
 # PDF ----------------------------------------------
 # Package for working with PDF's [pdftools](https://docs.ropensci.org/pdftools/)
@@ -697,6 +697,9 @@ microbenchmark(pie(rep(1, 12), col = rainbow(12)))
 Rpro()
 summaryRprof()
 
+# Bench package for benchmarking
+bench()
+
 
 # Write to a file -------------------------------------------------------------
 # not the best
@@ -742,6 +745,9 @@ om <- "Your Selection:"	#output message
 x <- readline(prompt = "User Input (Y or N) : ")
 if (x == 'Y' || x == 'y') cat(c(om,"Yes")) else cat (c(om,"No"))
 
+# Logging ---------------------------------------------------------------------
+# Recommended package for logging
+logger()
 
 # Working with directories ----------------------------------------------------
 # Old school way, which requires explicit paths
