@@ -33,6 +33,8 @@ Project Template information:
 - [Learning-Statistics-Resources](Learning-Statistics-Resources.md)
 - [Learning-GIS-Resources](Learning-GIS-Resources.md)
 
+### Random Articles on R
+- [Python is not a great language for Data Science](https://blog.genesmindsmachines.com/p/python-is-not-a-great-language-for?r=1yz1r2&utm_medium=ios&triedRedirect=true)
 
 ## Copyleft
 Copyleft License, Creative Commons:
