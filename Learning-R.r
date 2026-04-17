@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Edition:	77
+# Edition:	78
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -295,9 +295,13 @@ install.packages(c(
 
 # Asynchronous processing with R ------------------------------------------------
 #	[Mirai](https://mirai.r-lib.org/) package for asynchronous processing in R.
+#	- Engine for asynchronous processing
 #	- clean isolated process
 #	- info()
 #	[future](https://cran.r-project.org/web/packages/future/index.html) package for asynchronous processing in R.
+#	[promises](https://cran.r-project.org/web/packages/promises/index.html) package for managing workflows.
+#	- "When that background task is done, do this next."
+#	- Used with Shiny for web applications in R.
 
 
 # Tips & Tricks ---------------------------------------------------------------
