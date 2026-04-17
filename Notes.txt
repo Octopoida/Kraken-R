@@ -1,0 +1,12 @@
+Timing a script
+tictoc()
+
+tic()
+code
+toc()
+
+
+Parallel Computing Libraries
+future()
+furrr()
+promises()

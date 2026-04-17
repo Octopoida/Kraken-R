@@ -3,7 +3,7 @@
 # EMAIL:	geeraerd@evergreen.edu
 # LOCATION:	Olympia, Washington U.S.
 # TITLE:	Learning R
-# Edition:	76
+# Edition:	77
 
 # Copyleft --------------------------------------------------------------------
 # Copyright License, Creative Commons:
@@ -292,6 +292,13 @@ install.packages(c(
 #	OpenMPI is the protocol between nodes in a cluster for parrallel processing.
 #	OpenMP is the protocol for shared memory between nodes in a cluster.
 #	[Rmpi Tutorial](https://glennklockwood.com/data-intensive/r/on-hpc.html)
+
+# Asynchronous processing with R ------------------------------------------------
+#	[Mirai](https://mirai.r-lib.org/) package for asynchronous processing in R.
+#	- clean isolated process
+#	- info()
+#	[future](https://cran.r-project.org/web/packages/future/index.html) package for asynchronous processing in R.
+
 
 # Tips & Tricks ---------------------------------------------------------------
 # TAB for command completion
