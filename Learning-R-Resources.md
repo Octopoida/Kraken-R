@@ -1,6 +1,9 @@
 # Learning Statistics Resources
 A collection of resources for learning statistics and R.
 
+## Collection of Cheatsheets
+[Cheatsheets](https://opensource.posit.co/resources/cheatsheets/)
+
 
 ## [Bookdown](https://bookdown.org/)
 
