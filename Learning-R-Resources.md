@@ -19,6 +19,7 @@ A collection of resources for learning statistics and R.
 ## Online Books
 
 [Forecasting: Principles and Practice 2nd Edition](https://otexts.com/fpp2/)
+
 [Fexible Imputation of Missing Data by Stef Van Buuren](https://stefvanbuuren.name/fimd/)
 
 [STAT 545](https://stat545.com/)
